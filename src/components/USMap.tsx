@@ -212,7 +212,7 @@ function USMap({ hotspots, reports, onSelectReport, selectedState, onSelectState
       <div className="absolute top-0 left-0 right-0 z-10 flex items-center justify-between px-4 py-2 bg-black/80 border-b border-accent-dim/30 h-10">
         <div className="flex items-center gap-2">
           <span className="text-accent text-xs">[MAP]</span>
-          <span className="text-accent-muted text-xs">CONTINENTAL US // LIVE FEED</span>
+          <span className="text-accent-muted text-xs">U.S.A.</span>
           <span className="text-foreground/30 text-xs ml-2">ZOOM: {position.zoom.toFixed(1)}x</span>
         </div>
         <div className="flex items-center gap-4 text-xs">
