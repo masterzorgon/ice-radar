@@ -51,7 +51,7 @@ export async function GET(
               fontFamily: 'monospace',
             }}
           >
-            <div style={{ color: '#FF0000', fontSize: 48 }}>
+            <div style={{ color: '#FF0000', fontSize: 58 }}>
               REPORT NOT FOUND
             </div>
           </div>
@@ -225,7 +225,7 @@ export async function GET(
               <div
                 style={{
                   color: '#33FF00',
-                  fontSize: 42,
+                  fontSize: 50,
                   fontWeight: 'bold',
                   letterSpacing: 4,
                   textShadow: '0 0 10px #33FF00',
@@ -238,7 +238,7 @@ export async function GET(
             <div
               style={{
                 color: '#33FF00',
-                fontSize: 26,
+                fontSize: 31,
                 opacity: 0.6,
                 display: 'flex',
               }}
@@ -268,7 +268,7 @@ export async function GET(
             <div
               style={{
                 color: typeColor,
-                fontSize: 48,
+                fontSize: 58,
                 fontWeight: 'bold',
                 letterSpacing: 6,
                 textShadow: `0 0 20px ${typeColor}`,
@@ -291,7 +291,7 @@ export async function GET(
             <div
               style={{
                 color: '#666666',
-                fontSize: 24,
+                fontSize: 29,
                 letterSpacing: 2,
                 display: 'flex',
               }}
@@ -301,7 +301,7 @@ export async function GET(
             <div
               style={{
                 color: '#33FF00',
-                fontSize: 66,
+                fontSize: 79,
                 fontWeight: 'bold',
                 letterSpacing: 2,
                 textShadow: '0 0 10px #33FF00',
@@ -310,18 +310,16 @@ export async function GET(
             >
               {report.city.toUpperCase()}, {report.state.toUpperCase()}
             </div>
-            {report.address && (
-              <div
-                style={{
-                  color: '#33FF00',
-                  fontSize: 34,
-                  opacity: 0.7,
-                  display: 'flex',
-                }}
-              >
-                {report.address}
-              </div>
-            )}
+            <div
+              style={{
+                color: '#33FF00',
+                fontSize: 41,
+                opacity: 0.7,
+                display: 'flex',
+              }}
+            >
+              {report.address || `${report.lat.toFixed(4)}, ${report.lng.toFixed(4)}`}
+            </div>
           </div>
 
           {/* Description preview */}
@@ -336,7 +334,7 @@ export async function GET(
             <div
               style={{
                 color: '#666666',
-                fontSize: 24,
+                fontSize: 29,
                 letterSpacing: 2,
                 display: 'flex',
               }}
@@ -346,7 +344,7 @@ export async function GET(
             <div
               style={{
                 color: '#33FF00',
-                fontSize: 32,
+                fontSize: 38,
                 lineHeight: 1.4,
                 opacity: 0.8,
                 display: 'flex',
@@ -376,13 +374,13 @@ export async function GET(
               }}
             >
               <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                <div style={{ color: '#666666', fontSize: 14, display: 'flex' }}>
+                <div style={{ color: '#666666', fontSize: 17, display: 'flex' }}>
                   VERIFIED:
                 </div>
                 <div
                   style={{
                     color: report.verifiedCount >= 3 ? '#33FF00' : '#FFCC00',
-                    fontSize: 18,
+                    fontSize: 22,
                     fontWeight: 'bold',
                     display: 'flex',
                   }}
@@ -391,13 +389,13 @@ export async function GET(
                 </div>
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                <div style={{ color: '#666666', fontSize: 14, display: 'flex' }}>
+                <div style={{ color: '#666666', fontSize: 17, display: 'flex' }}>
                   STATUS:
                 </div>
                 <div
                   style={{
                     color: report.status === 'ACTIVE' ? '#33FF00' : report.status === 'RESOLVED' ? '#666666' : '#FFCC00',
-                    fontSize: 18,
+                    fontSize: 22,
                     fontWeight: 'bold',
                     display: 'flex',
                   }}
@@ -409,7 +407,7 @@ export async function GET(
             <div
               style={{
                 color: '#33FF00',
-                fontSize: 16,
+                fontSize: 19,
                 opacity: 0.6,
                 display: 'flex',
               }}
@@ -439,7 +437,7 @@ export async function GET(
             fontFamily: 'monospace',
           }}
         >
-          <div style={{ color: '#FF0000', fontSize: 48 }}>
+          <div style={{ color: '#FF0000', fontSize: 58 }}>
             ERROR GENERATING IMAGE
           </div>
         </div>
