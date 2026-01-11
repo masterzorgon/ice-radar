@@ -48,11 +48,12 @@ export default function EnforcementChart({ data, title = 'TRENDS', subtitle = 'M
                 backgroundColor: '#000000',
                 border: '2px solid #33FF00',
                 borderRadius: 0,
-                fontSize: 8,
+                fontSize: 12,
                 fontFamily: 'var(--font-terminal)',
+                padding: '8px 12px',
               }}
-              labelStyle={{ color: '#33FF00' }}
-              itemStyle={{ color: '#33FF00' }}
+              labelStyle={{ color: '#33FF00', fontSize: 12 }}
+              itemStyle={{ color: '#33FF00', fontSize: 12 }}
               formatter={(value) => typeof value === 'number' ? value.toLocaleString() : value}
             />
             <Legend

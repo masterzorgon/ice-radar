@@ -53,13 +53,16 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     const disabledStyles = disabled ? 'opacity-50 cursor-not-allowed' : '';
     const widthStyles = fullWidth ? 'w-full' : '';
     const pulseStyles = pulse ? 'pixel-pulse' : '';
-    const activeStyles = active ? 'bg-accent text-background' : '';
+    // When active, use active styles instead of variant styles to avoid conflicting Tailwind classes
+    const colorStyles = active 
+      ? 'bg-accent text-background border-2 border-accent' 
+      : variantStyles[variant];
 
     return (
       <button
         ref={ref}
         disabled={disabled}
-        className={`${baseStyles} ${variantStyles[variant]} ${sizeStyles[size]} ${widthStyles} ${disabledStyles} ${pulseStyles} ${activeStyles} ${className}`}
+        className={`${baseStyles} ${colorStyles} ${sizeStyles[size]} ${widthStyles} ${disabledStyles} ${pulseStyles} ${className}`}
         {...props}
       >
         {icon && iconPosition === 'left' && icon}

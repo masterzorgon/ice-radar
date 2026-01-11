@@ -56,6 +56,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     ? report.description.substring(0, 150) + '...'
     : report.description;
 
+  const ogImageUrl = `/api/og/report/${id}`;
+
   return {
     title: `${title} | ICE Radar`,
     description,
@@ -64,11 +66,20 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       description,
       type: 'article',
       siteName: 'ICE Radar',
+      images: [
+        {
+          url: ogImageUrl,
+          width: 1200,
+          height: 630,
+          alt: title,
+        },
+      ],
     },
     twitter: {
-      card: 'summary',
+      card: 'summary_large_image',
       title,
       description,
+      images: [ogImageUrl],
     },
   };
 }

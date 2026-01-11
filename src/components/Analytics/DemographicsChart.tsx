@@ -55,10 +55,12 @@ export function CountriesChart({ data, title = 'ORIGIN', subtitle = 'TOP COUNTRI
                 backgroundColor: '#000000',
                 border: '2px solid #33FF00',
                 borderRadius: 0,
-                fontSize: 8,
+                fontSize: 12,
                 fontFamily: 'var(--font-terminal)',
+                padding: '8px 12px',
               }}
-              labelStyle={{ color: '#33FF00' }}
+              labelStyle={{ color: '#33FF00', fontSize: 12 }}
+              itemStyle={{ color: '#33FF00', fontSize: 12 }}
               formatter={(value, _name, props) => {
                 const numValue = value as number;
                 const payload = props.payload as CountryOfOriginData;
@@ -112,11 +114,12 @@ export function AgeChart({ data, title = 'AGE', subtitle = 'DISTRIBUTION' }: Age
                   backgroundColor: '#000000',
                   border: '2px solid #33FF00',
                   borderRadius: 0,
-                  fontSize: 8,
+                  fontSize: 18,
                   fontFamily: 'var(--font-terminal)',
+                  padding: '8px 12px',
                 }}
-                itemStyle={{ color: '#33FF00' }}
-                labelStyle={{ color: '#33FF00' }}
+                itemStyle={{ color: '#33FF00', fontSize: 12 }}
+                labelStyle={{ color: '#33FF00', fontSize: 12 }}
                 formatter={(value, _name, props) => {
                   const numValue = value as number;
                   const payload = props.payload as AgeGroupData;
@@ -190,11 +193,12 @@ export function ApprehensionMethodChart({ data = [], title = 'METHOD', subtitle 
                   backgroundColor: '#000000',
                   border: '2px solid #33FF00',
                   borderRadius: 0,
-                  fontSize: 8,
+                  fontSize: 12,
                   fontFamily: 'var(--font-terminal)',
+                  padding: '8px 12px',
                 }}
-                itemStyle={{ color: '#33FF00' }}
-                labelStyle={{ color: '#33FF00' }}
+                itemStyle={{ color: '#33FF00', fontSize: 12 }}
+                labelStyle={{ color: '#33FF00', fontSize: 12 }}
                 formatter={(value, _name, props) => {
                   const numValue = value as number;
                   const payload = props.payload as ApprehensionMethodData;

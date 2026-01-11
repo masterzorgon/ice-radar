@@ -58,12 +58,12 @@ function StateHeatmap({ data, title = 'MAP', subtitle = 'STATE ENFORCEMENT ACTIV
 
       {/* Hover tooltip */}
       {hoveredState && (
-        <div className="absolute top-12 left-4 z-20 bg-background border-2 border-accent p-3 text-[8px] tracking-wider">
-          <div className="text-accent glow-text mb-1">{hoveredState.state}</div>
-          <div className="text-accent-muted">
+        <div className="absolute top-12 left-4 z-20 bg-background border-2 border-accent p-4 text-xs tracking-wider">
+          <div className="text-accent glow-text mb-2 text-sm font-bold">{hoveredState.state}</div>
+          <div className="text-accent-muted mb-1">
             ENFORCEMENT ACTIONS: <span className="text-warning glow-warning">{hoveredState.enforcementActions.toLocaleString()}</span>
           </div>
-          <div className="text-accent-muted">
+          <div className="text-accent-muted mb-1">
             DEPORTATIONS: <span className="text-danger glow-danger">{hoveredState.deportations.toLocaleString()}</span>
           </div>
           <div className="text-accent-muted">

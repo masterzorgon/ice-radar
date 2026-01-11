@@ -17,9 +17,29 @@ const vt323 = VT323({
 
 export const metadata: Metadata = {
   title: "ICE RADAR",
-  description: "Anonymous community reporting and tracking system for ICE activity",
+  description: "Anonymous community reporting and tracking system for ICE activity. Real-time alerts protecting communities.",
   icons: {
     icon: "/logo-icon.svg",
+  },
+  openGraph: {
+    title: "ICE RADAR",
+    description: "Anonymous community reporting and tracking system for ICE activity. Real-time alerts protecting communities.",
+    type: "website",
+    siteName: "ICE Radar",
+    images: [
+      {
+        url: "/api/og",
+        width: 1200,
+        height: 630,
+        alt: "ICE RADAR - Community Alert System",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "ICE RADAR",
+    description: "Anonymous community reporting and tracking system for ICE activity. Real-time alerts protecting communities.",
+    images: ["/api/og"],
   },
 };
 
