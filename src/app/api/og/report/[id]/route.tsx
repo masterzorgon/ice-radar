@@ -322,41 +322,6 @@ export async function GET(
             </div>
           </div>
 
-          {/* Description preview */}
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              gap: 8,
-              flex: 1,
-            }}
-          >
-            <div
-              style={{
-                color: '#666666',
-                fontSize: 29,
-                letterSpacing: 2,
-                display: 'flex',
-              }}
-            >
-              DESCRIPTION
-            </div>
-            <div
-              style={{
-                color: '#33FF00',
-                fontSize: 38,
-                lineHeight: 1.4,
-                opacity: 0.8,
-                display: 'flex',
-                overflow: 'hidden',
-              }}
-            >
-              {report.description.length > 180
-                ? report.description.substring(0, 180) + '...'
-                : report.description}
-            </div>
-          </div>
-
           {/* Footer */}
           <div
             style={{
@@ -373,36 +338,6 @@ export async function GET(
                 gap: 32,
               }}
             >
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                <div style={{ color: '#666666', fontSize: 17, display: 'flex' }}>
-                  VERIFIED:
-                </div>
-                <div
-                  style={{
-                    color: report.verifiedCount >= 3 ? '#33FF00' : '#FFCC00',
-                    fontSize: 22,
-                    fontWeight: 'bold',
-                    display: 'flex',
-                  }}
-                >
-                  {report.verifiedCount}
-                </div>
-              </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                <div style={{ color: '#666666', fontSize: 17, display: 'flex' }}>
-                  STATUS:
-                </div>
-                <div
-                  style={{
-                    color: report.status === 'ACTIVE' ? '#33FF00' : report.status === 'RESOLVED' ? '#666666' : '#FFCC00',
-                    fontSize: 22,
-                    fontWeight: 'bold',
-                    display: 'flex',
-                  }}
-                >
-                  {report.status}
-                </div>
-              </div>
             </div>
             <div
               style={{
