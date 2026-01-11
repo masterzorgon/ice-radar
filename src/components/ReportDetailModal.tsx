@@ -216,7 +216,7 @@ export default function ReportDetailModal({ report, onClose, onVerify, onAddComm
                   <div key={comment.id} className="bg-black/30 border border-accent-dim/20 p-2">
                     <div className="text-xs text-foreground/70">{comment.text}</div>
                     <div className="text-xs text-foreground/30 mt-1">
-                      {formatDistanceToNow(comment.timestamp, { addSuffix: true })}
+                      {formatDistanceToNow(new Date(comment.createdAt), { addSuffix: true })}
                     </div>
                   </div>
                 ))}

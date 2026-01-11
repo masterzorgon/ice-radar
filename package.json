@@ -24,6 +24,8 @@
     "react-simple-maps": "^3.0.0",
     "recharts": "^3.6.0",
     "resend": "^6.7.0",
+    "sax": "^1.4.4",
+    "unzip-stream": "^0.3.4",
     "xlsx": "^0.18.5",
     "zod": "^4.3.5"
   },

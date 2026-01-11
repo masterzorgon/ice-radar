@@ -23,20 +23,33 @@ model Subscription {
 }
 
 model Report {
-  id          String   @id @default(cuid())
-  type        String   // RAID, CHECKPOINT, PATROL, DETENTION, SURVEILLANCE
-  status      String   // ACTIVE, RESOLVED, UNVERIFIED
-  city        String
-  state       String
-  address     String?
-  lat         Float
-  lng         Float
-  description String
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id            String    @id @default(cuid())
+  type          String    // RAID, CHECKPOINT, PATROL, DETENTION, SURVEILLANCE
+  status        String    // ACTIVE, RESOLVED, UNVERIFIED
+  city          String
+  state         String
+  address       String?
+  lat           Float
+  lng           Float
+  description   String
+  verifiedCount Int       @default(0)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  comments      Comment[]
 
   @@index([state])
   @@index([createdAt])
+}
+
+model Comment {
+  id        String   @id @default(cuid())
+  text      String
+  authorName String? // Optional anonymous name
+  reportId  String
+  report    Report   @relation(fields: [reportId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@index([reportId])
 }
 
 // Cached analytics data from public immigration data sources

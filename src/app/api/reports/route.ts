@@ -4,6 +4,27 @@ import { prisma } from '@/lib/prisma';
 import { resend, FROM_EMAIL } from '@/lib/resend';
 import AlertNotification from '@/emails/AlertNotification';
 
+type ReportWithComments = {
+  id: string;
+  type: string;
+  status: string;
+  city: string;
+  state: string;
+  address: string | null;
+  lat: number;
+  lng: number;
+  description: string;
+  verifiedCount: number;
+  createdAt: Date;
+  updatedAt: Date;
+  comments: {
+    id: string;
+    text: string;
+    authorName: string | null;
+    createdAt: Date;
+  }[];
+};
+
 export const dynamic = 'force-dynamic';
 
 export async function GET(request: NextRequest) {
@@ -14,9 +35,14 @@ export async function GET(request: NextRequest) {
     const reports = await prisma.report.findMany({
       where: state ? { state } : undefined,
       orderBy: { createdAt: 'desc' },
+      include: {
+        comments: {
+          orderBy: { createdAt: 'desc' },
+        },
+      },
     });
 
-    const transformedReports = reports.map((r: { id: string; type: string; status: string; city: string; state: string; address: string | null; lat: number; lng: number; description: string; createdAt: Date }) => ({
+    const transformedReports = (reports as ReportWithComments[]).map((r) => ({
       id: r.id,
       type: r.type,
       status: r.status,
@@ -28,9 +54,14 @@ export async function GET(request: NextRequest) {
       },
       description: r.description,
       timestamp: r.createdAt,
-      verifiedCount: 1,
+      verifiedCount: r.verifiedCount,
       reporterCount: 1,
-      comments: [],
+      comments: r.comments.map((c) => ({
+        id: c.id,
+        text: c.text,
+        authorName: c.authorName,
+        createdAt: c.createdAt,
+      })),
     }));
 
     return NextResponse.json({ success: true, reports: transformedReports });

@@ -36,7 +36,7 @@ export function useReportsData(): UseReportsDataReturn {
         statsRes.json(),
       ]);
 
-      if (reportsData.success && reportsData.reports.length > 0) {
+      if (reportsData.success) {
         setReports(
           reportsData.reports.map((r: Report) => ({
             ...r,

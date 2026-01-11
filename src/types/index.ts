@@ -10,7 +10,8 @@ export type ReportType =
 export interface Comment {
   id: string;
   text: string;
-  timestamp: Date;
+  authorName?: string;
+  createdAt: Date;
 }
 
 export interface Report {

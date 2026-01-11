@@ -641,6 +641,7 @@ export default function ReportModal({ isOpen, onClose, onSubmit, reports, onVeri
             <textarea
               required
               rows={3}
+              maxLength={500}
               value={formData.description}
               onChange={(e) => setFormData({ ...formData, description: e.target.value })}
               className="w-full bg-black/50 border border-accent-dim/30 px-3 py-2 text-xs text-foreground placeholder:text-foreground/30 focus:border-accent/50 focus:outline-none resize-none"

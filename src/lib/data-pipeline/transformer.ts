@@ -9,6 +9,7 @@ import {
 } from '@/types/analytics';
 import { RawImmigrationRecord } from './csv-parser';
 import { US_STATES } from '@/data/states';
+import detentionAggregates from '@/data/detention-aggregates.json';
 
 // Build lookup maps
 const stateCodeToName = new Map(US_STATES.map(s => [s.code, s.name]));
@@ -105,47 +106,17 @@ function computeSummary(
   const arrests = current.filter(r => r.apprehension_date).length;
   const arrestsPrev = previous.filter(r => r.apprehension_date).length;
 
-  // Calculate average daily detentions
-  // For each record with book_in and book_out, count detention days
-  let totalDetentionDays = 0;
-  let totalDetentionDaysPrev = 0;
-
-  const processDetention = (records: RawImmigrationRecord[]) => {
-    let days = 0;
-    for (const r of records) {
-      if (r.book_in_date) {
-        const bookIn = parseDate(r.book_in_date);
-        const bookOut = r.book_out_date ? parseDate(r.book_out_date) : new Date();
-        if (bookIn && bookOut) {
-          days += Math.max(1, daysBetween(bookIn, bookOut));
-        }
-      }
-    }
-    return days;
-  };
-
-  totalDetentionDays = processDetention(current);
-  totalDetentionDaysPrev = processDetention(previous);
-
-  // Estimate average daily population
-  // Rough calculation: total detention days / days in period
-  const daysInPeriod = 365;
-  const avgDaily = Math.round(totalDetentionDays / daysInPeriod);
-  const avgDailyPrev = Math.round(totalDetentionDaysPrev / daysInPeriod);
-
-  // Active cases: people currently in detention (have book_in but no book_out)
-  const activeCases = current.filter(r => r.book_in_date && !r.book_out_date).length;
-  const activeCasesPrev = previous.filter(r => r.book_in_date && !r.book_out_date).length;
-
+  // Use pre-aggregated detention data from GitHub Action
+  // The 178MB detention file is too large for serverless, so we pre-process it
   return {
     totalDeportations: deportations,
     totalDeportationsPrevPeriod: deportationsPrev,
     totalArrests: arrests,
     totalArrestsPrevPeriod: arrestsPrev,
-    avgDailyDetentions: avgDaily || 0,
-    avgDailyDetentionsPrevPeriod: avgDailyPrev || 0,
-    activeCases: activeCases,
-    activeCasesPrevPeriod: activeCasesPrev,
+    avgDailyDetentions: detentionAggregates.summary.avgDailyDetentions,
+    avgDailyDetentionsPrevPeriod: detentionAggregates.summary.avgDailyDetentionsPrevPeriod,
+    activeCases: detentionAggregates.summary.activeCases,
+    activeCasesPrevPeriod: detentionAggregates.summary.activeCasesPrevPeriod,
   };
 }
 
@@ -188,6 +159,19 @@ function computeMonthlyTrends(records: RawImmigrationRecord[]): MonthlyEnforceme
   const entries = Array.from(monthlyData.entries())
     .map(([month, data]) => ({ month, ...data }))
     .sort((a, b) => parseMonthKey(a.month).getTime() - parseMonthKey(b.month).getTime());
+
+  // Remove the most recent month in the data (likely incomplete from upstream source)
+  // Only do this if the most recent month is within the last 3 months (recent data)
+  if (entries.length > 0) {
+    const lastEntry = entries[entries.length - 1];
+    const lastMonthDate = parseMonthKey(lastEntry.month);
+    const threeMonthsAgo = new Date();
+    threeMonthsAgo.setMonth(threeMonthsAgo.getMonth() - 3);
+
+    if (lastMonthDate > threeMonthsAgo) {
+      entries.pop(); // Remove the incomplete most recent month
+    }
+  }
 
   // Return last 12 complete months
   return entries.slice(-12);

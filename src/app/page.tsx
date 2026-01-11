@@ -61,68 +61,149 @@ export default function Home() {
     return reports.filter((r) => r.location.state === selectedState);
   }, [reports, selectedState]);
 
-  const handleSubmitReport = (data: ReportFormData) => {
-    const newReport: Report = {
-      id: String(Date.now()),
-      type: data.type,
-      status: 'UNVERIFIED',
-      location: {
-        city: data.city,
-        state: data.state,
-        coordinates: data.coordinates || [-98, 39],
-        address: data.address,
-      },
-      description: data.description,
-      timestamp: new Date(),
-      verifiedCount: 0,
-      reporterCount: 1,
-      comments: [],
-    };
-    setReports([newReport, ...reports]);
+  const handleSubmitReport = async (data: ReportFormData) => {
+    const coordinates = data.coordinates || [-98, 39];
+
+    try {
+      const response = await fetch('/api/reports', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          type: data.type,
+          city: data.city,
+          state: data.state,
+          address: data.address,
+          lat: coordinates[1],
+          lng: coordinates[0],
+          description: data.description,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok || !result.success) {
+        console.error('Failed to submit report:', result.error);
+        alert('Failed to submit report. Please try again.');
+        return;
+      }
+
+      // Add the new report from the API response to local state
+      const newReport: Report = {
+        id: result.report.id,
+        type: result.report.type,
+        status: result.report.status,
+        location: {
+          city: result.report.location.city,
+          state: result.report.location.state,
+          coordinates: result.report.location.coordinates,
+          address: result.report.location.address,
+        },
+        description: result.report.description,
+        timestamp: new Date(result.report.timestamp),
+        verifiedCount: 0,
+        reporterCount: 1,
+        comments: [],
+      };
+      setReports([newReport, ...reports]);
+    } catch (error) {
+      console.error('Error submitting report:', error);
+      alert('Failed to submit report. Please try again.');
+    }
   };
 
-  const handleVerifyReport = (reportId: string) => {
-    setReports(prevReports =>
-      prevReports.map(report => {
-        if (report.id === reportId) {
-          const newVerifiedCount = report.verifiedCount + 1;
-          const newStatus = report.status === 'UNVERIFIED' && newVerifiedCount >= 3 ? 'ACTIVE' : report.status;
-          return {
-            ...report,
-            verifiedCount: newVerifiedCount,
-            status: newStatus,
-          };
-        }
-        return report;
-      })
-    );
+  const handleVerifyReport = async (reportId: string) => {
+    try {
+      const response = await fetch(`/api/reports/${reportId}/verify`, {
+        method: 'POST',
+      });
+
+      const result = await response.json();
+
+      if (!response.ok || !result.success) {
+        console.error('Failed to verify report:', result.error);
+        alert('Failed to verify report. Please try again.');
+        return;
+      }
+
+      // Update local state with the new verified count and status
+      setReports(prevReports =>
+        prevReports.map(report => {
+          if (report.id === reportId) {
+            return {
+              ...report,
+              verifiedCount: result.report.verifiedCount,
+              status: result.report.status,
+            };
+          }
+          return report;
+        })
+      );
+
+      // Update selected report if it's the one being verified
+      if (selectedReport?.id === reportId) {
+        setSelectedReport(prev => prev ? {
+          ...prev,
+          verifiedCount: result.report.verifiedCount,
+          status: result.report.status,
+        } : null);
+      }
+    } catch (error) {
+      console.error('Error verifying report:', error);
+      alert('Failed to verify report. Please try again.');
+    }
   };
 
-  const handleAddComment = (reportId: string, commentText: string) => {
-    const newComment = {
-      id: String(Date.now()),
-      text: commentText,
-      timestamp: new Date(),
-    };
+  const handleAddComment = async (reportId: string, commentText: string) => {
+    try {
+      const response = await fetch(`/api/reports/${reportId}/comments`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          text: commentText,
+        }),
+      });
 
-    setReports(prevReports =>
-      prevReports.map(report => {
-        if (report.id === reportId) {
-          return {
-            ...report,
-            comments: [...(report.comments || []), newComment],
-          };
-        }
-        return report;
-      })
-    );
+      const result = await response.json();
 
-    // Update selected report to reflect the new comment
-    if (selectedReport?.id === reportId) {
-      setSelectedReport(prev => prev ? {
-        ...prev,
-        comments: [...(prev.comments || []), newComment],
-      } : null);
+      if (!response.ok || !result.success) {
+        console.error('Failed to add comment:', result.error);
+        alert('Failed to add comment. Please try again.');
+        return;
+      }
+
+      const newComment = {
+        id: result.comment.id,
+        text: result.comment.text,
+        authorName: result.comment.authorName,
+        createdAt: new Date(result.comment.createdAt),
+      };
+
+      setReports(prevReports =>
+        prevReports.map(report => {
+          if (report.id === reportId) {
+            return {
+              ...report,
+              comments: [...(report.comments || []), newComment],
+            };
+          }
+          return report;
+        })
+      );
+
+      // Update selected report to reflect the new comment
+      if (selectedReport?.id === reportId) {
+        setSelectedReport(prev => prev ? {
+          ...prev,
+          comments: [...(prev.comments || []), newComment],
+        } : null);
+      }
+    } catch (error) {
+      console.error('Error adding comment:', error);
+      alert('Failed to add comment. Please try again.');
     }
   };
 
