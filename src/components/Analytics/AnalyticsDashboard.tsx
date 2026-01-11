@@ -6,7 +6,7 @@ import Header from '@/components/Header';
 import NavBar from '@/components/NavBar';
 import StatCard from '@/components/Analytics/StatCard';
 import EnforcementChart from '@/components/Analytics/EnforcementChart';
-import { CountriesChart, AgeChart, FamilyChart } from '@/components/Analytics/DemographicsChart';
+import { CountriesChart, AgeChart, ApprehensionMethodChart } from '@/components/Analytics/DemographicsChart';
 import { useLanguage } from '@/contexts/LanguageContext';
 import ReportModal from '@/components/ReportModal';
 import DonateModal from '@/components/DonateModal';
@@ -37,7 +37,7 @@ interface AnalyticsDashboardProps {
 export default function AnalyticsDashboard({ data, dataSource }: AnalyticsDashboardProps) {
   const { t } = useLanguage();
   const { isPopupOpen, dismissForSession, dismissPermanently } = useDonationPopup();
-  const { summary, monthlyTrends, countriesOfOrigin, ageGroups, familyStatus, stateEnforcement, lastUpdated, dataSources } = data;
+  const { summary, monthlyTrends, countriesOfOrigin, ageGroups, apprehensionMethods, stateEnforcement, lastUpdated, dataSources } = data;
   const [isReportModalOpen, setIsReportModalOpen] = useState(false);
   const [isDonateModalOpen, setIsDonateModalOpen] = useState(false);
   const [isInfoModalOpen, setIsInfoModalOpen] = useState(false);
@@ -163,10 +163,10 @@ export default function AnalyticsDashboard({ data, dataSource }: AnalyticsDashbo
               />
             </div>
             <div className="flex-1">
-              <FamilyChart
-                data={familyStatus}
-                title={t.analytics?.statusTitle}
-                subtitle={t.analytics?.statusSubtitle}
+              <ApprehensionMethodChart
+                data={apprehensionMethods}
+                title={t.analytics?.methodTitle}
+                subtitle={t.analytics?.methodSubtitle}
               />
             </div>
 

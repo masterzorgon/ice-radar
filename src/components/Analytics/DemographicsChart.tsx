@@ -12,7 +12,7 @@ import {
   Pie,
   Cell,
 } from 'recharts';
-import { CountryOfOriginData, AgeGroupData, FamilyStatusData } from '@/types/analytics';
+import { CountryOfOriginData, AgeGroupData, ApprehensionMethodData } from '@/types/analytics';
 
 interface CountriesChartProps {
   data: CountryOfOriginData[];
@@ -113,6 +113,8 @@ export function AgeChart({ data, title = 'AGE', subtitle = 'DISTRIBUTION' }: Age
                   borderRadius: 0,
                   fontSize: 11,
                 }}
+                itemStyle={{ color: '#00ff00' }}
+                labelStyle={{ color: '#00ff00' }}
                 formatter={(value, _name, props) => {
                   const numValue = value as number;
                   const payload = props.payload as AgeGroupData;
@@ -139,15 +141,23 @@ export function AgeChart({ data, title = 'AGE', subtitle = 'DISTRIBUTION' }: Age
   );
 }
 
-interface FamilyChartProps {
-  data: FamilyStatusData[];
+interface ApprehensionMethodChartProps {
+  data: ApprehensionMethodData[];
   title?: string;
   subtitle?: string;
 }
 
-const FAMILY_COLORS = ['#ff3333', '#ffaa00', '#00ff00'];
+const METHOD_COLORS = ['#00ff00', '#00cc00', '#009900', '#006600', '#003300', '#001a00'];
 
-export function FamilyChart({ data, title = 'STATUS', subtitle = 'FAMILY COMPOSITION' }: FamilyChartProps) {
+export function ApprehensionMethodChart({ data = [], title = 'METHOD', subtitle = 'APPREHENSION TYPE' }: ApprehensionMethodChartProps) {
+  if (!data || data.length === 0) {
+    return (
+      <div className="bg-black/50 border border-accent-dim/30 p-4 h-full flex items-center justify-center">
+        <span className="text-accent-dim text-xs">NO DATA AVAILABLE</span>
+      </div>
+    );
+  }
+
   return (
     <div className="bg-black/50 border border-accent-dim/30 p-4 h-full">
       <div className="flex items-center gap-2 mb-4">
@@ -161,7 +171,7 @@ export function FamilyChart({ data, title = 'STATUS', subtitle = 'FAMILY COMPOSI
               <Pie
                 data={data}
                 dataKey="count"
-                nameKey="status"
+                nameKey="method"
                 cx="50%"
                 cy="50%"
                 innerRadius="40%"
@@ -170,7 +180,7 @@ export function FamilyChart({ data, title = 'STATUS', subtitle = 'FAMILY COMPOSI
                 stroke="#0a0a0a"
               >
                 {data.map((_, index) => (
-                  <Cell key={`cell-${index}`} fill={FAMILY_COLORS[index % FAMILY_COLORS.length]} />
+                  <Cell key={`cell-${index}`} fill={METHOD_COLORS[index % METHOD_COLORS.length]} />
                 ))}
               </Pie>
               <Tooltip
@@ -180,23 +190,25 @@ export function FamilyChart({ data, title = 'STATUS', subtitle = 'FAMILY COMPOSI
                   borderRadius: 0,
                   fontSize: 11,
                 }}
+                itemStyle={{ color: '#00ff00' }}
+                labelStyle={{ color: '#00ff00' }}
                 formatter={(value, _name, props) => {
                   const numValue = value as number;
-                  const payload = props.payload as FamilyStatusData;
-                  return [`${numValue.toLocaleString()} (${payload.percentage}%)`, payload.status];
+                  const payload = props.payload as ApprehensionMethodData;
+                  return [`${numValue.toLocaleString()} (${payload.percentage}%)`, payload.method];
                 }}
               />
             </PieChart>
           </ResponsiveContainer>
         </div>
-        <div className="flex flex-col justify-center gap-2 text-[10px] pr-2">
+        <div className="flex flex-col justify-center gap-1 text-[10px] pr-2">
           {data.map((item, index) => (
-            <div key={item.status} className="flex items-center gap-2">
+            <div key={item.method} className="flex items-center gap-2">
               <div
                 className="w-2 h-2"
-                style={{ backgroundColor: FAMILY_COLORS[index % FAMILY_COLORS.length] }}
+                style={{ backgroundColor: METHOD_COLORS[index % METHOD_COLORS.length] }}
               />
-              <span className="text-foreground/70 whitespace-nowrap">{item.status}</span>
+              <span className="text-foreground/70 whitespace-nowrap">{item.method}</span>
               <span className="text-accent">{item.percentage}%</span>
             </div>
           ))}

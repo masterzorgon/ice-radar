@@ -26,6 +26,13 @@ export interface FamilyStatusData {
   [key: string]: string | number;
 }
 
+export interface ApprehensionMethodData {
+  method: string;
+  count: number;
+  percentage: number;
+  [key: string]: string | number;
+}
+
 export interface StateEnforcementData {
   state: string;
   stateCode: string;
@@ -50,7 +57,7 @@ export interface AnalyticsData {
   monthlyTrends: MonthlyEnforcementData[];
   countriesOfOrigin: CountryOfOriginData[];
   ageGroups: AgeGroupData[];
-  familyStatus: FamilyStatusData[];
+  apprehensionMethods: ApprehensionMethodData[];
   stateEnforcement: StateEnforcementData[];
   lastUpdated: string;
   dataSources: string[];

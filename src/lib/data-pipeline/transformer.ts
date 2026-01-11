@@ -5,7 +5,7 @@ import {
   StateEnforcementData,
   CountryOfOriginData,
   AgeGroupData,
-  FamilyStatusData,
+  ApprehensionMethodData,
 } from '@/types/analytics';
 import { RawImmigrationRecord } from './csv-parser';
 import { US_STATES } from '@/data/states';
@@ -83,7 +83,7 @@ export function transformToAnalytics(
     monthlyTrends: computeMonthlyTrends(validRecords),
     countriesOfOrigin: computeCountriesOfOrigin(validRecords),
     ageGroups: computeAgeGroups(validRecords),
-    familyStatus: computeFamilyStatus(validRecords),
+    apprehensionMethods: computeApprehensionMethods(validRecords),
     stateEnforcement: computeStateEnforcement(validRecords),
     lastUpdated: new Date().toISOString(),
     dataSources: [
@@ -282,43 +282,38 @@ function computeAgeGroups(records: RawImmigrationRecord[]): AgeGroupData[] {
   }));
 }
 
-function computeFamilyStatus(records: RawImmigrationRecord[]): FamilyStatusData[] {
-  let singleAdults = 0;
-  let familyUnits = 0;
-  let unaccompaniedMinors = 0;
+function computeApprehensionMethods(records: RawImmigrationRecord[]): ApprehensionMethodData[] {
+  const methodCounts = new Map<string, number>();
 
   for (const record of records) {
-    const isUAC = record.uac === 'true' || record.uac === '1' || record.uac === 'Y' || record.uac === 'Yes';
-    const isFamily = record.family_unit === 'true' || record.family_unit === '1' || record.family_unit === 'Y' || record.family_unit === 'Yes';
-
-    if (isUAC) {
-      unaccompaniedMinors++;
-    } else if (isFamily) {
-      familyUnits++;
-    } else {
-      singleAdults++;
-    }
+    const method = record.apprehension_method?.trim() || 'Unknown';
+    methodCounts.set(method, (methodCounts.get(method) || 0) + 1);
   }
 
-  const total = singleAdults + familyUnits + unaccompaniedMinors || 1;
+  const total = records.length || 1;
 
-  return [
-    {
-      status: 'Single Adults',
-      count: singleAdults,
-      percentage: Math.round((singleAdults / total) * 1000) / 10,
-    },
-    {
-      status: 'Family Units',
-      count: familyUnits,
-      percentage: Math.round((familyUnits / total) * 1000) / 10,
-    },
-    {
-      status: 'Unaccompanied Minors',
-      count: unaccompaniedMinors,
-      percentage: Math.round((unaccompaniedMinors / total) * 1000) / 10,
-    },
-  ];
+  // Sort by count, take top methods, group rest as "Other"
+  const sorted = Array.from(methodCounts.entries())
+    .sort((a, b) => b[1] - a[1]);
+
+  const top5 = sorted.slice(0, 5);
+  const otherCount = sorted.slice(5).reduce((sum, [, count]) => sum + count, 0);
+
+  const result: ApprehensionMethodData[] = top5.map(([method, count]) => ({
+    method: titleCase(method),
+    count,
+    percentage: Math.round((count / total) * 1000) / 10,
+  }));
+
+  if (otherCount > 0) {
+    result.push({
+      method: 'Other',
+      count: otherCount,
+      percentage: Math.round((otherCount / total) * 1000) / 10,
+    });
+  }
+
+  return result;
 }
 
 // Utility functions
