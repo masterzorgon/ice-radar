@@ -12,6 +12,8 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import ReportModal from '@/components/ReportModal';
 import DonateModal from '@/components/DonateModal';
 import InfoModal from '@/components/InfoModal';
+import DisclaimerModal from '@/components/DisclaimerModal';
+import SubscribeModal from '@/components/SubscribeModal';
 
 // Dynamic import for map to avoid SSR issues
 const StateHeatmap = dynamic(() => import('@/components/Analytics/StateHeatmap'), {
@@ -31,6 +33,8 @@ export default function AnalyticsPage() {
   const [isReportModalOpen, setIsReportModalOpen] = useState(false);
   const [isDonateModalOpen, setIsDonateModalOpen] = useState(false);
   const [isInfoModalOpen, setIsInfoModalOpen] = useState(false);
+  const [isDisclaimerModalOpen, setIsDisclaimerModalOpen] = useState(false);
+  const [isSubscribeModalOpen, setIsSubscribeModalOpen] = useState(false);
 
   const formattedDate = new Date(lastUpdated).toLocaleDateString('en-US', {
     year: 'numeric',
@@ -57,6 +61,8 @@ export default function AnalyticsPage() {
           //   </div>
           // }
           onInfoClick={() => setIsInfoModalOpen(true)}
+          onDisclaimerClick={() => setIsDisclaimerModalOpen(true)}
+          onSubscribeClick={() => setIsSubscribeModalOpen(true)}
           onDonateClick={() => setIsDonateModalOpen(true)}
           onReportClick={() => setIsReportModalOpen(true)}
         />
@@ -161,7 +167,6 @@ export default function AnalyticsPage() {
             {/* Info box */}
             <div className="bg-accent/5 border border-accent/20 p-3">
               <div className="flex items-center gap-2 mb-2">
-                <span className="text-accent">i</span>
                 <span className="text-accent text-xs font-bold">{t.analytics?.aboutData || 'About This Data'}</span>
               </div>
               <p className="text-[10px] text-foreground/50">
@@ -208,6 +213,18 @@ export default function AnalyticsPage() {
       <InfoModal
         isOpen={isInfoModalOpen}
         onClose={() => setIsInfoModalOpen(false)}
+      />
+
+      {/* Disclaimer Modal */}
+      <DisclaimerModal
+        isOpen={isDisclaimerModalOpen}
+        onClose={() => setIsDisclaimerModalOpen(false)}
+      />
+
+      {/* Subscribe Modal */}
+      <SubscribeModal
+        isOpen={isSubscribeModalOpen}
+        onClose={() => setIsSubscribeModalOpen(false)}
       />
     </div>
   );

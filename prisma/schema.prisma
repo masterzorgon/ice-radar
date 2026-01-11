@@ -1,0 +1,40 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model Subscription {
+  id                String   @id @default(cuid())
+  email             String
+  states            String   // Comma-separated list of state codes (e.g., "CA,TX,NY")
+  verified          Boolean  @default(false)
+  verificationToken String   @unique
+  unsubscribeToken  String   @unique
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  @@unique([email])
+}
+
+model Report {
+  id          String   @id @default(cuid())
+  type        String   // RAID, CHECKPOINT, PATROL, DETENTION, SURVEILLANCE
+  status      String   // ACTIVE, RESOLVED, UNVERIFIED
+  city        String
+  state       String
+  address     String?
+  lat         Float
+  lng         Float
+  description String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([state])
+  @@index([createdAt])
+}

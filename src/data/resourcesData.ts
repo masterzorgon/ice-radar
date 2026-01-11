@@ -1,0 +1,318 @@
+export interface Resource {
+  id: string;
+  title: string;
+  titleEs: string;
+  description: string;
+  descriptionEs: string;
+  url?: string;
+  phone?: string;
+  type: 'link' | 'phone' | 'both';
+}
+
+export interface ResourceCategory {
+  id: string;
+  name: string;
+  nameEs: string;
+  shortName: string;
+  shortNameEs: string;
+  description: string;
+  descriptionEs: string;
+  resources: Resource[];
+}
+
+export const resourceCategories: ResourceCategory[] = [
+  {
+    id: 'rights',
+    name: 'Know Your Rights',
+    nameEs: 'Conoce Tus Derechos',
+    shortName: 'Rights',
+    shortNameEs: 'Derechos',
+    description: 'Understand your rights during ICE encounters',
+    descriptionEs: 'Comprende tus derechos durante encuentros con ICE',
+    resources: [
+      {
+        id: 'aclu-rights',
+        title: 'ACLU Know Your Rights',
+        titleEs: 'ACLU Conoce Tus Derechos',
+        description: 'Comprehensive guide to immigrant rights from the American Civil Liberties Union. Covers interactions at home, work, and in public.',
+        descriptionEs: 'Guia completa de derechos de inmigrantes de la Union Americana de Libertades Civiles. Cubre interacciones en casa, trabajo y en publico.',
+        url: 'https://www.aclu.org/know-your-rights/immigrants-rights',
+        type: 'link',
+      },
+      {
+        id: 'nilc-rights',
+        title: 'NILC Know Your Rights',
+        titleEs: 'NILC Conoce Tus Derechos',
+        description: 'Resources from the National Immigration Law Center including wallet cards and guides in multiple languages.',
+        descriptionEs: 'Recursos del Centro Nacional de Leyes de Inmigracion incluyendo tarjetas de billetera y guias en multiples idiomas.',
+        url: 'https://www.nilc.org/get-involved/community-education-resources/know-your-rights/',
+        type: 'link',
+      },
+      {
+        id: 'united-we-dream',
+        title: 'United We Dream Protection',
+        titleEs: 'Proteccion de United We Dream',
+        description: 'Safety planning resources and guides for immigrant youth and families from the largest immigrant youth-led network.',
+        descriptionEs: 'Recursos de planificacion de seguridad y guias para jovenes y familias inmigrantes de la red mas grande liderada por jovenes inmigrantes.',
+        url: 'https://unitedwedream.org/',
+        type: 'link',
+      },
+      {
+        id: 'ilrc-red-cards',
+        title: 'Red Cards / Know Your Rights Cards',
+        titleEs: 'Tarjetas Rojas / Tarjetas de Derechos',
+        description: 'Printable cards you can show to agents asserting your right to remain silent and refuse entry without a warrant.',
+        descriptionEs: 'Tarjetas imprimibles que puedes mostrar a los agentes afirmando tu derecho a permanecer en silencio y negar entrada sin orden judicial.',
+        url: 'https://www.ilrc.org/red-cards',
+        type: 'link',
+      },
+    ],
+  },
+  {
+    id: 'detention',
+    name: 'Detention Facilities',
+    nameEs: 'Centros de Detencion',
+    shortName: 'Detention',
+    shortNameEs: 'Detencion',
+    description: 'Find detention facilities and visitation information',
+    descriptionEs: 'Encuentra centros de detencion e informacion de visitas',
+    resources: [
+      {
+        id: 'ice-locator',
+        title: 'ICE Detainee Locator System',
+        titleEs: 'Sistema de Localizacion de Detenidos de ICE',
+        description: 'Official ICE online system to locate individuals in immigration detention. Requires name and country of birth or A-number.',
+        descriptionEs: 'Sistema oficial en linea de ICE para localizar individuos en detencion migratoria. Requiere nombre y pais de nacimiento o numero A.',
+        url: 'https://www.ice.gov/detention-facilities',
+        type: 'link',
+      },
+      {
+        id: 'freedom-immigrants',
+        title: 'Freedom for Immigrants',
+        titleEs: 'Libertad para Inmigrantes',
+        description: 'Detention database and resources. Includes facility conditions reports and visitation program information.',
+        descriptionEs: 'Base de datos de detencion y recursos. Incluye informes de condiciones de instalaciones e informacion del programa de visitas.',
+        url: 'https://www.freedomforimmigrants.org/detention-statistics',
+        type: 'link',
+      },
+      {
+        id: 'detention-watch',
+        title: 'Detention Watch Network',
+        titleEs: 'Red de Vigilancia de Detencion',
+        description: 'National coalition working to end immigration detention. Provides facility information and advocacy resources.',
+        descriptionEs: 'Coalicion nacional trabajando para terminar la detencion migratoria. Proporciona informacion de instalaciones y recursos de defensa.',
+        url: 'https://www.detentionwatchnetwork.org/',
+        type: 'link',
+      },
+    ],
+  },
+  {
+    id: 'confirm',
+    name: 'Confirming Detainment',
+    nameEs: 'Confirmar Detencion',
+    shortName: 'Confirm',
+    shortNameEs: 'Confirmar',
+    description: 'How to confirm if someone is in ICE custody',
+    descriptionEs: 'Como confirmar si alguien esta bajo custodia de ICE',
+    resources: [
+      {
+        id: 'ice-locator-confirm',
+        title: 'ICE Online Detainee Locator',
+        titleEs: 'Localizador de Detenidos de ICE en Linea',
+        description: 'Search by name and country of birth, or Alien Registration Number (A-number). Results show detention facility location.',
+        descriptionEs: 'Busca por nombre y pais de nacimiento, o Numero de Registro de Extranjero (numero A). Los resultados muestran la ubicacion del centro de detencion.',
+        url: 'https://locator.ice.gov/odls/#/index',
+        type: 'link',
+      },
+      {
+        id: 'ice-hotline',
+        title: 'ICE Detention Information Line',
+        titleEs: 'Linea de Informacion de Detencion de ICE',
+        description: 'Call to inquire about someone in ICE custody. Available in English and Spanish. Have the person\'s full name and date of birth ready.',
+        descriptionEs: 'Llama para preguntar sobre alguien bajo custodia de ICE. Disponible en ingles y espanol. Ten listo el nombre completo y fecha de nacimiento.',
+        phone: '1-888-351-4024',
+        type: 'phone',
+      },
+      {
+        id: 'ice-ero',
+        title: 'ICE ERO Contact by Location',
+        titleEs: 'Contacto de ICE ERO por Ubicacion',
+        description: 'Find local ICE Enforcement and Removal Operations field office contact information by state.',
+        descriptionEs: 'Encuentra informacion de contacto de la oficina local de Operaciones de Aplicacion y Remocion de ICE por estado.',
+        url: 'https://www.ice.gov/contact/ero',
+        type: 'link',
+      },
+    ],
+  },
+  {
+    id: 'legal',
+    name: 'Find Legal Help',
+    nameEs: 'Encontrar Ayuda Legal',
+    shortName: 'Legal',
+    shortNameEs: 'Legal',
+    description: 'Immigration lawyers and legal aid services',
+    descriptionEs: 'Abogados de inmigracion y servicios de ayuda legal',
+    resources: [
+      {
+        id: 'clinic-directory',
+        title: 'CLINIC Legal Directory',
+        titleEs: 'Directorio Legal de CLINIC',
+        description: 'Catholic Legal Immigration Network directory of nonprofit immigration legal services providers across the US.',
+        descriptionEs: 'Directorio de la Red Catolica de Inmigracion Legal de proveedores de servicios legales de inmigracion sin fines de lucro en todo EE.UU.',
+        url: 'https://www.cliniclegal.org/directory',
+        type: 'link',
+      },
+      {
+        id: 'immigration-advocates',
+        title: 'Immigration Advocates Network',
+        titleEs: 'Red de Defensores de Inmigracion',
+        description: 'Searchable directory of free and low-cost immigration legal services. Filter by location and services offered.',
+        descriptionEs: 'Directorio de busqueda de servicios legales de inmigracion gratuitos y de bajo costo. Filtra por ubicacion y servicios ofrecidos.',
+        url: 'https://www.immigrationadvocates.org/nonprofit/legaldirectory/',
+        type: 'link',
+      },
+      {
+        id: 'aila-referral',
+        title: 'AILA Lawyer Referral Service',
+        titleEs: 'Servicio de Referencia de Abogados de AILA',
+        description: 'American Immigration Lawyers Association directory to find qualified immigration attorneys in your area.',
+        descriptionEs: 'Directorio de la Asociacion Americana de Abogados de Inmigracion para encontrar abogados de inmigracion calificados en tu area.',
+        url: 'https://www.ailalawyer.com/',
+        type: 'link',
+      },
+      {
+        id: 'lawhelp',
+        title: 'LawHelp.org',
+        titleEs: 'LawHelp.org',
+        description: 'Find free legal aid programs in your state. Includes immigration-specific resources and self-help guides.',
+        descriptionEs: 'Encuentra programas de ayuda legal gratuita en tu estado. Incluye recursos especificos de inmigracion y guias de autoayuda.',
+        url: 'https://www.lawhelp.org/',
+        type: 'link',
+      },
+    ],
+  },
+  {
+    id: 'emergency',
+    name: 'Emergency Contacts',
+    nameEs: 'Contactos de Emergencia',
+    shortName: 'Emergency',
+    shortNameEs: 'Emergencia',
+    description: 'Hotlines and rapid response networks',
+    descriptionEs: 'Lineas de ayuda y redes de respuesta rapida',
+    resources: [
+      {
+        id: 'nilc-contact',
+        title: 'National Immigration Law Center',
+        titleEs: 'Centro Nacional de Leyes de Inmigracion',
+        description: 'Leading organization defending and advancing the rights of low-income immigrants. Resources and legal support.',
+        descriptionEs: 'Organizacion lider defendiendo y avanzando los derechos de inmigrantes de bajos ingresos. Recursos y apoyo legal.',
+        url: 'https://www.nilc.org/',
+        type: 'link',
+      },
+      {
+        id: 'aclu-immigrants',
+        title: 'ACLU Immigrants\' Rights Project',
+        titleEs: 'Proyecto de Derechos de Inmigrantes de ACLU',
+        description: 'Legal advocacy and resources for immigrant rights. Report rights violations and find local ACLU affiliates.',
+        descriptionEs: 'Defensa legal y recursos para derechos de inmigrantes. Reporta violaciones de derechos y encuentra afiliados locales de ACLU.',
+        url: 'https://www.aclu.org/issues/immigrants-rights',
+        type: 'link',
+      },
+      {
+        id: 'immigrant-defense',
+        title: 'Immigrant Defense Project Hotline',
+        titleEs: 'Linea de Ayuda del Proyecto de Defensa de Inmigrantes',
+        description: 'New York-based but provides national resources. Call for immediate assistance during raids or enforcement actions.',
+        descriptionEs: 'Basado en Nueva York pero proporciona recursos nacionales. Llama para asistencia inmediata durante redadas o acciones de aplicacion.',
+        url: 'https://www.immigrantdefenseproject.org/',
+        phone: '1-212-725-6422',
+        type: 'both',
+      },
+      {
+        id: 'consulate-finder',
+        title: 'Find Your Consulate',
+        titleEs: 'Encuentra Tu Consulado',
+        description: 'US State Department directory to find foreign consulates in the United States. Your consulate can provide assistance if detained.',
+        descriptionEs: 'Directorio del Departamento de Estado de EE.UU. para encontrar consulados extranjeros en Estados Unidos. Tu consulado puede proporcionar asistencia si eres detenido.',
+        url: 'https://www.state.gov/discover-diplomacy/foreign-embassies/',
+        type: 'link',
+      },
+    ],
+  },
+  {
+    id: 'family',
+    name: 'Family Preparedness',
+    nameEs: 'Preparacion Familiar',
+    shortName: 'Family',
+    shortNameEs: 'Familia',
+    description: 'Emergency plans and documentation for families',
+    descriptionEs: 'Planes de emergencia y documentacion para familias',
+    resources: [
+      {
+        id: 'ilrc-family-plan',
+        title: 'ILRC Family Preparedness Plan',
+        titleEs: 'Plan de Preparacion Familiar de ILRC',
+        description: 'Comprehensive guide to creating an emergency plan. Includes templates for power of attorney and caregiver designation.',
+        descriptionEs: 'Guia completa para crear un plan de emergencia. Incluye plantillas para poder notarial y designacion de cuidador.',
+        url: 'https://www.ilrc.org/family-preparedness-plan',
+        type: 'link',
+      },
+      {
+        id: 'chirla-family',
+        title: 'CHIRLA Family Emergency Resources',
+        titleEs: 'Recursos de Emergencia Familiar de CHIRLA',
+        description: 'Coalition for Humane Immigrant Rights provides family separation preparation resources and support.',
+        descriptionEs: 'La Coalicion por los Derechos Humanos de los Inmigrantes proporciona recursos de preparacion para separacion familiar y apoyo.',
+        url: 'https://www.chirla.org/',
+        type: 'link',
+      },
+    ],
+  },
+  {
+    id: 'community',
+    name: 'Community Support',
+    nameEs: 'Apoyo Comunitario',
+    shortName: 'Community',
+    shortNameEs: 'Comunidad',
+    description: 'Bail funds, sanctuary policies, and local networks',
+    descriptionEs: 'Fondos de fianza, politicas de santuario y redes locales',
+    resources: [
+      {
+        id: 'bail-fund-network',
+        title: 'National Bail Fund Network',
+        titleEs: 'Red Nacional de Fondos de Fianza',
+        description: 'Directory of community bail funds across the country. Find organizations that help pay immigration bonds.',
+        descriptionEs: 'Directorio de fondos de fianza comunitarios en todo el pais. Encuentra organizaciones que ayudan a pagar fianzas de inmigracion.',
+        url: 'https://www.communityjusticeexchange.org/nbfn-directory',
+        type: 'link',
+      },
+      {
+        id: 'immigrant-defense-project',
+        title: 'Immigrant Defense Project',
+        titleEs: 'Proyecto de Defensa de Inmigrantes',
+        description: 'Resources for community defense, know your rights trainings, and raid response. Based in NY but national resources.',
+        descriptionEs: 'Recursos para defensa comunitaria, entrenamientos de conoce tus derechos y respuesta a redadas. Basado en NY pero recursos nacionales.',
+        url: 'https://www.immigrantdefenseproject.org/',
+        type: 'link',
+      },
+      {
+        id: 'sanctuary-cities',
+        title: 'Sanctuary Cities Information',
+        titleEs: 'Informacion de Ciudades Santuario',
+        description: 'Learn about sanctuary city and state policies that limit local cooperation with federal immigration enforcement.',
+        descriptionEs: 'Aprende sobre politicas de ciudades y estados santuario que limitan la cooperacion local con la aplicacion federal de inmigracion.',
+        url: 'https://www.ilrc.org/local-enforcement-map',
+        type: 'link',
+      },
+      {
+        id: 'mental-health',
+        title: 'Immigrant Mental Health Resources',
+        titleEs: 'Recursos de Salud Mental para Inmigrantes',
+        description: 'Mental health support resources for immigrants dealing with enforcement-related stress and trauma.',
+        descriptionEs: 'Recursos de apoyo de salud mental para inmigrantes lidiando con estres y trauma relacionados con la aplicacion migratoria.',
+        url: 'https://www.psychiatry.org/patients-families/what-is-mental-illness/immigrants-refugees',
+        type: 'link',
+      },
+    ],
+  },
+];

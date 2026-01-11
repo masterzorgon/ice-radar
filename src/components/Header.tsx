@@ -66,7 +66,7 @@ export default function Header() {
             <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
             <span className="text-accent-dim">{t.header.systemOnline}</span>
           </div>
-          <div className="text-accent-dim">
+          <div className="text-accent-dim w-22">
             UTC: <span className="text-accent">{time}</span>
           </div>
         </div>

@@ -13,6 +13,8 @@ export const es = {
     blog: '[NOTICIAS]',
     analytics: '[ESTADISTICAS]',
     info: '[INFO]',
+    disclaimer: '[AVISO]',
+    alerts: '[ALERTAS]',
     donate: 'DONAR',
     submitReport: '[+ ENVIAR REPORTE]',
   },
@@ -198,6 +200,50 @@ export const es = {
   // Common
   common: {
     ago: 'hace',
+  },
+
+  // Resources
+  resources: {
+    pageTitle: 'CONOCE TUS DERECHOS Y OBTÉN AYUDA',
+    visitLink: 'VISITAR RECURSO',
+    disclaimerTitle: 'AVISO IMPORTANTE',
+    disclaimer: 'Esta informacion se proporciona solo con fines educativos y no constituye asesoramiento legal. Cada situacion es diferente. Si necesita asistencia legal, consulte con un abogado de inmigracion calificado. Los enlaces proporcionados son a organizaciones externas y no somos responsables de su contenido.',
+    categories: 'Categorias',
+    footer: 'Los enlaces externos se abren en nuevas pestanas',
+  },
+
+  // Disclaimer Modal
+  disclaimer: {
+    title: '[AVISO]',
+    subtitle: 'AVISO IMPORTANTE',
+    close: '[CERRAR]',
+    mainText: 'Esta informacion se proporciona solo con fines educativos y no constituye asesoramiento legal. Cada situacion es diferente. Si necesita asistencia legal, consulte con un abogado de inmigracion calificado. Los enlaces proporcionados son a organizaciones externas y no somos responsables de su contenido. Todos los datos son proporcionados por la comunidad, anonimos y/o de recursos publicos. La informacion debe verificarse de forma independiente.',
+    notLegalAdvice: 'No Es Asesoramiento Legal',
+    notLegalAdviceDesc: 'Esta informacion es solo para fines educativos. Cada situacion es unica y requiere evaluacion individual.',
+    externalLinks: 'Enlaces Externos',
+    externalLinksDesc: 'Los enlaces proporcionados son a organizaciones externas. No somos responsables de su contenido o precision.',
+    communityData: 'Datos de la Comunidad',
+    communityDataDesc: 'Todos los datos son proporcionados por la comunidad, anonimos y/o de recursos publicos.',
+    verifyIndependently: 'Verificar Informacion',
+    verifyIndependentlyDesc: 'La informacion siempre debe verificarse de forma independiente antes de tomar accion.',
+  },
+
+  // Subscribe Modal
+  subscribe: {
+    title: '[ALERTAS]',
+    subtitle: 'NOTIFICACIONES POR EMAIL',
+    description: 'Recibe notificaciones cuando se reporten nuevos avistamientos de ICE en los estados que selecciones. Tu email solo se usa para alertas.',
+    emailLabel: 'CORREO ELECTRONICO',
+    emailPlaceholder: 'tu@email.com',
+    statesLabel: 'SELECCIONA ESTADOS',
+    selectAll: 'Seleccionar Todos',
+    deselectAll: 'Deseleccionar Todos',
+    privacyNotice: 'Tu email se almacena de forma segura y solo se usa para alertas. Cancela cuando quieras.',
+    submit: '[SUSCRIBIRSE A ALERTAS]',
+    submitting: 'SUSCRIBIENDO...',
+    successTitle: 'Revisa Tu Email',
+    successMessage: 'Te enviamos un enlace de verificacion. Haz clic para activar tus alertas.',
+    close: '[CERRAR]',
   },
 
   // Analytics

@@ -1,7 +1,7 @@
 export const en = {
   // Header
   header: {
-    title: 'ICE SIGHTINGS TRACKER',
+    title: 'ICE RADAR',
     subtitle: 'COMMUNITY ALERT SYSTEM (BETA)',
     systemOnline: 'SYSTEM ONLINE',
   },
@@ -10,9 +10,10 @@ export const en = {
   nav: {
     home: '[HOME]',
     resources: '[RESOURCES]',
-    blog: '[NEWS]',
     analytics: '[ANALYTICS]',
     info: '[INFO]',
+    disclaimer: '[DISCLAIMER]',
+    alerts: '[ALERTS]',
     donate: 'DONATE',
     submitReport: '[+ SUBMIT REPORT]',
   },
@@ -198,6 +199,48 @@ export const en = {
   // Common
   common: {
     ago: 'ago',
+  },
+
+  // Resources
+  resources: {
+    pageTitle: 'KNOW YOUR RIGHTS & GET HELP',
+    visitLink: 'VISIT RESOURCE',
+    categories: 'Categories',
+    footer: 'External links open in new tabs',
+  },
+
+  // Disclaimer Modal
+  disclaimer: {
+    title: '[DISCLAIMER]',
+    subtitle: 'IMPORTANT NOTICE',
+    close: '[CLOSE]',
+    mainText: 'This information is provided for educational purposes only and does not constitute legal advice. Every situation is different. If you need legal assistance, please consult with a qualified immigration attorney. The links provided are to external organizations and we are not responsible for their content. All data is community-sourced, anonymous, and/or from public resources. Information should be verified independently.',
+    notLegalAdvice: 'Not Legal Advice',
+    notLegalAdviceDesc: 'This information is for educational purposes only. Every situation is unique and requires individual assessment.',
+    externalLinks: 'External Links',
+    externalLinksDesc: 'Links provided are to external organizations. We are not responsible for their content or accuracy.',
+    communityData: 'Community Data',
+    communityDataDesc: 'All data is community-sourced, anonymous, and/or from public resources.',
+    verifyIndependently: 'Verify Information',
+    verifyIndependentlyDesc: 'Information should always be verified independently before taking action.',
+  },
+
+  // Subscribe Modal
+  subscribe: {
+    title: '[ALERTS]',
+    subtitle: 'EMAIL NOTIFICATIONS',
+    description: 'Get notified when new ICE sightings are reported in your selected states. Your email is only used for alerts.',
+    emailLabel: 'EMAIL ADDRESS',
+    emailPlaceholder: 'your@email.com',
+    statesLabel: 'SELECT STATES',
+    selectAll: 'Select All',
+    deselectAll: 'Deselect All',
+    privacyNotice: 'Your email is stored securely and only used for alerts. Unsubscribe anytime.',
+    submit: '[SUBSCRIBE TO ALERTS]',
+    submitting: 'SUBSCRIBING...',
+    successTitle: 'Check Your Email',
+    successMessage: 'We sent you a verification link. Click it to activate your alerts.',
+    close: '[CLOSE]',
   },
 
   // Analytics

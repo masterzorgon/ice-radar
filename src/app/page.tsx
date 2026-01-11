@@ -10,6 +10,8 @@ import ReportModal, { ReportFormData } from '@/components/ReportModal';
 import ReportDetailModal from '@/components/ReportDetailModal';
 import DonateModal from '@/components/DonateModal';
 import InfoModal from '@/components/InfoModal';
+import DisclaimerModal from '@/components/DisclaimerModal';
+import SubscribeModal from '@/components/SubscribeModal';
 import { mockReports, mockHotspots, mockStats } from '@/data/mockData';
 import { Report } from '@/types';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -34,6 +36,8 @@ export default function Home() {
   const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
   const [isDonateModalOpen, setIsDonateModalOpen] = useState(false);
   const [isInfoModalOpen, setIsInfoModalOpen] = useState(false);
+  const [isDisclaimerModalOpen, setIsDisclaimerModalOpen] = useState(false);
+  const [isSubscribeModalOpen, setIsSubscribeModalOpen] = useState(false);
   const [reports, setReports] = useState(mockReports);
 
   const filteredReports = useMemo(() => {
@@ -129,6 +133,8 @@ export default function Home() {
       <main className="flex-1 p-4 flex flex-col gap-4">
         <NavBar
           onInfoClick={() => setIsInfoModalOpen(true)}
+          onDisclaimerClick={() => setIsDisclaimerModalOpen(true)}
+          onSubscribeClick={() => setIsSubscribeModalOpen(true)}
           onDonateClick={() => setIsDonateModalOpen(true)}
           onReportClick={() => setIsReportModalOpen(true)}
         />
@@ -268,6 +274,18 @@ export default function Home() {
       <InfoModal
         isOpen={isInfoModalOpen}
         onClose={() => setIsInfoModalOpen(false)}
+      />
+
+      {/* Disclaimer Modal */}
+      <DisclaimerModal
+        isOpen={isDisclaimerModalOpen}
+        onClose={() => setIsDisclaimerModalOpen(false)}
+      />
+
+      {/* Subscribe Modal */}
+      <SubscribeModal
+        isOpen={isSubscribeModalOpen}
+        onClose={() => setIsSubscribeModalOpen(false)}
       />
     </div>
   );

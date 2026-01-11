@@ -8,10 +8,12 @@ interface NavBarProps {
   onDonateClick?: () => void;
   onReportClick?: () => void;
   onInfoClick?: () => void;
+  onDisclaimerClick?: () => void;
+  onSubscribeClick?: () => void;
   rightContent?: React.ReactNode;
 }
 
-export default function NavBar({ onDonateClick, onReportClick, onInfoClick, rightContent }: NavBarProps) {
+export default function NavBar({ onDonateClick, onReportClick, onInfoClick, onDisclaimerClick, onSubscribeClick, rightContent }: NavBarProps) {
   const { t } = useLanguage();
   const pathname = usePathname();
 
@@ -28,12 +30,9 @@ export default function NavBar({ onDonateClick, onReportClick, onInfoClick, righ
         <Link href="/" className={navLinkClass('/')}>
           {t.nav.home}
         </Link>
-        <button className="px-4 py-1.5 text-xs text-foreground/70 border border-transparent hover:border-accent-dim/30 hover:text-foreground transition-colors cursor-pointer">
+        <Link href="/resources" className={navLinkClass('/resources')}>
           {t.nav.resources}
-        </button>
-        <button className="px-4 py-1.5 text-xs text-foreground/70 border border-transparent hover:border-accent-dim/30 hover:text-foreground transition-colors cursor-pointer">
-          {t.nav.blog}
-        </button>
+        </Link>
         <Link href="/analytics" className={navLinkClass('/analytics')}>
           {t.nav.analytics}
         </Link>
@@ -48,6 +47,31 @@ export default function NavBar({ onDonateClick, onReportClick, onInfoClick, righ
               <path d="M12 16v-4M12 8h.01" />
             </svg>
             <span>{t.nav.info}</span>
+          </button>
+        )}
+        {onDisclaimerClick && (
+          <button
+            onClick={onDisclaimerClick}
+            className="flex items-center gap-1.5 px-3 py-1 text-xs text-foreground/70 border border-transparent hover:border-accent-dim/30 hover:text-foreground transition-colors cursor-pointer"
+          >
+            <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+              <line x1="12" y1="9" x2="12" y2="13" />
+              <line x1="12" y1="17" x2="12.01" y2="17" />
+            </svg>
+            <span>{t.nav.disclaimer}</span>
+          </button>
+        )}
+        {onSubscribeClick && (
+          <button
+            onClick={onSubscribeClick}
+            className="flex items-center gap-1.5 px-3 py-1 text-xs text-foreground/70 border border-transparent hover:border-accent-dim/30 hover:text-foreground transition-colors cursor-pointer"
+          >
+            <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+              <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+            </svg>
+            <span>{t.nav.alerts || '[ALERTS]'}</span>
           </button>
         )}
       </div>
