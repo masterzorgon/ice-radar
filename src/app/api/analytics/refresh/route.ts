@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
+import type { DataRefreshLog } from '@prisma/client';
 import { fetchArrestsAndDetention, parseCSV, transformToAnalytics, analyzeCSVColumns } from '@/lib/data-pipeline';
 
 // Optional API key protection
@@ -216,7 +217,7 @@ export async function GET() {
             sourceHash: cache.sourceHash,
           }
         : null,
-      recentRefreshes: recentLogs.map(log => ({
+      recentRefreshes: recentLogs.map((log: DataRefreshLog) => ({
         id: log.id,
         status: log.status,
         recordCount: log.recordCount,
