@@ -225,7 +225,7 @@ export async function GET(
               <div
                 style={{
                   color: '#33FF00',
-                  fontSize: 32,
+                  fontSize: 42,
                   fontWeight: 'bold',
                   letterSpacing: 4,
                   textShadow: '0 0 10px #33FF00',
@@ -238,7 +238,7 @@ export async function GET(
             <div
               style={{
                 color: '#33FF00',
-                fontSize: 16,
+                fontSize: 26,
                 opacity: 0.6,
                 display: 'flex',
               }}
@@ -291,7 +291,7 @@ export async function GET(
             <div
               style={{
                 color: '#666666',
-                fontSize: 14,
+                fontSize: 24,
                 letterSpacing: 2,
                 display: 'flex',
               }}
@@ -301,7 +301,7 @@ export async function GET(
             <div
               style={{
                 color: '#33FF00',
-                fontSize: 56,
+                fontSize: 66,
                 fontWeight: 'bold',
                 letterSpacing: 2,
                 textShadow: '0 0 10px #33FF00',
@@ -314,7 +314,7 @@ export async function GET(
               <div
                 style={{
                   color: '#33FF00',
-                  fontSize: 24,
+                  fontSize: 34,
                   opacity: 0.7,
                   display: 'flex',
                 }}
@@ -336,7 +336,7 @@ export async function GET(
             <div
               style={{
                 color: '#666666',
-                fontSize: 14,
+                fontSize: 24,
                 letterSpacing: 2,
                 display: 'flex',
               }}
@@ -346,7 +346,7 @@ export async function GET(
             <div
               style={{
                 color: '#33FF00',
-                fontSize: 22,
+                fontSize: 32,
                 lineHeight: 1.4,
                 opacity: 0.8,
                 display: 'flex',
