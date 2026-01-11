@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { Report } from '@/types';
 import { formatDistanceToNow, format } from 'date-fns';
 import { useLanguage } from '@/contexts/LanguageContext';
+import ShareButtons from '@/components/ui/ShareButtons';
 
 interface ReportDetailModalProps {
   report: Report | null;
@@ -247,24 +248,30 @@ export default function ReportDetailModal({ report, onClose, onVerify, onAddComm
             </div>
           </div>
 
+          {/* Share buttons */}
+          <div className="pt-2">
+            <div className="text-[8px] text-accent-muted tracking-wider mb-2">{t.share.title}:</div>
+            <ShareButtons report={report} variant="full" />
+          </div>
+
+
           {/* Actions */}
           <div className="flex gap-3 pt-2">
             <button
               onClick={onClose}
               className="flex-1 px-4 py-2 border-2 border-accent-dim text-accent-muted text-[8px] tracking-wider hover:border-accent hover:text-accent cursor-pointer"
             >
-              [{t.detailModal.close}]
+              {t.detailModal.close}
             </button>
             <button
               onClick={handleVerify}
               disabled={hasVerified}
-              className={`flex-1 px-4 py-2 text-[8px] tracking-wider cursor-pointer border-2 ${
-                hasVerified
+              className={`flex-1 px-4 py-2 text-[8px] tracking-wider cursor-pointer border-2 ${hasVerified
                   ? 'border-accent-dim text-accent-muted cursor-not-allowed'
                   : 'border-accent text-accent hover:bg-accent hover:text-background'
-              }`}
+                }`}
             >
-              {hasVerified ? `[${t.detailModal.verifiedCheck}]` : `[${t.detailModal.verifyReport}]`}
+              {hasVerified ? `${t.detailModal.verifiedCheck}` : `${t.detailModal.verifyReport}`}
             </button>
           </div>
 

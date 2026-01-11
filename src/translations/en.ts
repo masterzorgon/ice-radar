@@ -258,6 +258,15 @@ export const en = {
     close: '[CLOSE]',
   },
 
+  // Share
+  share: {
+    title: 'SHARE',
+    sms: 'TEXT',
+    whatsapp: 'WHATSAPP',
+    alertPrefix: 'ICE ALERT',
+    viewDetails: 'View details',
+  },
+
   // Analytics
   analytics: {
     pageTitle: 'ENFORCEMENT & DEMOGRAPHIC DATA',

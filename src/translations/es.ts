@@ -261,6 +261,15 @@ export const es = {
     close: '[CERRAR]',
   },
 
+  // Share
+  share: {
+    title: 'COMPARTIR',
+    sms: 'TEXTO',
+    whatsapp: 'WHATSAPP',
+    alertPrefix: 'ALERTA ICE',
+    viewDetails: 'Ver detalles',
+  },
+
   // Analytics
   analytics: {
     pageTitle: 'DATOS DE APLICACION Y DEMOGRAFICOS',
