@@ -211,6 +211,8 @@ export const en = {
       detention: 'Individual(s) being detained or transported',
       surveillance: 'Agents observing or monitoring an area',
     },
+    shareViaText: '[SHARE VIA TEXT]',
+    shareMessage: 'ICE Activity Alert',
   },
 
   // Common
