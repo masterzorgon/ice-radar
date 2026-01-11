@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
-import { Prisma } from '.prisma/client';
 import { fetchArrestsAndDetention, parseCSV, transformToAnalytics, analyzeCSVColumns } from '@/lib/data-pipeline';
 
 // Optional API key protection
@@ -107,12 +106,12 @@ export async function POST(request: NextRequest) {
       where: { dataType: 'FULL_DATASET' },
       create: {
         dataType: 'FULL_DATASET',
-        data: analyticsData as unknown as Prisma.InputJsonValue,
+        data: analyticsData as object,
         sourceHash: hash,
         fetchedAt: new Date(),
       },
       update: {
-        data: analyticsData as unknown as Prisma.InputJsonValue,
+        data: analyticsData as object,
         sourceHash: hash,
         fetchedAt: new Date(),
       },
