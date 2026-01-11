@@ -37,3 +37,16 @@ jobs:
           file_pattern: 'src/data/detention-aggregates.json'
           commit_user_name: 'github-actions[bot]'
           commit_user_email: 'github-actions[bot]@users.noreply.github.com'
+
+      - name: Wait for Vercel deployment
+        run: sleep 120 # Wait 2 minutes for Vercel to rebuild after commit
+
+      - name: Trigger analytics cache refresh
+        run: |
+          curl -X POST "${{ secrets.SITE_URL }}/api/analytics/refresh" \
+            -H "x-api-key: ${{ secrets.ADMIN_API_KEY }}" \
+            -H "Content-Type: application/json" \
+            --fail --silent --show-error
+        env:
+          SITE_URL: ${{ secrets.SITE_URL }}
+          ADMIN_API_KEY: ${{ secrets.ADMIN_API_KEY }}

@@ -2,6 +2,11 @@
   "name": "ice-tracker",
   "version": "0.1.0",
   "private": true,
+  "overrides": {
+    "react-simple-maps": {
+      "react": "$react"
+    }
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
