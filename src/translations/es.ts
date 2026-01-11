@@ -97,7 +97,7 @@ export const es = {
     serverCosts: 'Costos de servidor e infraestructura',
     development: 'Desarrollo y actualizaciones de seguridad',
     keepFree: 'Mantener la plataforma gratuita para todos',
-    stripeButton: '[DONAR VIA STRIPE]',
+    donateButton: '[APOYAR ESTE PROYECTO]',
     securePayment: 'Pago seguro via Stripe',
     securityNote: 'Todas las transacciones estan encriptadas y procesadas de forma segura por Stripe.',
     noStorage: 'No se almacena informacion de pago en nuestros servidores.',

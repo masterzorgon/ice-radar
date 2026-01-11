@@ -72,6 +72,14 @@ export default function SubscribeModal({ isOpen, onClose }: SubscribeModalProps)
     onClose();
   };
 
+  const validateEmail = (email: string) => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  };
+
+  const validateStates = (states: string[]) => {
+    return states.length > 0;
+  };
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
       {/* Backdrop */}
@@ -143,8 +151,16 @@ export default function SubscribeModal({ isOpen, onClose }: SubscribeModalProps)
               {/* State Selection */}
               <div className="mb-4">
                 <div className="flex items-center justify-between mb-2">
-                  <label className="text-xs text-accent-dim">
+                  <label className="text-xs text-accent-dim flex items-center gap-2">
                     {t.subscribe?.statesLabel || 'SELECT STATES'}
+                    {selectedStates.length > 0 && (
+                      <>
+                        <span>•</span>
+                        <p className="text-xs text-accent">
+                          {selectedStates.length} {selectedStates.length === 1 ? 'state' : 'states'} selected
+                        </p>
+                      </>
+                    )}
                   </label>
                   <button
                     type="button"
@@ -176,11 +192,6 @@ export default function SubscribeModal({ isOpen, onClose }: SubscribeModalProps)
                     ))}
                   </div>
                 </div>
-                {selectedStates.length > 0 && (
-                  <p className="text-xs text-accent mt-2">
-                    {selectedStates.length} {selectedStates.length === 1 ? 'state' : 'states'} selected
-                  </p>
-                )}
               </div>
 
               {/* Error Message */}
@@ -199,7 +210,7 @@ export default function SubscribeModal({ isOpen, onClose }: SubscribeModalProps)
               {/* Submit */}
               <button
                 type="submit"
-                disabled={isSubmitting || selectedStates.length === 0}
+                disabled={isSubmitting || (!validateEmail(email) || !validateStates(selectedStates))}
                 className="w-full px-4 py-2 bg-accent/20 border border-accent/50 text-accent text-xs hover:bg-accent/30 transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isSubmitting
