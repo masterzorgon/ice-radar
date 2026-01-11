@@ -1,12 +1,11 @@
 import { prisma } from '@/lib/prisma';
-import { mockAnalyticsData } from '@/data/analyticsData';
 import { AnalyticsData } from '@/types/analytics';
 import AnalyticsDashboard from '@/components/Analytics/AnalyticsDashboard';
 
 // Revalidate every hour via ISR
 export const revalidate = 3600;
 
-async function getAnalyticsData(): Promise<{ data: AnalyticsData; source: string }> {
+async function getAnalyticsData(): Promise<{ data: AnalyticsData | null; source: string }> {
   try {
     const cached = await prisma.analyticsCache.findUnique({
       where: { dataType: 'FULL_DATASET' },
@@ -34,15 +33,25 @@ async function getAnalyticsData(): Promise<{ data: AnalyticsData; source: string
     console.error('Failed to fetch analytics from cache:', error);
   }
 
-  // Fallback to mock data
   return {
-    data: mockAnalyticsData,
-    source: 'fallback',
+    data: null,
+    source: 'unavailable',
   };
 }
 
 export default async function AnalyticsPage() {
   const { data, source } = await getAnalyticsData();
+
+  if (!data) {
+    return (
+      <div className="min-h-screen bg-black flex items-center justify-center">
+        <div className="text-center">
+          <p className="text-red-500 text-lg mb-2">Analytics data unavailable</p>
+          <p className="text-gray-400 text-sm">Please try again later or run POST /api/analytics/refresh to populate the cache.</p>
+        </div>
+      </div>
+    );
+  }
 
   return <AnalyticsDashboard data={data} dataSource={source} />;
 }

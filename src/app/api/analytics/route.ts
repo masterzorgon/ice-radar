@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
-import { mockAnalyticsData } from '@/data/analyticsData';
 import { AnalyticsData } from '@/types/analytics';
 
 export const dynamic = 'force-dynamic';
@@ -38,23 +37,21 @@ export async function GET() {
       });
     }
 
-    // No cache exists - return mock data as fallback
+    // No cache exists
     return NextResponse.json({
-      success: true,
-      data: mockAnalyticsData,
-      source: 'fallback',
-      message: 'No cached data available. Using fallback mock data. Run POST /api/analytics/refresh to populate cache.',
-    });
+      success: false,
+      data: null,
+      source: 'unavailable',
+      message: 'No cached data available. Run POST /api/analytics/refresh to populate cache.',
+    }, { status: 404 });
   } catch (error) {
     console.error('Analytics fetch error:', error);
 
-    // Always return mock data on error so the page still works
     return NextResponse.json({
-      success: true,
-      data: mockAnalyticsData,
-      source: 'fallback',
+      success: false,
+      data: null,
       error: error instanceof Error ? error.message : 'Database unavailable',
-      message: 'Using fallback data due to database error.',
-    });
+      message: 'Failed to fetch analytics data.',
+    }, { status: 500 });
   }
 }

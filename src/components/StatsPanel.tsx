@@ -4,11 +4,25 @@ import { Stats } from '@/types';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 interface StatsPanelProps {
-  stats: Stats;
+  stats: Stats | null;
 }
 
 export default function StatsPanel({ stats }: StatsPanelProps) {
   const { t } = useLanguage();
+
+  if (!stats) {
+    return (
+      <div className="bg-black/50 border border-accent-dim/30 p-4">
+        <div className="flex items-center gap-2 mb-4">
+          <span className="text-accent text-xs">{t.stats.title}</span>
+          <span className="text-accent-dim text-xs">{t.stats.subtitle}</span>
+        </div>
+        <div className="text-center text-foreground/50 text-xs py-4">
+          No statistics available
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="bg-black/50 border border-accent-dim/30 p-4">

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import Header from '@/components/Header';
 import NavBar from '@/components/NavBar';
@@ -14,7 +14,7 @@ import InfoModal from '@/components/InfoModal';
 import DisclaimerModal from '@/components/DisclaimerModal';
 import SubscribeModal from '@/components/SubscribeModal';
 import { useDonationPopup } from '@/hooks/useDonationPopup';
-import { mockReports, mockHotspots, mockStats } from '@/data/mockData';
+import { useReportsData } from '@/hooks/useReportsData';
 import { Report } from '@/types';
 import { useLanguage } from '@/contexts/LanguageContext';
 
@@ -33,6 +33,14 @@ const USMap = dynamic(() => import('@/components/USMap'), {
 export default function Home() {
   const { t } = useLanguage();
   const { isPopupOpen, dismissForSession, dismissPermanently } = useDonationPopup();
+  const {
+    reports: dbReports,
+    hotspots,
+    stats,
+    isLoading,
+    refresh,
+    lastUpdated,
+  } = useReportsData();
   const [selectedReport, setSelectedReport] = useState<Report | null>(null);
   const [selectedState, setSelectedState] = useState<string | null>(null);
   const [isReportModalOpen, setIsReportModalOpen] = useState(false);
@@ -41,7 +49,12 @@ export default function Home() {
   const [isInfoModalOpen, setIsInfoModalOpen] = useState(false);
   const [isDisclaimerModalOpen, setIsDisclaimerModalOpen] = useState(false);
   const [isSubscribeModalOpen, setIsSubscribeModalOpen] = useState(false);
-  const [reports, setReports] = useState(mockReports);
+  const [reports, setReports] = useState<Report[]>(dbReports);
+
+  // Sync local reports when database reports are refreshed
+  useEffect(() => {
+    setReports(dbReports);
+  }, [dbReports]);
 
   const filteredReports = useMemo(() => {
     if (!selectedState) return reports;
@@ -146,7 +159,7 @@ export default function Home() {
         <div className="flex-1 grid grid-cols-12 gap-4 min-h-0">
           {/* Left sidebar - Stats */}
           <div className="col-span-3 flex flex-col gap-4">
-            <StatsPanel stats={mockStats} />
+            <StatsPanel stats={stats} />
 
             {/* Quick info panel */}
             <div className="bg-black/50 border border-accent-dim/30 p-4 flex-1">
@@ -216,7 +229,7 @@ export default function Home() {
           {/* Center - Map */}
           <div className="col-span-6 relative">
             <USMap
-              hotspots={mockHotspots}
+              hotspots={hotspots}
               reports={reports}
               onSelectReport={handleSelectReport}
               selectedState={selectedState}
@@ -242,6 +255,20 @@ export default function Home() {
             <div className="flex items-center gap-2">
               <span className="text-accent-dim">{t.statusBar.system}</span>
               <span className="text-accent">{t.statusBar.operational}</span>
+            </div>
+            <div className="flex items-center gap-3">
+              <button
+                onClick={refresh}
+                disabled={isLoading}
+                className="px-2 py-1 bg-accent/20 border border-accent/30 text-accent hover:bg-accent/30 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {isLoading ? 'REFRESHING...' : 'REFRESH DATA'}
+              </button>
+              {lastUpdated && (
+                <span className="text-foreground/40">
+                  Last updated: {lastUpdated.toLocaleTimeString()}
+                </span>
+              )}
             </div>
           </div>
           <div className="text-foreground/40">

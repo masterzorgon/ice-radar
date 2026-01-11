@@ -22,7 +22,7 @@ export const es = {
   // Stats Panel
   stats: {
     title: '[ESTADISTICAS]',
-    subtitle: 'RESUMEN 24H',
+    subtitle: 'PAST MONTH',
     reports: 'REPORTES',
     active: 'ACTIVOS',
     verified: 'VERIFICADOS',

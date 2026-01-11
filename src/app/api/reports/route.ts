@@ -4,6 +4,45 @@ import { prisma } from '@/lib/prisma';
 import { resend, FROM_EMAIL } from '@/lib/resend';
 import AlertNotification from '@/emails/AlertNotification';
 
+export const dynamic = 'force-dynamic';
+
+export async function GET(request: NextRequest) {
+  try {
+    const { searchParams } = new URL(request.url);
+    const state = searchParams.get('state');
+
+    const reports = await prisma.report.findMany({
+      where: state ? { state } : undefined,
+      orderBy: { createdAt: 'desc' },
+    });
+
+    const transformedReports = reports.map((r: { id: string; type: string; status: string; city: string; state: string; address: string | null; lat: number; lng: number; description: string; createdAt: Date }) => ({
+      id: r.id,
+      type: r.type,
+      status: r.status,
+      location: {
+        city: r.city,
+        state: r.state,
+        coordinates: [r.lng, r.lat] as [number, number],
+        address: r.address ?? undefined,
+      },
+      description: r.description,
+      timestamp: r.createdAt,
+      verifiedCount: 1,
+      reporterCount: 1,
+      comments: [],
+    }));
+
+    return NextResponse.json({ success: true, reports: transformedReports });
+  } catch (error) {
+    console.error('Failed to fetch reports:', error);
+    return NextResponse.json(
+      { success: false, error: 'Failed to fetch reports' },
+      { status: 500 }
+    );
+  }
+}
+
 const reportSchema = z.object({
   type: z.enum(['RAID', 'CHECKPOINT', 'PATROL', 'DETENTION', 'SURVEILLANCE']),
   city: z.string().min(1, 'City is required'),
@@ -47,7 +86,7 @@ export async function POST(request: NextRequest) {
     const baseUrl = process.env.BASE_URL || 'http://localhost:3000';
     const viewUrl = `${baseUrl}/?report=${report.id}`;
 
-    const emailPromises = subscriptions.map(async (subscription) => {
+    const emailPromises = subscriptions.map(async (subscription: { email: string; unsubscribeToken: string }) => {
       const unsubscribeUrl = `${baseUrl}/api/unsubscribe?token=${subscription.unsubscribeToken}`;
 
       try {

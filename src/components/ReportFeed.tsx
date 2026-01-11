@@ -48,7 +48,7 @@ export default function ReportFeed({
   };
 
   return (
-    <div className="bg-black/50 border border-accent-dim/30 flex flex-col h-full">
+    <div className="bg-black/50 border border-accent-dim/30 flex flex-col h-full max-h-[calc(100vh-12rem)]">
       <div className="flex items-center gap-2 px-4 py-2 border-b border-accent-dim/30 bg-black/50">
         <span className="text-accent text-xs">{t.feed.title}</span>
         <span className="text-accent-dim text-xs">{t.feed.subtitle}</span>

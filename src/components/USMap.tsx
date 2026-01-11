@@ -209,7 +209,7 @@ function USMap({ hotspots, reports, onSelectReport, selectedState, onSelectState
   return (
     <div className="relative w-full h-full bg-black/50 border border-accent-dim/30 rounded">
       {/* Map Header */}
-      <div className="absolute top-0 left-0 right-0 z-10 flex items-center justify-between px-4 py-2 bg-black/80 border-b border-accent-dim/30">
+      <div className="absolute top-0 left-0 right-0 z-10 flex items-center justify-between px-4 py-2 bg-black/80 border-b border-accent-dim/30 h-10">
         <div className="flex items-center gap-2">
           <span className="text-accent text-xs">[MAP]</span>
           <span className="text-accent-dim text-xs">CONTINENTAL US // LIVE FEED</span>
