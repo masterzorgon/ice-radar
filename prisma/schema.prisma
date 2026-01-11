@@ -38,3 +38,26 @@ model Report {
   @@index([state])
   @@index([createdAt])
 }
+
+// Cached analytics data from public immigration data sources
+model AnalyticsCache {
+  id         String   @id @default(cuid())
+  dataType   String   @unique // 'FULL_DATASET'
+  data       Json     // Complete AnalyticsData object
+  sourceHash String   // MD5 of source CSV for change detection
+  fetchedAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+// Audit log for data refresh operations
+model DataRefreshLog {
+  id           String    @id @default(cuid())
+  status       String    // 'SUCCESS' | 'FAILED' | 'IN_PROGRESS'
+  recordCount  Int?
+  errorMessage String?
+  duration     Int?      // milliseconds
+  triggeredBy  String    // 'CRON' | 'ADMIN'
+  startedAt    DateTime  @default(now())
+  completedAt  DateTime?
+}
