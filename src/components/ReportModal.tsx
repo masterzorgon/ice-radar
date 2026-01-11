@@ -1,9 +1,26 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useRef, useEffect, useCallback } from 'react';
 import { ReportType, Report } from '@/types';
 import { formatDistanceToNow } from 'date-fns';
 import { useLanguage } from '@/contexts/LanguageContext';
+
+interface AddressSuggestion {
+  display_name: string;
+  address: {
+    house_number?: string;
+    road?: string;
+    city?: string;
+    town?: string;
+    village?: string;
+    municipality?: string;
+    county?: string;
+    state?: string;
+    'ISO3166-2-lvl4'?: string;
+  };
+  lat: string;
+  lon: string;
+}
 
 interface ReportModalProps {
   isOpen: boolean;
@@ -128,6 +145,14 @@ export default function ReportModal({ isOpen, onClose, onSubmit, reports, onVeri
   const [locationError, setLocationError] = useState<string | null>(null);
   const [verifiedInModal, setVerifiedInModal] = useState<Set<string>>(new Set());
 
+  // Address autocomplete state
+  const [addressSuggestions, setAddressSuggestions] = useState<AddressSuggestion[]>([]);
+  const [isSearchingAddress, setIsSearchingAddress] = useState(false);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const addressInputRef = useRef<HTMLInputElement>(null);
+  const suggestionsRef = useRef<HTMLDivElement>(null);
+  const debounceTimerRef = useRef<NodeJS.Timeout | null>(null);
+
   // Find nearby recent incidents when user has coordinates
   const nearbyIncidents = useMemo(() => {
     if (!formData.coordinates) return [];
@@ -162,6 +187,103 @@ export default function ReportModal({ isOpen, onClose, onSubmit, reports, onVeri
       .sort((a, b) => a.distance - b.distance)
       .slice(0, 5); // Show max 5 nearby incidents
   }, [formData.coordinates, reports, verifiedInModal]);
+
+  // Search for address suggestions using Nominatim
+  const searchAddress = useCallback(async (query: string) => {
+    if (query.length < 3) {
+      setAddressSuggestions([]);
+      setShowSuggestions(false);
+      return;
+    }
+
+    setIsSearchingAddress(true);
+    try {
+      const response = await fetch(
+        `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}&countrycodes=us&addressdetails=1&limit=5`,
+        {
+          headers: {
+            'User-Agent': 'ICE-Tracker-App',
+          },
+        }
+      );
+
+      if (response.ok) {
+        const data: AddressSuggestion[] = await response.json();
+        setAddressSuggestions(data);
+        setShowSuggestions(data.length > 0);
+      }
+    } catch {
+      setAddressSuggestions([]);
+    } finally {
+      setIsSearchingAddress(false);
+    }
+  }, []);
+
+  // Handle address input change with debouncing
+  const handleAddressChange = useCallback((value: string) => {
+    setFormData(prev => ({ ...prev, address: value }));
+
+    // Clear existing timer
+    if (debounceTimerRef.current) {
+      clearTimeout(debounceTimerRef.current);
+    }
+
+    // Set new timer for debounced search
+    debounceTimerRef.current = setTimeout(() => {
+      searchAddress(value);
+    }, 300);
+  }, [searchAddress]);
+
+  // Handle suggestion selection
+  const handleSuggestionSelect = useCallback((suggestion: AddressSuggestion) => {
+    const addr = suggestion.address;
+
+    // Extract city
+    const city = addr.city || addr.town || addr.village || addr.municipality || addr.county || '';
+
+    // Extract state code from ISO3166-2-lvl4 (e.g., "US-CA" -> "CA")
+    const stateCode = addr['ISO3166-2-lvl4']?.split('-')[1] || '';
+
+    // Extract street address
+    const streetAddress = [addr.house_number, addr.road].filter(Boolean).join(' ');
+
+    setFormData(prev => ({
+      ...prev,
+      address: streetAddress || suggestion.display_name.split(',')[0],
+      city: city,
+      state: US_STATES.some(s => s.code === stateCode) ? stateCode : prev.state,
+      coordinates: [parseFloat(suggestion.lon), parseFloat(suggestion.lat)],
+    }));
+
+    setShowSuggestions(false);
+    setAddressSuggestions([]);
+  }, []);
+
+  // Close suggestions when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        suggestionsRef.current &&
+        !suggestionsRef.current.contains(event.target as Node) &&
+        addressInputRef.current &&
+        !addressInputRef.current.contains(event.target as Node)
+      ) {
+        setShowSuggestions(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  // Cleanup debounce timer on unmount
+  useEffect(() => {
+    return () => {
+      if (debounceTimerRef.current) {
+        clearTimeout(debounceTimerRef.current);
+      }
+    };
+  }, []);
 
   if (!isOpen) return null;
 
@@ -468,18 +590,47 @@ export default function ReportModal({ isOpen, onClose, onSubmit, reports, onVeri
             </div>
           </div>
 
-          {/* Address */}
-          <div>
+          {/* Address with Autocomplete */}
+          <div className="relative">
             <label className="block text-xs text-accent-dim mb-2">
               {t.reportModal.address}
             </label>
-            <input
-              type="text"
-              value={formData.address}
-              onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-              className="w-full bg-black/50 border border-accent-dim/30 px-3 py-2 text-xs text-foreground placeholder:text-foreground/30 focus:border-accent/50 focus:outline-none"
-              placeholder={t.reportModal.addressPlaceholder}
-            />
+            <div className="relative">
+              <input
+                ref={addressInputRef}
+                type="text"
+                value={formData.address}
+                onChange={(e) => handleAddressChange(e.target.value)}
+                onFocus={() => addressSuggestions.length > 0 && setShowSuggestions(true)}
+                className="w-full bg-black/50 border border-accent-dim/30 px-3 py-2 text-xs text-foreground placeholder:text-foreground/30 focus:border-accent/50 focus:outline-none"
+                placeholder={t.reportModal.addressPlaceholder}
+                autoComplete="off"
+              />
+              {isSearchingAddress && (
+                <div className="absolute right-3 top-1/2 -translate-y-1/2">
+                  <span className="text-accent-dim text-xs animate-pulse">...</span>
+                </div>
+              )}
+            </div>
+
+            {/* Address Suggestions Dropdown */}
+            {showSuggestions && addressSuggestions.length > 0 && (
+              <div
+                ref={suggestionsRef}
+                className="absolute z-50 w-full mt-1 bg-black/95 border border-accent-dim/50 max-h-48 overflow-y-auto"
+              >
+                {addressSuggestions.map((suggestion, index) => (
+                  <button
+                    key={index}
+                    type="button"
+                    onClick={() => handleSuggestionSelect(suggestion)}
+                    className="w-full px-3 py-2 text-left text-xs text-foreground/80 hover:bg-accent/20 hover:text-foreground border-b border-accent-dim/20 last:border-b-0 transition-colors"
+                  >
+                    {suggestion.display_name}
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
 
           {/* Description */}
