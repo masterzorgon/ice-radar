@@ -1,26 +1,144 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0a0a0a;
+  --foreground: #00ff00;
+  --accent: #00ff00;
+  --accent-dim: #00aa00;
+  --danger: #ff3333;
+  --danger-dim: #aa2222;
+  --warning: #ffaa00;
+  --muted: #333333;
+  --border: #1a1a1a;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-accent: var(--accent);
+  --color-accent-dim: var(--accent-dim);
+  --color-danger: var(--danger);
+  --color-danger-dim: var(--danger-dim);
+  --color-warning: var(--warning);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent-dim) var(--background);
+}
+
+*::-webkit-scrollbar {
+  width: 6px;
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--accent-dim);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-mono), 'Courier New', monospace;
+}
+
+/* Terminal cursor blink */
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+.cursor-blink {
+  animation: blink 1s infinite;
+}
+
+/* Scanline effect */
+.scanlines::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.15),
+    rgba(0, 0, 0, 0.15) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+  pointer-events: none;
+  z-index: 100;
+}
+
+/* Glow effects */
+.glow-text {
+  text-shadow: 0 0 10px var(--accent), 0 0 20px var(--accent), 0 0 30px var(--accent);
+}
+
+.glow-danger {
+  text-shadow: 0 0 10px var(--danger), 0 0 20px var(--danger);
+}
+
+/* Subtle pulse animation for hotspots */
+@keyframes pulse-ring {
+  0% {
+    transform: scale(1);
+    opacity: 0.3;
+  }
+  100% {
+    transform: scale(1.4);
+    opacity: 0;
+  }
+}
+
+.pulse-ring {
+  animation: pulse-ring 2.5s ease-out infinite;
+}
+
+/* Soft glow pulse for incident pings */
+@keyframes soft-ping {
+  0%, 100% {
+    opacity: 0.7;
+    filter: blur(0px);
+  }
+  50% {
+    opacity: 1;
+    filter: blur(0.5px);
+  }
+}
+
+.incident-ping {
+  animation: soft-ping 3s ease-in-out infinite;
+}
+
+@keyframes incident-glow {
+  0%, 100% {
+    opacity: 0.15;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.25;
+    transform: scale(1.15);
+  }
+}
+
+.incident-glow {
+  animation: incident-glow 3s ease-in-out infinite;
+}
+
+/* Ensure all interactive elements have pointer cursor */
+button,
+a,
+select,
+[role="button"],
+[onclick] {
+  cursor: pointer;
 }
