@@ -216,7 +216,7 @@ function USMap({ hotspots, reports, onSelectReport, selectedState, onSelectState
           <span className="text-accent-muted text-xs">U.S.A.</span>
           <span className="text-foreground/30 text-xs ml-2">ZOOM: {position.zoom.toFixed(1)}x</span>
         </div>
-        <div className="flex items-center gap-4 text-xs">
+        <div className="hidden md:flex items-center gap-4 text-xs">
           {selectedState && (
             <Button
               onClick={() => onSelectState(null)}

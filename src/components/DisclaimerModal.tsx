@@ -92,7 +92,7 @@ export default function DisclaimerModal({ isOpen, onClose }: DisclaimerModalProp
             variant="warning"
             fullWidth
           >
-            [{t.disclaimer.close}]
+            {t.disclaimer.close}
           </Button>
         </div>
       </div>

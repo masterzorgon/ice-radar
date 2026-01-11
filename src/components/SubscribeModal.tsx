@@ -124,7 +124,7 @@ export default function SubscribeModal({ isOpen, onClose }: SubscribeModalProps)
                 variant="primary"
                 className="mt-6"
               >
-                [{t.subscribe?.close || 'CLOSE'}]
+                {t.subscribe?.close || 'CLOSE'}
               </Button>
             </div>
           ) : (

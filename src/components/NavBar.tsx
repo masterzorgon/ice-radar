@@ -44,7 +44,7 @@ export default function NavBar({ onDonateClick, onReportClick, onInfoClick, onDi
 
   return (
     <div className="relative">
-      <div className="flex items-center justify-between px-4 py-2 bg-background border-2 border-accent-dim">
+      <div className="flex items-center justify-between px-2 py-2 bg-background border-2 border-accent-dim">
         {/* Mobile hamburger menu button */}
         <Button
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -98,7 +98,7 @@ export default function NavBar({ onDonateClick, onReportClick, onInfoClick, onDi
               onClick={onDonateClick}
               variant="donate"
               pulse
-              className="hidden sm:flex min-h-[44px]"
+              className="flex min-h-[44px]"
             >
               {'<3'} {t.nav.donate}
             </Button>

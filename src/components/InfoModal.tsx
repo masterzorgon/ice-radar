@@ -187,7 +187,7 @@ export default function InfoModal({ isOpen, onClose }: InfoModalProps) {
             variant="primary"
             fullWidth
           >
-            [{t.infoModal.close}]
+            {t.infoModal.close}
           </Button>
         </div>
       </div>

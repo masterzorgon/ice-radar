@@ -81,14 +81,14 @@ export default function DonationPopupModal({
               variant="secondary"
               className="flex-1"
             >
-              [{t.donationPopup.maybeLater}]
+              {t.donationPopup.maybeLater}
             </Button>
             <Button
               onClick={onDismissPermanently}
               variant="ghost"
               className="flex-1 text-accent-muted/50"
             >
-              [{t.donationPopup.dontShowAgain}]
+              {t.donationPopup.dontShowAgain}
             </Button>
           </div>
         </div>

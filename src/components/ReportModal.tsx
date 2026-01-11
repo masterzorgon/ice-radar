@@ -669,7 +669,7 @@ export default function ReportModal({ isOpen, onClose, onSubmit, reports, onVeri
               variant="secondary"
               className="flex-1"
             >
-              [{t.reportModal.cancel}]
+              {t.reportModal.cancel}
             </Button>
             <Button
               type="submit"
