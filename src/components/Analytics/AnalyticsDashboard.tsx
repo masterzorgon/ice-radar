@@ -21,9 +21,9 @@ import { AnalyticsData } from '@/types/analytics';
 const StateHeatmap = dynamic(() => import('@/components/Analytics/StateHeatmap'), {
   ssr: false,
   loading: () => (
-    <div className="w-full h-full flex items-center justify-center bg-black/50 border border-accent-dim/30">
-      <div className="text-accent-dim text-xs">
-        LOADING MAP DATA<span className="animate-pulse">_</span>
+    <div className="w-full h-full flex items-center justify-center bg-background border-2 border-accent-dim">
+      <div className="text-accent-dim text-[8px] tracking-wider">
+        {'>'} LOADING MAP DATA<span className="cursor-blink"></span>
       </div>
     </div>
   ),
@@ -52,13 +52,6 @@ export default function AnalyticsDashboard({ data, dataSource }: AnalyticsDashbo
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      {/* Scanline overlay */}
-      <div className="fixed inset-0 pointer-events-none z-50 opacity-[0.03]"
-        style={{
-          backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,255,0,0.1) 2px, rgba(0,255,0,0.1) 4px)',
-        }}
-      />
-
       <Header />
 
       <main className="flex-1 p-4 flex flex-col gap-4">
@@ -71,11 +64,11 @@ export default function AnalyticsDashboard({ data, dataSource }: AnalyticsDashbo
         />
 
         {/* Page header */}
-        <div className="flex items-center gap-2 px-2">
-          <span className="text-accent text-sm">[ANALYTICS]</span>
-          <span className="text-accent-dim text-sm">{t.analytics?.pageTitle || 'ENFORCEMENT & DEMOGRAPHIC DATA'}</span>
+        <div className="flex items-center gap-2 px-2 border-b-2 border-accent-dim pb-2">
+          <span className="text-accent text-[10px] tracking-wider glow-text">[ANALYTICS]</span>
+          <span className="text-accent-dim text-[8px] tracking-wider">{t.analytics?.pageTitle || 'ENFORCEMENT & DEMOGRAPHIC DATA'}</span>
           {dataSource && dataSource !== 'cache' && (
-            <span className="text-xs text-yellow-500/70 ml-2">({dataSource})</span>
+            <span className="text-[8px] text-warning tracking-wider ml-2">({dataSource})</span>
           )}
         </div>
 
@@ -109,19 +102,19 @@ export default function AnalyticsDashboard({ data, dataSource }: AnalyticsDashbo
             />
 
             {/* Data sources */}
-            <div className="bg-black/50 border border-accent-dim/30 p-3 flex-1">
-              <div className="text-accent-dim text-[10px] uppercase tracking-wider mb-2">
-                {t.analytics?.dataSources || 'Data Sources'}
+            <div className="bg-background border-2 border-accent-dim p-3 flex-1">
+              <div className="text-accent-dim text-[8px] uppercase tracking-wider mb-2">
+                {'>'} {t.analytics?.dataSources || 'Data Sources'}
               </div>
               <div className="space-y-1.5">
                 {dataSources.map((source, index) => (
-                  <div key={index} className="text-[10px] text-foreground/50 flex items-start gap-1.5">
+                  <div key={index} className="text-[8px] tracking-wider text-accent-dim flex items-start gap-1.5">
                     <span className="text-accent">-</span>
                     <span>{source}</span>
                   </div>
                 ))}
               </div>
-              <div className="mt-3 pt-2 border-t border-accent-dim/20 text-[10px] text-foreground/30">
+              <div className="mt-3 pt-2 border-t-2 border-accent-dim text-[8px] text-accent-dim/50 tracking-wider">
                 {t.analytics?.disclaimer || 'Data is aggregated from public sources and may not reflect real-time figures.'}
               </div>
             </div>
@@ -171,11 +164,11 @@ export default function AnalyticsDashboard({ data, dataSource }: AnalyticsDashbo
             </div>
 
             {/* Info box */}
-            <div className="bg-accent/5 border border-accent/20 p-3">
+            <div className="bg-background border-2 border-accent p-3">
               <div className="flex items-center gap-2 mb-2">
-                <span className="text-accent text-xs font-bold">{t.analytics?.aboutData || 'About This Data'}</span>
+                <span className="text-accent text-[8px] tracking-wider glow-text">[i] {t.analytics?.aboutData || 'About This Data'}</span>
               </div>
-              <p className="text-[10px] text-foreground/50">
+              <p className="text-[8px] text-accent-dim tracking-wider">
                 {t.analytics?.aboutDataDesc || 'This dashboard displays aggregated immigration enforcement statistics compiled from government agencies and research institutions. Data is updated periodically and represents cumulative figures for the selected time period.'}
               </p>
             </div>
@@ -183,11 +176,11 @@ export default function AnalyticsDashboard({ data, dataSource }: AnalyticsDashbo
         </div>
 
         {/* Bottom status bar */}
-        <div className="flex items-center justify-between px-4 py-2 bg-black/50 border border-accent-dim/30 text-xs">
+        <div className="flex items-center justify-between px-4 py-2 bg-background border-2 border-accent-dim text-[8px] tracking-wider">
           <div className="flex items-center gap-6">
             <div className="flex items-center gap-2">
               <span className="text-accent-dim">{t.statusBar.system}</span>
-              <span className="text-accent">{t.statusBar.operational}</span>
+              <span className="text-accent glow-text">{t.statusBar.operational}</span>
             </div>
             <div className="flex items-center gap-2">
               <span className="text-accent-dim">{t.analytics?.period || 'Period'}:</span>
@@ -198,7 +191,7 @@ export default function AnalyticsDashboard({ data, dataSource }: AnalyticsDashbo
               <span className="text-accent">{formattedDate}</span>
             </div>
           </div>
-          <div className="text-foreground/40">
+          <div className="text-accent-dim/50">
             {t.analytics?.footerDisclaimer || 'Statistics are for informational purposes only'}
           </div>
         </div>

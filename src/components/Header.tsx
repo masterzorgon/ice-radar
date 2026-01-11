@@ -31,45 +31,51 @@ export default function Header() {
   };
 
   return (
-    <header className="border-b border-accent-dim/30 bg-black/80 px-4 py-3">
+    <header className="border-b-2 border-accent-dim bg-background px-4 py-3">
       <div className="flex items-center justify-between">
+        {/* Logo and Title */}
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-3">
             <RadarLogo size={38} />
             <div>
-              <h1 className="text-accent text-lg font-bold tracking-wider">
+              <h1 className="text-accent text-[10px] tracking-[3px] glow-text">
                 {t.header.title}
               </h1>
-              <p className="text-accent-dim text-xs">
+              <p className="text-accent-dim text-[8px] tracking-wider mt-1">
                 {t.header.subtitle}
               </p>
             </div>
           </div>
         </div>
 
-        <div className="flex items-center gap-6 text-xs">
-          {/* Language Toggle */}
+        {/* Right side controls */}
+        <div className="flex items-center gap-6 text-[8px]">
+          {/* Language Toggle - pixel button style */}
           <button
             onClick={toggleLanguage}
-            className="flex items-center gap-2 px-2 py-1 border border-accent-dim/30 hover:border-accent/50 transition-colors cursor-pointer"
+            className="flex items-center gap-2 px-3 py-2 border-2 border-accent-dim hover:border-accent hover:bg-accent hover:text-background cursor-pointer"
             title={language === 'en' ? 'Switch to Spanish' : 'Cambiar a Ingles'}
           >
             <Image
               src={language === 'en' ? '/flag-us.svg' : '/flag-mx.svg'}
               alt={language === 'en' ? 'English' : 'Espanol'}
-              width={20}
-              height={15}
-              className="rounded-sm"
+              width={16}
+              height={12}
+              className="pixelated"
             />
-            <span className="text-accent-dim uppercase">{language === 'en' ? 'EN' : 'ES'}</span>
+            <span className="tracking-wider">{language === 'en' ? 'EN' : 'ES'}</span>
           </button>
 
-          <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
-            <span className="text-accent-dim">{t.header.systemOnline}</span>
+          {/* System status indicator */}
+          <div className="flex items-center gap-2 border-2 border-accent-dim px-3 py-2">
+            <span className="w-2 h-2 bg-accent pixel-pulse" />
+            <span className="text-accent-dim tracking-wider">{t.header.systemOnline}</span>
           </div>
-          <div className="text-accent-dim w-22">
-            UTC: <span className="text-accent">{time}</span>
+
+          {/* Time display */}
+          <div className="text-accent-dim border-2 border-accent-dim px-3 py-2">
+            <span className="tracking-wider">UTC:</span>{' '}
+            <span className="text-accent glow-text">{time}</span>
           </div>
         </div>
       </div>

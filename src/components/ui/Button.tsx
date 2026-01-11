@@ -9,18 +9,21 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   pulse?: boolean;
 }
 
+// Chunky 8-bit retro terminal button styles
+// Instant hover state (no transitions), inverted colors on hover
 const variantStyles = {
-  primary: 'text-accent border border-accent/30 bg-accent/10 hover:bg-accent/20',
-  danger: 'text-danger border border-danger/50 bg-danger/20 hover:bg-danger/30',
-  secondary: 'text-foreground/70 border border-transparent hover:border-accent-dim/30 hover:text-foreground',
-  ghost: 'text-foreground/50 hover:text-foreground border border-transparent',
-  donate: 'text-pink-400 border border-pink-500/50 bg-pink-500/20 hover:bg-pink-500/30',
+  primary: 'text-accent border-2 border-accent bg-transparent hover:bg-accent hover:text-background',
+  danger: 'text-danger border-2 border-danger bg-transparent hover:bg-danger hover:text-background',
+  secondary: 'text-accent-dim border-2 border-accent-dim bg-transparent hover:border-accent hover:text-accent',
+  ghost: 'text-accent-dim border-2 border-transparent hover:text-accent hover:border-accent-dim',
+  donate: 'text-pink-400 border-2 border-pink-400 bg-transparent hover:bg-pink-400 hover:text-background',
 };
 
+// Pixel-perfect sizes (multiples of 8)
 const sizeStyles = {
-  sm: 'py-1 px-3',
-  md: 'py-1.5 px-4',
-  lg: 'py-2 px-5',
+  sm: 'py-1 px-2',
+  md: 'py-2 px-4',
+  lg: 'py-3 px-6',
 };
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
@@ -39,10 +42,12 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     },
     ref
   ) => {
-    const baseStyles = 'text-xs transition-colors cursor-pointer flex items-center justify-center gap-2';
+    // 8-bit chunky button base styles
+    // No transition, instant hover, uppercase text, letter-spacing
+    const baseStyles = 'text-[8px] tracking-wider uppercase cursor-pointer flex items-center justify-center gap-2 font-mono';
     const disabledStyles = disabled ? 'opacity-50 cursor-not-allowed' : '';
     const widthStyles = fullWidth ? 'w-full' : '';
-    const pulseStyles = pulse ? 'animate-pulse hover:animate-none' : '';
+    const pulseStyles = pulse ? 'pixel-pulse' : '';
 
     return (
       <button

@@ -30,20 +30,20 @@ export default function StatCard({ label, value, previousValue, format = 'number
   const isDecrease = changePercent !== null && changePercent < 0;
 
   return (
-    <div className="bg-black/50 border border-accent-dim/30 p-3">
-      <div className="text-accent-dim text-[10px] uppercase tracking-wider mb-1">
-        {label}
+    <div className="bg-background border-2 border-accent-dim p-3">
+      <div className="text-accent-dim text-[8px] uppercase tracking-wider mb-1">
+        {'>'} {label}
       </div>
-      <div className="text-accent text-xl font-bold tracking-tight">
+      <div className="text-accent text-[16px] tracking-wider glow-text">
         {formatNumber(value, format)}
       </div>
       {changePercent !== null && (
-        <div className={`text-[10px] mt-1 flex items-center gap-1 ${
-          isIncrease ? 'text-danger' : isDecrease ? 'text-accent' : 'text-foreground/50'
+        <div className={`text-[8px] tracking-wider mt-1 flex items-center gap-1 ${
+          isIncrease ? 'text-danger glow-danger' : isDecrease ? 'text-accent glow-text' : 'text-accent-dim'
         }`}>
           {isIncrease && <span>+</span>}
           {changePercent.toFixed(1)}%
-          <span className="text-foreground/30">vs prev period</span>
+          <span className="text-accent-dim/50">vs prev period</span>
         </div>
       )}
     </div>

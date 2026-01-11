@@ -12,56 +12,59 @@ export default function StatsPanel({ stats }: StatsPanelProps) {
 
   if (!stats) {
     return (
-      <div className="bg-black/50 border border-accent-dim/30 p-4">
+      <div className="bg-background border-2 border-accent-dim p-4">
         <div className="flex items-center gap-2 mb-4">
-          <span className="text-accent text-xs">{t.stats.title}</span>
-          <span className="text-accent-dim text-xs">{t.stats.subtitle}</span>
+          <span className="text-accent text-[8px] tracking-wider glow-text">{t.stats.title}</span>
+          <span className="text-accent-dim text-[8px] tracking-wider">{t.stats.subtitle}</span>
         </div>
-        <div className="text-center text-foreground/50 text-xs py-4">
-          No statistics available
+        <div className="text-center text-accent-dim text-[8px] tracking-wider py-4">
+          {'>'} NO STATISTICS AVAILABLE
         </div>
       </div>
     );
   }
 
   return (
-    <div className="bg-black/50 border border-accent-dim/30 p-4">
+    <div className="bg-background border-2 border-accent-dim p-4">
+      {/* Header */}
       <div className="flex items-center gap-2 mb-4">
-        <span className="text-accent text-xs">{t.stats.title}</span>
-        <span className="text-accent-dim text-xs">{t.stats.subtitle}</span>
+        <span className="text-accent text-[8px] tracking-wider glow-text">{t.stats.title}</span>
+        <span className="text-accent-dim text-[8px] tracking-wider">{t.stats.subtitle}</span>
       </div>
 
+      {/* Stats Grid */}
       <div className="grid grid-cols-3 gap-4 mb-4">
-        <div className="text-center">
-          <div className="text-2xl text-warning font-bold">
+        <div className="text-center border-2 border-accent-dim p-3">
+          <div className="text-[16px] text-warning tracking-wider glow-warning">
             {stats.totalReports24h}
           </div>
-          <div className="text-xs text-foreground/50">{t.stats.reports}</div>
+          <div className="text-[8px] text-accent-dim tracking-wider mt-1">{t.stats.reports}</div>
         </div>
-        <div className="text-center">
-          <div className="text-2xl text-danger font-bold glow-danger">
+        <div className="text-center border-2 border-danger p-3">
+          <div className="text-[16px] text-danger tracking-wider glow-danger">
             {stats.activeIncidents}
           </div>
-          <div className="text-xs text-foreground/50">{t.stats.active}</div>
+          <div className="text-[8px] text-accent-dim tracking-wider mt-1">{t.stats.active}</div>
         </div>
-        <div className="text-center">
-          <div className="text-2xl text-accent font-bold">
+        <div className="text-center border-2 border-accent p-3">
+          <div className="text-[16px] text-accent tracking-wider glow-text">
             {stats.verifiedReports}
           </div>
-          <div className="text-xs text-foreground/50">{t.stats.verified}</div>
+          <div className="text-[8px] text-accent-dim tracking-wider mt-1">{t.stats.verified}</div>
         </div>
       </div>
 
-      <div className="border-t border-accent-dim/20 pt-3">
-        <div className="text-xs text-accent-dim mb-2">{t.stats.topStates}</div>
-        <div className="space-y-1">
+      {/* Top States */}
+      <div className="border-t-2 border-accent-dim pt-3">
+        <div className="text-[8px] text-accent-dim tracking-wider mb-2">{'>'} {t.stats.topStates}</div>
+        <div className="space-y-2">
           {stats.topStates.map((item, index) => (
-            <div key={item.state} className="flex items-center gap-2 text-xs">
+            <div key={item.state} className="flex items-center gap-2 text-[8px] tracking-wider">
               <span className="text-accent-dim w-4">{index + 1}.</span>
-              <span className="text-foreground w-8">{item.state}</span>
-              <div className="flex-1 h-2 bg-muted/30 overflow-hidden">
+              <span className="text-accent w-8">[{item.state}]</span>
+              <div className="flex-1 h-2 bg-accent-dim/20 overflow-hidden border border-accent-dim/50">
                 <div
-                  className="h-full bg-accent-dim"
+                  className="h-full bg-accent"
                   style={{ width: `${(item.count / stats.topStates[0].count) * 100}%` }}
                 />
               </div>

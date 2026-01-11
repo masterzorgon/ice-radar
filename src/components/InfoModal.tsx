@@ -16,27 +16,24 @@ export default function InfoModal({ isOpen, onClose }: InfoModalProps) {
     <div className="fixed inset-0 z-50 flex items-center justify-center">
       {/* Backdrop */}
       <div
-        className="absolute inset-0 bg-black/80 cursor-pointer"
+        className="absolute inset-0 bg-black/95 cursor-pointer"
         onClick={onClose}
       />
 
       {/* Modal */}
-      <div className="relative bg-black/95 border border-accent-dim/50 w-full max-w-lg mx-4 max-h-[80vh] overflow-hidden flex flex-col">
+      <div className="relative bg-background border-2 border-accent w-full max-w-lg mx-4 max-h-[80vh] overflow-hidden flex flex-col crt-overlay">
         {/* Header */}
-        <div className="flex items-center justify-between px-4 py-3 border-b border-accent-dim/30 bg-black/50">
+        <div className="flex items-center justify-between px-4 py-3 border-b-2 border-accent-dim bg-accent-dim">
           <div className="flex items-center gap-2">
-            <svg className="w-4 h-4 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <circle cx="12" cy="12" r="10" />
-              <path d="M12 16v-4M12 8h.01" />
-            </svg>
-            <span className="text-accent text-xs">{t.infoModal.title}</span>
-            <span className="text-accent-dim text-xs">{t.infoModal.subtitle}</span>
+            <span className="text-accent text-[10px]">[i]</span>
+            <span className="text-accent text-[8px] tracking-wider glow-text">{t.infoModal.title}</span>
+            <span className="text-accent-dim text-[8px] tracking-wider">{t.infoModal.subtitle}</span>
           </div>
           <button
             onClick={onClose}
-            className="text-foreground/50 hover:text-foreground text-lg transition-colors"
+            className="text-accent-dim hover:text-accent text-[10px] px-2 py-1 border-2 border-transparent hover:border-accent"
           >
-            ×
+            [X]
           </button>
         </div>
 
@@ -44,32 +41,32 @@ export default function InfoModal({ isOpen, onClose }: InfoModalProps) {
         <div className="p-4 space-y-4 overflow-y-auto">
           {/* Report Statuses */}
           <div>
-            <h3 className="text-accent text-xs font-bold mb-3 flex items-center gap-2">
-              <span className="w-1.5 h-1.5 bg-accent" />
+            <h3 className="text-accent text-[8px] tracking-wider mb-3 flex items-center gap-2 glow-text">
+              <span>{'>'}</span>
               {t.infoModal.reportStatuses}
             </h3>
             <div className="space-y-3">
-              <div className="bg-black/50 border border-accent-dim/30 p-3">
+              <div className="bg-background border-2 border-accent-dim p-3">
                 <div className="flex items-center gap-2 mb-1">
-                  <span className="text-danger font-bold text-xs">{t.status.active}</span>
+                  <span className="text-danger text-[8px] tracking-wider glow-danger">[{t.status.active}]</span>
                 </div>
-                <p className="text-xs text-foreground/60">
+                <p className="text-[8px] text-accent-dim tracking-wider">
                   {t.infoModal.activeDesc}
                 </p>
               </div>
-              <div className="bg-black/50 border border-accent-dim/30 p-3">
+              <div className="bg-background border-2 border-accent-dim p-3">
                 <div className="flex items-center gap-2 mb-1">
-                  <span className="text-warning font-bold text-xs">{t.status.unverified}</span>
+                  <span className="text-warning text-[8px] tracking-wider glow-warning">[{t.status.unverified}]</span>
                 </div>
-                <p className="text-xs text-foreground/60">
+                <p className="text-[8px] text-accent-dim tracking-wider">
                   {t.infoModal.unverifiedDesc}
                 </p>
               </div>
-              <div className="bg-black/50 border border-accent-dim/30 p-3">
+              <div className="bg-background border-2 border-accent-dim p-3">
                 <div className="flex items-center gap-2 mb-1">
-                  <span className="text-accent-dim font-bold text-xs">{t.status.resolved}</span>
+                  <span className="text-accent-dim text-[8px] tracking-wider">[{t.status.resolved}]</span>
                 </div>
-                <p className="text-xs text-foreground/60">
+                <p className="text-[8px] text-accent-dim tracking-wider">
                   {t.infoModal.resolvedDesc}
                 </p>
               </div>
@@ -78,48 +75,48 @@ export default function InfoModal({ isOpen, onClose }: InfoModalProps) {
 
           {/* Report Types */}
           <div>
-            <h3 className="text-accent text-xs font-bold mb-3 flex items-center gap-2">
-              <span className="w-1.5 h-1.5 bg-accent" />
+            <h3 className="text-accent text-[8px] tracking-wider mb-3 flex items-center gap-2 glow-text">
+              <span>{'>'}</span>
               {t.infoModal.reportTypes}
             </h3>
             <div className="space-y-3">
-              <div className="bg-black/50 border border-accent-dim/30 p-3">
+              <div className="bg-background border-2 border-accent-dim p-3">
                 <div className="flex items-center gap-2 mb-1">
-                  <span className="text-danger font-bold text-xs">{t.reportTypes.raid}</span>
+                  <span className="text-danger text-[8px] tracking-wider">[{t.reportTypes.raid}]</span>
                 </div>
-                <p className="text-xs text-foreground/60">
+                <p className="text-[8px] text-accent-dim tracking-wider">
                   {t.infoModal.raidDesc}
                 </p>
               </div>
-              <div className="bg-black/50 border border-accent-dim/30 p-3">
+              <div className="bg-background border-2 border-accent-dim p-3">
                 <div className="flex items-center gap-2 mb-1">
-                  <span className="text-warning font-bold text-xs">{t.reportTypes.checkpoint}</span>
+                  <span className="text-warning text-[8px] tracking-wider">[{t.reportTypes.checkpoint}]</span>
                 </div>
-                <p className="text-xs text-foreground/60">
+                <p className="text-[8px] text-accent-dim tracking-wider">
                   {t.infoModal.checkpointDesc}
                 </p>
               </div>
-              <div className="bg-black/50 border border-accent-dim/30 p-3">
+              <div className="bg-background border-2 border-accent-dim p-3">
                 <div className="flex items-center gap-2 mb-1">
-                  <span className="text-accent font-bold text-xs">{t.reportTypes.patrol}</span>
+                  <span className="text-accent text-[8px] tracking-wider">[{t.reportTypes.patrol}]</span>
                 </div>
-                <p className="text-xs text-foreground/60">
+                <p className="text-[8px] text-accent-dim tracking-wider">
                   {t.infoModal.patrolDesc}
                 </p>
               </div>
-              <div className="bg-black/50 border border-accent-dim/30 p-3">
+              <div className="bg-background border-2 border-accent-dim p-3">
                 <div className="flex items-center gap-2 mb-1">
-                  <span className="text-accent font-bold text-xs">{t.reportTypes.detention}</span>
+                  <span className="text-accent text-[8px] tracking-wider">[{t.reportTypes.detention}]</span>
                 </div>
-                <p className="text-xs text-foreground/60">
+                <p className="text-[8px] text-accent-dim tracking-wider">
                   {t.infoModal.detentionDesc}
                 </p>
               </div>
-              <div className="bg-black/50 border border-accent-dim/30 p-3">
+              <div className="bg-background border-2 border-accent-dim p-3">
                 <div className="flex items-center gap-2 mb-1">
-                  <span className="text-accent font-bold text-xs">{t.reportTypes.surveillance}</span>
+                  <span className="text-accent text-[8px] tracking-wider">[{t.reportTypes.surveillance}]</span>
                 </div>
-                <p className="text-xs text-foreground/60">
+                <p className="text-[8px] text-accent-dim tracking-wider">
                   {t.infoModal.surveillanceDesc}
                 </p>
               </div>
@@ -128,35 +125,35 @@ export default function InfoModal({ isOpen, onClose }: InfoModalProps) {
 
           {/* Threat Levels */}
           <div>
-            <h3 className="text-accent text-xs font-bold mb-3 flex items-center gap-2">
-              <span className="w-1.5 h-1.5 bg-accent" />
+            <h3 className="text-accent text-[8px] tracking-wider mb-3 flex items-center gap-2 glow-text">
+              <span>{'>'}</span>
               {t.infoModal.threatLevels}
             </h3>
             <div className="space-y-3">
-              <div className="bg-black/50 border border-accent-dim/30 p-3">
+              <div className="bg-background border-2 border-danger p-3">
                 <div className="flex items-center gap-2 mb-1">
-                  <span className="w-2 h-2 rounded-full bg-danger" />
-                  <span className="text-danger font-bold text-xs">{t.infoModal.critical}</span>
+                  <span className="w-2 h-2 bg-danger" />
+                  <span className="text-danger text-[8px] tracking-wider glow-danger">{t.infoModal.critical}</span>
                 </div>
-                <p className="text-xs text-foreground/60">
+                <p className="text-[8px] text-accent-dim tracking-wider">
                   {t.infoModal.criticalDesc}
                 </p>
               </div>
-              <div className="bg-black/50 border border-accent-dim/30 p-3">
+              <div className="bg-background border-2 border-warning p-3">
                 <div className="flex items-center gap-2 mb-1">
-                  <span className="w-2 h-2 rounded-full bg-warning" />
-                  <span className="text-warning font-bold text-xs">{t.infoModal.elevated}</span>
+                  <span className="w-2 h-2 bg-warning" />
+                  <span className="text-warning text-[8px] tracking-wider glow-warning">{t.infoModal.elevated}</span>
                 </div>
-                <p className="text-xs text-foreground/60">
+                <p className="text-[8px] text-accent-dim tracking-wider">
                   {t.infoModal.elevatedDesc}
                 </p>
               </div>
-              <div className="bg-black/50 border border-accent-dim/30 p-3">
+              <div className="bg-background border-2 border-accent p-3">
                 <div className="flex items-center gap-2 mb-1">
-                  <span className="w-2 h-2 rounded-full bg-accent" />
-                  <span className="text-accent font-bold text-xs">{t.infoModal.normal}</span>
+                  <span className="w-2 h-2 bg-accent" />
+                  <span className="text-accent text-[8px] tracking-wider glow-text">{t.infoModal.normal}</span>
                 </div>
-                <p className="text-xs text-foreground/60">
+                <p className="text-[8px] text-accent-dim tracking-wider">
                   {t.infoModal.normalDesc}
                 </p>
               </div>
@@ -165,15 +162,15 @@ export default function InfoModal({ isOpen, onClose }: InfoModalProps) {
 
           {/* Verification */}
           <div>
-            <h3 className="text-accent text-xs font-bold mb-3 flex items-center gap-2">
-              <span className="w-1.5 h-1.5 bg-accent" />
+            <h3 className="text-accent text-[8px] tracking-wider mb-3 flex items-center gap-2 glow-text">
+              <span>{'>'}</span>
               {t.infoModal.verificationSystem}
             </h3>
-            <div className="bg-black/50 border border-accent-dim/30 p-3">
-              <p className="text-xs text-foreground/60 mb-2">
+            <div className="bg-background border-2 border-accent-dim p-3">
+              <p className="text-[8px] text-accent-dim tracking-wider mb-2">
                 <span className="text-accent">{t.infoModal.verifiedCount}</span> {t.infoModal.verifiedCountDesc}
               </p>
-              <p className="text-xs text-foreground/60">
+              <p className="text-[8px] text-accent-dim tracking-wider">
                 {t.infoModal.verificationNote}
               </p>
             </div>
@@ -181,12 +178,12 @@ export default function InfoModal({ isOpen, onClose }: InfoModalProps) {
         </div>
 
         {/* Footer */}
-        <div className="px-4 py-3 border-t border-accent-dim/30 bg-black/50">
+        <div className="px-4 py-3 border-t-2 border-accent-dim bg-accent-dim">
           <button
             onClick={onClose}
-            className="w-full px-4 py-2 bg-accent/10 border border-accent/30 text-accent text-xs hover:bg-accent/20 transition-colors cursor-pointer"
+            className="w-full px-4 py-2 bg-transparent border-2 border-accent text-accent text-[8px] tracking-wider hover:bg-accent hover:text-background cursor-pointer"
           >
-            {t.infoModal.close}
+            [{t.infoModal.close}]
           </button>
         </div>
       </div>

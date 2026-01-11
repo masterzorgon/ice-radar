@@ -63,29 +63,29 @@ export default function ReportDetailModal({ report, onClose, onVerify, onAddComm
     }
   };
 
-  const getStatusBg = (status: Report['status']) => {
+  const getStatusBorder = (status: Report['status']) => {
     switch (status) {
       case 'ACTIVE':
-        return 'bg-danger/20 border-danger/50';
+        return 'border-danger';
       case 'UNVERIFIED':
-        return 'bg-warning/20 border-warning/50';
+        return 'border-warning';
       case 'RESOLVED':
-        return 'bg-accent-dim/20 border-accent-dim/50';
+        return 'border-accent-dim';
     }
   };
 
   const getTypeIcon = (type: Report['type']) => {
     switch (type) {
       case 'RAID':
-        return '▲';
+        return '[!]';
       case 'CHECKPOINT':
-        return '◆';
+        return '[#]';
       case 'PATROL':
-        return '●';
+        return '[*]';
       case 'DETENTION':
-        return '■';
+        return '[@]';
       case 'SURVEILLANCE':
-        return '◎';
+        return '[?]';
     }
   };
 
@@ -108,26 +108,26 @@ export default function ReportDetailModal({ report, onClose, onVerify, onAddComm
     <div className="fixed inset-0 z-50 flex items-center justify-center">
       {/* Backdrop */}
       <div
-        className="absolute inset-0 bg-black/80 cursor-pointer"
+        className="absolute inset-0 bg-black/95 cursor-pointer"
         onClick={onClose}
       />
 
       {/* Modal */}
-      <div className="relative bg-black/95 border border-accent-dim/50 w-full max-w-lg mx-4">
+      <div className="relative bg-background border-2 border-accent w-full max-w-lg mx-4 crt-overlay">
         {/* Header */}
-        <div className="flex items-center justify-between px-4 py-3 border-b border-accent-dim/30 bg-black/50">
+        <div className="flex items-center justify-between px-4 py-3 border-b-2 border-accent-dim bg-accent-dim">
           <div className="flex items-center gap-2">
-            <span className={`text-lg ${report.status === 'ACTIVE' ? 'text-danger' : 'text-warning'}`}>
+            <span className={`text-[10px] ${report.status === 'ACTIVE' ? 'text-danger glow-danger' : 'text-warning glow-warning'}`}>
               {getTypeIcon(report.type)}
             </span>
-            <span className="text-accent text-xs">{t.detailModal.title}</span>
-            <span className="text-accent-dim text-xs">{t.detailModal.report} #{report.id}</span>
+            <span className="text-accent text-[8px] tracking-wider glow-text">{t.detailModal.title}</span>
+            <span className="text-accent-dim text-[8px] tracking-wider">{t.detailModal.report} #{report.id}</span>
           </div>
           <button
             onClick={onClose}
-            className="text-foreground/50 hover:text-foreground text-lg transition-colors"
+            className="text-accent-dim hover:text-accent text-[10px] px-2 py-1 border-2 border-transparent hover:border-accent"
           >
-            ×
+            [X]
           </button>
         </div>
 
@@ -135,87 +135,87 @@ export default function ReportDetailModal({ report, onClose, onVerify, onAddComm
         <div className="p-4 space-y-4">
           {/* Status & Type */}
           <div className="flex items-center gap-3">
-            <span className={`px-3 py-1 text-xs border ${getStatusBg(report.status)} ${getStatusColor(report.status)}`}>
-              {report.status}
+            <span className={`px-3 py-1 text-[8px] tracking-wider border-2 ${getStatusBorder(report.status)} ${getStatusColor(report.status)}`}>
+              [{report.status}]
             </span>
-            <span className="px-3 py-1 text-xs bg-black/50 border border-accent-dim/30 text-foreground">
-              {report.type}
+            <span className="px-3 py-1 text-[8px] tracking-wider bg-transparent border-2 border-accent-dim text-accent">
+              [{report.type}]
             </span>
           </div>
 
           {/* Type Description */}
-          <div className="text-xs text-foreground/50 italic">
-            {getTypeDescription(report.type)}
+          <div className="text-[8px] text-accent-dim tracking-wider italic">
+            {'>'} {getTypeDescription(report.type)}
           </div>
 
           {/* Location */}
-          <div className="bg-black/50 border border-accent-dim/30 p-3">
+          <div className="bg-background border-2 border-accent-dim p-3">
             <div className="flex items-center justify-between mb-1">
-              <div className="text-xs text-accent-dim">{t.detailModal.location}</div>
+              <div className="text-[8px] text-accent-dim tracking-wider">{t.detailModal.location}</div>
               <a
                 href={`https://www.google.com/maps/search/?api=1&query=${report.location.coordinates[1]},${report.location.coordinates[0]}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-xs text-accent hover:underline flex items-center gap-1"
+                className="text-[8px] text-accent tracking-wider hover:text-accent/80 flex items-center gap-1"
               >
-                <span>📍</span>
+                <span>[MAP]</span>
                 <span>{t.detailModal.viewOnMaps}</span>
               </a>
             </div>
-            <div className="text-sm text-foreground">
+            <div className="text-[10px] text-accent tracking-wider">
               {report.location.city}, {report.location.state}
             </div>
             {report.location.address && (
-              <div className="text-xs text-foreground/60 mt-1">
+              <div className="text-[8px] text-accent-dim tracking-wider mt-1">
                 {report.location.address}
               </div>
             )}
-            <div className="text-xs text-foreground/40 mt-2">
+            <div className="text-[8px] text-accent-dim/50 tracking-wider mt-2">
               {t.detailModal.coordinates} {report.location.coordinates[1].toFixed(4)}, {report.location.coordinates[0].toFixed(4)}
             </div>
           </div>
 
           {/* Description */}
-          <div className="bg-black/50 border border-accent-dim/30 p-3">
-            <div className="text-xs text-accent-dim mb-1">{t.detailModal.descriptionLabel}</div>
-            <div className="text-sm text-foreground/80 leading-relaxed">
+          <div className="bg-background border-2 border-accent-dim p-3">
+            <div className="text-[8px] text-accent-dim tracking-wider mb-1">{t.detailModal.descriptionLabel}</div>
+            <div className="text-[10px] text-accent tracking-wider leading-relaxed">
               {report.description}
             </div>
           </div>
 
           {/* Timestamp & Verification */}
           <div className="grid grid-cols-2 gap-3">
-            <div className="bg-black/50 border border-accent-dim/30 p-3">
-              <div className="text-xs text-accent-dim mb-1">{t.detailModal.reported}</div>
-              <div className="text-sm text-foreground">
+            <div className="bg-background border-2 border-accent-dim p-3">
+              <div className="text-[8px] text-accent-dim tracking-wider mb-1">{t.detailModal.reported}</div>
+              <div className="text-[10px] text-accent tracking-wider">
                 {formatDistanceToNow(report.timestamp, { addSuffix: true })}
               </div>
-              <div className="text-xs text-foreground/40 mt-1">
+              <div className="text-[8px] text-accent-dim/50 tracking-wider mt-1">
                 {format(report.timestamp, 'MMM d, yyyy HH:mm')}
               </div>
             </div>
-            <div className="bg-black/50 border border-accent-dim/30 p-3">
-              <div className="text-xs text-accent-dim mb-1">{t.detailModal.verification}</div>
-              <div className="text-sm text-accent">
+            <div className="bg-background border-2 border-accent-dim p-3">
+              <div className="text-[8px] text-accent-dim tracking-wider mb-1">{t.detailModal.verification}</div>
+              <div className="text-[10px] text-accent tracking-wider glow-text">
                 {report.verifiedCount} {t.detailModal.verified}
               </div>
-              <div className="text-xs text-foreground/40 mt-1">
+              <div className="text-[8px] text-accent-dim/50 tracking-wider mt-1">
                 {report.reporterCount} {report.reporterCount !== 1 ? t.detailModal.reporters : t.detailModal.reporter}
               </div>
             </div>
           </div>
 
           {/* Comments Section */}
-          <div className="bg-black/50 border border-accent-dim/30 p-3">
-            <div className="text-xs text-accent-dim mb-2">{t.detailModal.comments} ({report.comments?.length || 0}):</div>
+          <div className="bg-background border-2 border-accent-dim p-3">
+            <div className="text-[8px] text-accent-dim tracking-wider mb-2">{t.detailModal.comments} ({report.comments?.length || 0}):</div>
 
             {/* Existing Comments */}
             {report.comments && report.comments.length > 0 && (
               <div className="space-y-2 mb-3 max-h-32 overflow-y-auto">
                 {report.comments.map((comment) => (
-                  <div key={comment.id} className="bg-black/30 border border-accent-dim/20 p-2">
-                    <div className="text-xs text-foreground/70">{comment.text}</div>
-                    <div className="text-xs text-foreground/30 mt-1">
+                  <div key={comment.id} className="bg-background border-2 border-accent-dim/50 p-2">
+                    <div className="text-[8px] text-accent tracking-wider">{comment.text}</div>
+                    <div className="text-[8px] text-accent-dim/50 tracking-wider mt-1">
                       {formatDistanceToNow(new Date(comment.createdAt), { addSuffix: true })}
                     </div>
                   </div>
@@ -230,18 +230,18 @@ export default function ReportDetailModal({ report, onClose, onVerify, onAddComm
                 onChange={(e) => setCommentText(e.target.value.slice(0, 200))}
                 placeholder={t.detailModal.addComment}
                 rows={2}
-                className="w-full bg-black/30 border border-accent-dim/20 px-2 py-1.5 text-xs text-foreground placeholder:text-foreground/30 focus:border-accent/50 focus:outline-none resize-none"
+                className="w-full bg-background border-2 border-accent-dim/50 px-2 py-1.5 text-[8px] text-accent tracking-wider placeholder:text-accent-dim/50 focus:border-accent focus:outline-none resize-none"
               />
               <div className="flex items-center justify-between">
-                <span className={`text-xs ${commentText.length >= 180 ? 'text-warning' : 'text-foreground/30'}`}>
+                <span className={`text-[8px] tracking-wider ${commentText.length >= 180 ? 'text-warning' : 'text-accent-dim/50'}`}>
                   {commentText.length}/200
                 </span>
                 <button
                   onClick={handleSubmitComment}
                   disabled={!commentText.trim() || isSubmittingComment}
-                  className="px-3 py-1 bg-accent/10 border border-accent/30 text-accent text-xs hover:bg-accent/20 transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+                  className="px-3 py-1 bg-transparent border-2 border-accent text-accent text-[8px] tracking-wider hover:bg-accent hover:text-background disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
                 >
-                  {isSubmittingComment ? t.detailModal.posting : t.detailModal.post}
+                  [{isSubmittingComment ? t.detailModal.posting : t.detailModal.post}]
                 </button>
               </div>
             </div>
@@ -251,25 +251,25 @@ export default function ReportDetailModal({ report, onClose, onVerify, onAddComm
           <div className="flex gap-3 pt-2">
             <button
               onClick={onClose}
-              className="flex-1 px-4 py-2 border border-accent-dim/30 text-foreground/50 text-xs hover:bg-accent/10 hover:text-foreground transition-colors cursor-pointer"
+              className="flex-1 px-4 py-2 border-2 border-accent-dim text-accent-dim text-[8px] tracking-wider hover:border-accent hover:text-accent cursor-pointer"
             >
-              {t.detailModal.close}
+              [{t.detailModal.close}]
             </button>
             <button
               onClick={handleVerify}
               disabled={hasVerified}
-              className={`flex-1 px-4 py-2 text-xs transition-colors cursor-pointer ${
+              className={`flex-1 px-4 py-2 text-[8px] tracking-wider cursor-pointer border-2 ${
                 hasVerified
-                  ? 'bg-accent/10 border border-accent/30 text-accent/70 cursor-not-allowed'
-                  : 'bg-accent/20 border border-accent/50 text-accent hover:bg-accent/30'
+                  ? 'border-accent-dim text-accent-dim cursor-not-allowed'
+                  : 'border-accent text-accent hover:bg-accent hover:text-background'
               }`}
             >
-              {hasVerified ? `${t.detailModal.verifiedCheck} ✓` : t.detailModal.verifyReport}
+              {hasVerified ? `[${t.detailModal.verifiedCheck}]` : `[${t.detailModal.verifyReport}]`}
             </button>
           </div>
 
           {/* Anonymous note */}
-          <div className="text-xs text-foreground/30 text-center pt-2">
+          <div className="text-[8px] text-accent-dim/50 text-center pt-2 tracking-wider">
             {t.detailModal.anonymousNote}
           </div>
         </div>

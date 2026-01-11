@@ -1,15 +1,33 @@
 @import "tailwindcss";
 
+/* ============================================
+   RETRO TERMINAL HUD — Design System
+   Cold War-era CRT military interface
+   ============================================ */
+
 :root {
-  --background: #0a0a0a;
-  --foreground: #00ff00;
-  --accent: #00ff00;
-  --accent-dim: #00aa00;
-  --danger: #ff3333;
-  --danger-dim: #aa2222;
-  --warning: #ffaa00;
-  --muted: #333333;
-  --border: #1a1a1a;
+  /* Core Colors - CRT Phosphor Palette */
+  --background: #000000;
+  --foreground: #33FF00;
+  --accent: #33FF00;
+  --accent-dim: #0A3300;
+  --danger: #FF0000;
+  --danger-dim: #660000;
+  --warning: #FFCC00;
+  --muted: #1A1A1A;
+  --border: #0A3300;
+
+  /* Retro Terminal Specific */
+  --crt-glow: 0 0 8px #33FF00, 0 0 2px #33FF00;
+  --crt-ghost: 1px 1px 0 #0A3300;
+  --crt-glow-danger: 0 0 8px #FF0000, 0 0 2px #FF0000;
+  --crt-glow-warning: 0 0 8px #FFCC00, 0 0 2px #FFCC00;
+  --scanline-opacity: 0.08;
+  --border-weight: 2px;
+
+  /* Pixel Font Stack */
+  --pixel-font: 'Press Start 2P', 'VT323', monospace;
+  --terminal-font: 'VT323', 'Courier New', monospace;
 }
 
 @theme inline {
@@ -22,119 +40,553 @@
   --color-warning: var(--warning);
   --color-muted: var(--muted);
   --color-border: var(--border);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--pixel-font);
+  --font-mono: var(--pixel-font);
 }
 
+/* ============================================
+   PIXEL-PERFECT RENDERING
+   ============================================ */
+* {
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: unset;
+  font-smooth: never;
+}
+
+/* ============================================
+   SCROLLBAR - Chunky Retro Style
+   ============================================ */
 * {
   scrollbar-width: thin;
-  scrollbar-color: var(--accent-dim) var(--background);
+  scrollbar-color: var(--accent) var(--background);
 }
 
 *::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
+  height: 8px;
 }
 
 *::-webkit-scrollbar-track {
   background: var(--background);
+  border: 2px solid var(--accent-dim);
 }
 
 *::-webkit-scrollbar-thumb {
-  background-color: var(--accent-dim);
+  background-color: var(--accent);
+  border: none;
 }
 
+*::-webkit-scrollbar-corner {
+  background: var(--background);
+}
+
+/* ============================================
+   BODY & BASE STYLES
+   ============================================ */
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-mono), 'Courier New', monospace;
+  font-family: var(--pixel-font);
+  font-size: 10px;
+  line-height: 1.6;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
 }
 
-/* Terminal cursor blink */
-@keyframes blink {
-  0%, 50% { opacity: 1; }
-  51%, 100% { opacity: 0; }
+/* ============================================
+   CRT OVERLAY EFFECTS
+   ============================================ */
+
+/* Scanline overlay - apply to containers */
+.crt-overlay {
+  position: relative;
 }
 
-.cursor-blink {
-  animation: blink 1s infinite;
+.crt-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    transparent 0px,
+    transparent 1px,
+    rgba(0, 0, 0, var(--scanline-opacity)) 1px,
+    rgba(0, 0, 0, var(--scanline-opacity)) 2px
+  );
+  pointer-events: none;
+  z-index: 9999;
 }
 
-/* Scanline effect */
+/* Full-page scanlines */
 .scanlines::before {
   content: "";
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   background: repeating-linear-gradient(
     0deg,
-    rgba(0, 0, 0, 0.15),
-    rgba(0, 0, 0, 0.15) 1px,
+    rgba(0, 0, 0, 0.1),
+    rgba(0, 0, 0, 0.1) 1px,
     transparent 1px,
     transparent 2px
   );
   pointer-events: none;
-  z-index: 100;
+  z-index: 9999;
 }
 
-/* Glow effects */
+/* CRT Vignette effect */
+.crt-vignette::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 60%,
+    rgba(0, 0, 0, 0.4) 100%
+  );
+  pointer-events: none;
+  z-index: 9998;
+}
+
+/* Screen flicker - very subtle */
+@keyframes screen-flicker {
+  0%, 97%, 100% { opacity: 1; }
+  98% { opacity: 0.97; }
+  99% { opacity: 0.99; }
+}
+
+.crt-flicker {
+  animation: screen-flicker 4s infinite;
+}
+
+/* Static noise overlay */
+@keyframes noise {
+  0%, 100% { background-position: 0 0; }
+  10% { background-position: -5% -10%; }
+  20% { background-position: -15% 5%; }
+  30% { background-position: 7% -25%; }
+  40% { background-position: 20% 25%; }
+  50% { background-position: -25% 10%; }
+  60% { background-position: 15% 5%; }
+  70% { background-position: 0% 15%; }
+  80% { background-position: 25% 35%; }
+  90% { background-position: -10% 10%; }
+}
+
+.crt-noise::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  animation: noise 0.5s steps(5) infinite;
+  pointer-events: none;
+  z-index: 9997;
+  opacity: 0.5;
+}
+
+/* ============================================
+   GLOW EFFECTS - CRT Phosphor Style
+   ============================================ */
 .glow-text {
-  text-shadow: 0 0 10px var(--accent), 0 0 20px var(--accent), 0 0 30px var(--accent);
+  text-shadow: var(--crt-glow), var(--crt-ghost);
 }
 
 .glow-danger {
-  text-shadow: 0 0 10px var(--danger), 0 0 20px var(--danger);
+  text-shadow: var(--crt-glow-danger), 1px 1px 0 var(--danger-dim);
 }
 
-/* Subtle pulse animation for hotspots */
+.glow-warning {
+  text-shadow: var(--crt-glow-warning), 1px 1px 0 #665200;
+}
+
+/* Bloom effect for bright elements */
+.crt-bloom {
+  filter: blur(0.5px);
+  text-shadow:
+    0 0 4px var(--accent),
+    0 0 8px var(--accent),
+    0 0 12px var(--accent);
+}
+
+/* ============================================
+   TERMINAL CURSOR - Block Style
+   ============================================ */
+@keyframes blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+.cursor-blink {
+  animation: blink 0.8s steps(1) infinite;
+}
+
+.cursor-blink::after {
+  content: '█';
+  animation: blink 0.8s steps(1) infinite;
+}
+
+/* Loading dots animation */
+@keyframes loading-dots {
+  0% { content: '.'; }
+  33% { content: '..'; }
+  66% { content: '...'; }
+}
+
+.loading-dots::after {
+  content: '.';
+  animation: loading-dots 1.5s steps(1) infinite;
+}
+
+/* ============================================
+   ANIMATIONS - Stepped/Low Framerate
+   ============================================ */
+
+/* Stepped pulse animation */
+@keyframes stepped-pulse {
+  0%, 24% { opacity: 1; }
+  25%, 49% { opacity: 0.7; }
+  50%, 74% { opacity: 1; }
+  75%, 100% { opacity: 0.85; }
+}
+
+.pixel-pulse {
+  animation: stepped-pulse 2s steps(4) infinite;
+}
+
+/* Stepped scale pulse for hotspots */
 @keyframes pulse-ring {
-  0% {
+  0%, 33% {
     transform: scale(1);
-    opacity: 0.3;
+    opacity: 0.4;
   }
-  100% {
+  34%, 66% {
+    transform: scale(1.2);
+    opacity: 0.2;
+  }
+  67%, 100% {
     transform: scale(1.4);
     opacity: 0;
   }
 }
 
 .pulse-ring {
-  animation: pulse-ring 2.5s ease-out infinite;
+  animation: pulse-ring 2s steps(3) infinite;
 }
 
-/* Soft glow pulse for incident pings */
+/* Incident ping - stepped */
 @keyframes soft-ping {
-  0%, 100% {
+  0%, 49% {
     opacity: 0.7;
-    filter: blur(0px);
   }
-  50% {
+  50%, 100% {
     opacity: 1;
-    filter: blur(0.5px);
   }
 }
 
 .incident-ping {
-  animation: soft-ping 3s ease-in-out infinite;
+  animation: soft-ping 1s steps(2) infinite;
 }
 
 @keyframes incident-glow {
-  0%, 100% {
+  0%, 49% {
     opacity: 0.15;
     transform: scale(1);
   }
-  50% {
+  50%, 100% {
     opacity: 0.25;
-    transform: scale(1.15);
+    transform: scale(1.1);
   }
 }
 
 .incident-glow {
-  animation: incident-glow 3s ease-in-out infinite;
+  animation: incident-glow 1.5s steps(2) infinite;
 }
 
-/* Ensure all interactive elements have pointer cursor */
+/* ============================================
+   RADAR LOGO ANIMATIONS
+   ============================================ */
+@keyframes radar-sweep {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(-360deg); }
+}
+
+@keyframes radar-blip-1 {
+  0%, 24% { opacity: 0.2; transform: scale(0.9); }
+  25%, 49% { opacity: 1; transform: scale(1.1); }
+  50%, 100% { opacity: 0.4; transform: scale(1); }
+}
+
+@keyframes radar-blip-2 {
+  0%, 49% { opacity: 0.2; transform: scale(0.9); }
+  50%, 74% { opacity: 1; transform: scale(1.1); }
+  75%, 100% { opacity: 0.3; transform: scale(1); }
+}
+
+@keyframes radar-blip-3 {
+  0%, 74% { opacity: 0.2; transform: scale(0.9); }
+  75%, 94% { opacity: 1; transform: scale(1.2); }
+  95%, 100% { opacity: 0.2; transform: scale(1); }
+}
+
+.animate-radar-sweep {
+  animation: radar-sweep 4s steps(32) infinite;
+  transform-origin: center;
+}
+
+.animate-radar-blip-1 {
+  animation: radar-blip-1 4s steps(4) infinite;
+  transform-origin: center;
+}
+
+.animate-radar-blip-2 {
+  animation: radar-blip-2 4s steps(4) infinite;
+  transform-origin: center;
+}
+
+.animate-radar-blip-3 {
+  animation: radar-blip-3 4s steps(4) infinite;
+  transform-origin: center;
+}
+
+/* ============================================
+   BUTTONS - Chunky 8-bit Style
+   ============================================ */
+.btn-retro {
+  font-family: var(--pixel-font);
+  font-size: 8px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 8px 16px;
+  border: 2px solid var(--accent);
+  background: transparent;
+  color: var(--accent);
+  cursor: pointer;
+  position: relative;
+  transition: none;
+}
+
+.btn-retro:hover {
+  background: var(--accent);
+  color: var(--background);
+}
+
+.btn-retro:active {
+  transform: translate(2px, 2px);
+}
+
+.btn-retro:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Beveled 8-bit button */
+.btn-beveled {
+  font-family: var(--pixel-font);
+  font-size: 8px;
+  text-transform: uppercase;
+  padding: 8px 16px;
+  background: var(--accent-dim);
+  color: var(--accent);
+  border: none;
+  box-shadow:
+    2px 2px 0 var(--background),
+    4px 4px 0 var(--accent);
+  cursor: pointer;
+}
+
+.btn-beveled:hover {
+  background: var(--accent);
+  color: var(--background);
+}
+
+.btn-beveled:active {
+  box-shadow: none;
+  transform: translate(4px, 4px);
+}
+
+/* ============================================
+   BORDERS - Pixel Bracketed Corners
+   ============================================ */
+.pixel-border {
+  border: 2px solid var(--accent-dim);
+  position: relative;
+}
+
+.pixel-border::before,
+.pixel-border::after {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border: 2px solid var(--accent);
+}
+
+.pixel-border::before {
+  top: -2px;
+  left: -2px;
+  border-right: none;
+  border-bottom: none;
+}
+
+.pixel-border::after {
+  bottom: -2px;
+  right: -2px;
+  border-left: none;
+  border-top: none;
+}
+
+/* Full bracketed box */
+.bracket-box {
+  position: relative;
+  border: 2px solid var(--accent-dim);
+}
+
+.bracket-box::before {
+  content: '[ ';
+  position: absolute;
+  top: -2px;
+  left: 4px;
+  background: var(--background);
+  padding: 0 2px;
+  font-size: 10px;
+  color: var(--accent);
+}
+
+/* ============================================
+   DIVIDERS - Block Character Style
+   ============================================ */
+.pixel-divider {
+  border: none;
+  height: 2px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--accent) 0px,
+    var(--accent) 4px,
+    transparent 4px,
+    transparent 8px
+  );
+  margin: 8px 0;
+}
+
+.pixel-divider-vertical {
+  width: 2px;
+  height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    var(--accent) 0px,
+    var(--accent) 4px,
+    transparent 4px,
+    transparent 8px
+  );
+}
+
+/* Block divider: ■ ■ ■ ■ ■ */
+.block-divider::before {
+  content: '■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■';
+  display: block;
+  color: var(--accent-dim);
+  font-size: 6px;
+  letter-spacing: 2px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+/* ============================================
+   FORM ELEMENTS - Retro Terminal Style
+   ============================================ */
+input, textarea, select {
+  font-family: var(--pixel-font);
+  font-size: 10px;
+  background: var(--background);
+  border: 2px solid var(--accent-dim);
+  color: var(--accent);
+  padding: 8px;
+  text-transform: uppercase;
+}
+
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: var(--crt-glow);
+}
+
+input::placeholder, textarea::placeholder {
+  color: var(--accent-dim);
+}
+
+/* Custom checkbox - pixel style */
+input[type="checkbox"] {
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--accent-dim);
+  background: var(--background);
+  cursor: pointer;
+  position: relative;
+}
+
+input[type="checkbox"]:checked {
+  background: var(--accent-dim);
+}
+
+input[type="checkbox"]:checked::after {
+  content: '×';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: bold;
+}
+
+/* Custom radio - pixel style */
+input[type="radio"] {
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--accent-dim);
+  background: var(--background);
+  cursor: pointer;
+}
+
+input[type="radio"]:checked {
+  background: var(--accent);
+  box-shadow: inset 0 0 0 3px var(--background);
+}
+
+/* ============================================
+   TABLES - Terminal Grid Style
+   ============================================ */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 8px;
+}
+
+th, td {
+  border: 1px solid var(--accent-dim);
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background: var(--accent-dim);
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+tr:hover td {
+  background: var(--accent-dim);
+}
+
+/* ============================================
+   INTERACTIVE ELEMENTS
+   ============================================ */
 button,
 a,
 select,
@@ -143,77 +595,147 @@ select,
   cursor: pointer;
 }
 
-/* Radar logo animations */
-@keyframes radar-sweep {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(-360deg);
-  }
+/* Instant hover - no transitions */
+.instant-hover {
+  transition: none !important;
 }
 
-@keyframes radar-blip-1 {
-  0%, 20% {
-    opacity: 0.1;
-    transform: scale(0.8);
-  }
-  25%, 45% {
-    opacity: 0.9;
-    transform: scale(1.2);
-  }
-  50%, 100% {
-    opacity: 0.3;
-    transform: scale(1);
-  }
+.instant-hover:hover {
+  background: var(--accent) !important;
+  color: var(--background) !important;
 }
 
-@keyframes radar-blip-2 {
-  0%, 45% {
-    opacity: 0.1;
-    transform: scale(0.8);
-  }
-  50%, 70% {
-    opacity: 0.8;
-    transform: scale(1.2);
-  }
-  75%, 100% {
-    opacity: 0.2;
-    transform: scale(1);
-  }
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+
+/* Pixel-perfect text sizes (multiples of 8) */
+.text-8 { font-size: 8px; }
+.text-16 { font-size: 16px; }
+.text-24 { font-size: 24px; }
+.text-32 { font-size: 32px; }
+
+/* Terminal header style */
+.terminal-header {
+  font-family: var(--pixel-font);
+  font-size: 8px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--accent);
+  text-shadow: var(--crt-glow);
 }
 
-@keyframes radar-blip-3 {
-  0%, 70% {
-    opacity: 0.1;
-    transform: scale(0.8);
-  }
-  75%, 90% {
-    opacity: 0.7;
-    transform: scale(1.3);
-  }
-  95%, 100% {
-    opacity: 0.15;
-    transform: scale(1);
-  }
+/* Data label */
+.data-label {
+  font-size: 6px;
+  color: var(--accent-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
-.animate-radar-sweep {
-  animation: radar-sweep 4s linear infinite;
-  transform-origin: center;
+/* Status indicators */
+.status-active {
+  color: var(--accent);
+  text-shadow: var(--crt-glow);
 }
 
-.animate-radar-blip-1 {
-  animation: radar-blip-1 4s ease-in-out infinite;
-  transform-origin: center;
+.status-alert {
+  color: var(--danger);
+  text-shadow: var(--crt-glow-danger);
 }
 
-.animate-radar-blip-2 {
-  animation: radar-blip-2 4s ease-in-out infinite;
-  transform-origin: center;
+.status-warning {
+  color: var(--warning);
+  text-shadow: var(--crt-glow-warning);
 }
 
-.animate-radar-blip-3 {
-  animation: radar-blip-3 4s ease-in-out infinite;
-  transform-origin: center;
+/* Amber text for secondary info */
+.text-amber {
+  color: var(--warning);
+}
+
+/* ============================================
+   MODAL STYLES
+   ============================================ */
+.modal-backdrop {
+  background: rgba(0, 0, 0, 0.95);
+  backdrop-filter: none;
+}
+
+.modal-container {
+  background: var(--background);
+  border: 2px solid var(--accent);
+  box-shadow:
+    0 0 20px rgba(51, 255, 0, 0.3),
+    inset 0 0 20px rgba(51, 255, 0, 0.05);
+}
+
+.modal-header {
+  border-bottom: 2px solid var(--accent-dim);
+  padding: 12px 16px;
+  background: var(--accent-dim);
+}
+
+/* ============================================
+   CARD STYLES - HUD Panels
+   ============================================ */
+.hud-panel {
+  background: var(--background);
+  border: 2px solid var(--accent-dim);
+  position: relative;
+}
+
+.hud-panel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--accent);
+}
+
+.hud-panel-title {
+  font-size: 8px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--accent-dim);
+  color: var(--accent);
+}
+
+/* ============================================
+   MAP STYLES
+   ============================================ */
+.map-container {
+  background: var(--background);
+  border: 2px solid var(--accent-dim);
+  position: relative;
+}
+
+.map-overlay-grid {
+  background-image:
+    linear-gradient(var(--accent-dim) 1px, transparent 1px),
+    linear-gradient(90deg, var(--accent-dim) 1px, transparent 1px);
+  background-size: 20px 20px;
+  opacity: 0.3;
+}
+
+/* ============================================
+   TYPOGRAPHY HELPERS
+   ============================================ */
+.all-caps {
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.monospace {
+  font-family: var(--terminal-font);
+}
+
+/* For larger readable text, use VT323 */
+.readable-text {
+  font-family: 'VT323', monospace;
+  font-size: 16px;
+  -webkit-font-smoothing: auto;
 }

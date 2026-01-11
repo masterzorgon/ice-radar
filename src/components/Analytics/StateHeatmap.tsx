@@ -41,33 +41,33 @@ function StateHeatmap({ data, title = 'MAP', subtitle = 'STATE ENFORCEMENT ACTIV
   }, {} as Record<string, StateEnforcementData>);
 
   const getIntensityColor = (intensity: number | undefined) => {
-    if (!intensity || intensity === 0) return '#1a1a1a';
-    if (intensity >= 9) return '#ff3333';
-    if (intensity >= 7) return '#ff6633';
-    if (intensity >= 5) return '#ffaa00';
-    if (intensity >= 3) return '#00aa00';
-    return '#006600';
+    if (!intensity || intensity === 0) return '#0A1A0A';
+    if (intensity >= 9) return '#FF3333';
+    if (intensity >= 7) return '#FF6633';
+    if (intensity >= 5) return '#FFAA00';
+    if (intensity >= 3) return '#29CC00';
+    return '#146600';
   };
 
   return (
-    <div className="bg-black/50 border border-accent-dim/30 p-4 h-full relative">
+    <div className="bg-background border-2 border-accent-dim p-4 h-full relative">
       <div className="flex items-center gap-2 mb-2">
-        <span className="text-accent text-xs">[{title}]</span>
-        <span className="text-accent-dim text-xs">{subtitle}</span>
+        <span className="text-accent text-[10px] tracking-wider glow-text">[{title}]</span>
+        <span className="text-accent-dim text-[8px] tracking-wider">{subtitle}</span>
       </div>
 
       {/* Hover tooltip */}
       {hoveredState && (
-        <div className="absolute top-12 left-4 z-20 bg-black/95 border border-accent-dim/50 p-3 text-xs">
-          <div className="text-accent font-bold">{hoveredState.state}</div>
-          <div className="text-foreground/70 mt-1">
-            Enforcement Actions: <span className="text-warning">{hoveredState.enforcementActions.toLocaleString()}</span>
+        <div className="absolute top-12 left-4 z-20 bg-background border-2 border-accent p-3 text-[8px] tracking-wider">
+          <div className="text-accent glow-text mb-1">{hoveredState.state}</div>
+          <div className="text-accent-dim">
+            ENFORCEMENT ACTIONS: <span className="text-warning glow-warning">{hoveredState.enforcementActions.toLocaleString()}</span>
           </div>
-          <div className="text-foreground/70">
-            Deportations: <span className="text-danger">{hoveredState.deportations.toLocaleString()}</span>
+          <div className="text-accent-dim">
+            DEPORTATIONS: <span className="text-danger glow-danger">{hoveredState.deportations.toLocaleString()}</span>
           </div>
-          <div className="text-foreground/70">
-            Intensity: <span style={{ color: getIntensityColor(hoveredState.intensity) }}>
+          <div className="text-accent-dim">
+            INTENSITY: <span style={{ color: getIntensityColor(hoveredState.intensity) }}>
               {hoveredState.intensity}/10
             </span>
           </div>
@@ -75,18 +75,18 @@ function StateHeatmap({ data, title = 'MAP', subtitle = 'STATE ENFORCEMENT ACTIV
       )}
 
       {/* Legend */}
-      <div className="absolute bottom-4 left-4 z-10 flex items-center gap-3 text-[10px]">
+      <div className="absolute bottom-4 left-4 z-10 flex items-center gap-3 text-[8px] tracking-wider">
         <div className="flex items-center gap-1">
           <span className="w-2 h-2 bg-danger" />
-          <span className="text-foreground/50">High</span>
+          <span className="text-accent-dim">HIGH</span>
         </div>
         <div className="flex items-center gap-1">
           <span className="w-2 h-2 bg-warning" />
-          <span className="text-foreground/50">Med</span>
+          <span className="text-accent-dim">MED</span>
         </div>
         <div className="flex items-center gap-1">
           <span className="w-2 h-2 bg-accent" />
-          <span className="text-foreground/50">Low</span>
+          <span className="text-accent-dim">LOW</span>
         </div>
       </div>
 
@@ -108,13 +108,13 @@ function StateHeatmap({ data, title = 'MAP', subtitle = 'STATE ENFORCEMENT ACTIV
                     key={geo.rsmKey}
                     geography={geo}
                     fill={getIntensityColor(stateData?.intensity)}
-                    stroke="#00aa00"
-                    strokeWidth={0.5}
+                    stroke="#33FF00"
+                    strokeWidth={1}
                     onMouseEnter={() => stateData && setHoveredState(stateData)}
                     onMouseLeave={() => setHoveredState(null)}
                     style={{
                       default: { outline: 'none', cursor: stateData ? 'pointer' : 'default' },
-                      hover: { fill: stateData ? '#0a2a0a' : '#1a1a1a', outline: 'none', cursor: stateData ? 'pointer' : 'default' },
+                      hover: { fill: stateData ? '#0A2A0A' : '#0A1A0A', outline: 'none', cursor: stateData ? 'pointer' : 'default' },
                       pressed: { outline: 'none' },
                     }}
                   />

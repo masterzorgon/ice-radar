@@ -13,7 +13,7 @@ export default function ResourceTabs({ categories, activeTab, onTabChange }: Res
   const { language } = useLanguage();
 
   return (
-    <div className="flex items-center gap-1 overflow-x-auto scrollbar-thin scrollbar-thumb-accent-dim/30 scrollbar-track-transparent pb-2">
+    <div className="flex items-center gap-1 overflow-x-auto pb-2">
       {categories.map((category) => {
         const isActive = activeTab === category.id;
         const name = language === 'es' ? category.shortNameEs : category.shortName;
@@ -23,10 +23,10 @@ export default function ResourceTabs({ categories, activeTab, onTabChange }: Res
             key={category.id}
             onClick={() => onTabChange(category.id)}
             className={`
-              px-3 py-1.5 text-xs whitespace-nowrap transition-colors border
+              px-3 py-2 text-[8px] tracking-wider whitespace-nowrap border-2
               ${isActive
-                ? 'bg-accent/20 border-accent text-accent'
-                : 'bg-black/30 border-accent-dim/30 text-foreground/50 hover:text-foreground/70 hover:border-accent-dim/50'
+                ? 'bg-accent text-background border-accent'
+                : 'bg-transparent border-accent-dim text-accent-dim hover:text-accent hover:border-accent'
               }
             `}
           >

@@ -44,10 +44,10 @@ export default async function AnalyticsPage() {
 
   if (!data) {
     return (
-      <div className="min-h-screen bg-black flex items-center justify-center">
-        <div className="text-center">
-          <p className="text-red-500 text-lg mb-2">Analytics data unavailable</p>
-          <p className="text-gray-400 text-sm">Please try again later or run POST /api/analytics/refresh to populate the cache.</p>
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="text-center bg-background border-2 border-danger p-8">
+          <p className="text-danger text-[10px] tracking-wider glow-danger mb-2">[!] ANALYTICS DATA UNAVAILABLE</p>
+          <p className="text-accent-dim text-[8px] tracking-wider">{'>'} PLEASE TRY AGAIN LATER OR RUN POST /API/ANALYTICS/REFRESH TO POPULATE THE CACHE.</p>
         </div>
       </div>
     );
