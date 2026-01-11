@@ -20,7 +20,7 @@ export default function ResourceCard({ resource }: ResourceCardProps) {
         <h3 className="text-accent text-[10px] tracking-wider leading-tight glow-text">{title}</h3>
       </div>
 
-      <p className="text-accent-dim text-[8px] tracking-wider leading-relaxed flex-1 mb-4">
+      <p className="text-accent-muted text-[8px] tracking-wider leading-relaxed flex-1 mb-4">
         {description}
       </p>
 

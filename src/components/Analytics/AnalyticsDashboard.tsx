@@ -22,7 +22,7 @@ const StateHeatmap = dynamic(() => import('@/components/Analytics/StateHeatmap')
   ssr: false,
   loading: () => (
     <div className="w-full h-full flex items-center justify-center bg-background border-2 border-accent-dim">
-      <div className="text-accent-dim text-[8px] tracking-wider">
+      <div className="text-accent-muted text-[8px] tracking-wider">
         {'>'} LOADING MAP DATA<span className="cursor-blink"></span>
       </div>
     </div>
@@ -66,7 +66,7 @@ export default function AnalyticsDashboard({ data, dataSource }: AnalyticsDashbo
         {/* Page header */}
         <div className="flex items-center gap-2 px-2 border-b-2 border-accent-dim pb-2">
           <span className="text-accent text-[10px] tracking-wider glow-text">[ANALYTICS]</span>
-          <span className="text-accent-dim text-[8px] tracking-wider">{t.analytics?.pageTitle || 'ENFORCEMENT & DEMOGRAPHIC DATA'}</span>
+          <span className="text-accent-muted text-[8px] tracking-wider">{t.analytics?.pageTitle || 'ENFORCEMENT & DEMOGRAPHIC DATA'}</span>
           {dataSource && dataSource !== 'cache' && (
             <span className="text-[8px] text-warning tracking-wider ml-2">({dataSource})</span>
           )}
@@ -103,18 +103,18 @@ export default function AnalyticsDashboard({ data, dataSource }: AnalyticsDashbo
 
             {/* Data sources */}
             <div className="bg-background border-2 border-accent-dim p-3 flex-1">
-              <div className="text-accent-dim text-[8px] uppercase tracking-wider mb-2">
+              <div className="text-accent-muted text-[8px] uppercase tracking-wider mb-2">
                 {'>'} {t.analytics?.dataSources || 'Data Sources'}
               </div>
               <div className="space-y-1.5">
                 {dataSources.map((source, index) => (
-                  <div key={index} className="text-[8px] tracking-wider text-accent-dim flex items-start gap-1.5">
+                  <div key={index} className="text-[8px] tracking-wider text-accent-muted flex items-start gap-1.5">
                     <span className="text-accent">-</span>
                     <span>{source}</span>
                   </div>
                 ))}
               </div>
-              <div className="mt-3 pt-2 border-t-2 border-accent-dim text-[8px] text-accent-dim/50 tracking-wider">
+              <div className="mt-3 pt-2 border-t-2 border-accent-dim text-[8px] text-accent-muted/50 tracking-wider">
                 {t.analytics?.disclaimer || 'Data is aggregated from public sources and may not reflect real-time figures.'}
               </div>
             </div>
@@ -168,7 +168,7 @@ export default function AnalyticsDashboard({ data, dataSource }: AnalyticsDashbo
               <div className="flex items-center gap-2 mb-2">
                 <span className="text-accent text-[8px] tracking-wider glow-text">[i] {t.analytics?.aboutData || 'About This Data'}</span>
               </div>
-              <p className="text-[8px] text-accent-dim tracking-wider">
+              <p className="text-[8px] text-accent-muted tracking-wider">
                 {t.analytics?.aboutDataDesc || 'This dashboard displays aggregated immigration enforcement statistics compiled from government agencies and research institutions. Data is updated periodically and represents cumulative figures for the selected time period.'}
               </p>
             </div>
@@ -179,19 +179,19 @@ export default function AnalyticsDashboard({ data, dataSource }: AnalyticsDashbo
         <div className="flex items-center justify-between px-4 py-2 bg-background border-2 border-accent-dim text-[8px] tracking-wider">
           <div className="flex items-center gap-6">
             <div className="flex items-center gap-2">
-              <span className="text-accent-dim">{t.statusBar.system}</span>
+              <span className="text-accent-muted">{t.statusBar.system}</span>
               <span className="text-accent glow-text">{t.statusBar.operational}</span>
             </div>
             <div className="flex items-center gap-2">
-              <span className="text-accent-dim">{t.analytics?.period || 'Period'}:</span>
+              <span className="text-accent-muted">{t.analytics?.period || 'Period'}:</span>
               <span className="text-accent">FY 2024</span>
             </div>
             <div className="flex items-center gap-2">
-              <span className="text-accent-dim">Updated:</span>
+              <span className="text-accent-muted">Updated:</span>
               <span className="text-accent">{formattedDate}</span>
             </div>
           </div>
-          <div className="text-accent-dim/50">
+          <div className="text-accent-muted/50">
             {t.analytics?.footerDisclaimer || 'Statistics are for informational purposes only'}
           </div>
         </div>

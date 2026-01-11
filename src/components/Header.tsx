@@ -41,7 +41,7 @@ export default function Header() {
               <h1 className="text-accent text-[10px] tracking-[3px] glow-text">
                 {t.header.title}
               </h1>
-              <p className="text-accent-dim text-[8px] tracking-wider mt-1">
+              <p className="text-accent-muted text-[8px] tracking-wider mt-1">
                 {t.header.subtitle}
               </p>
             </div>
@@ -69,11 +69,11 @@ export default function Header() {
           {/* System status indicator */}
           <div className="flex items-center gap-2 border-2 border-accent-dim px-3 py-2">
             <span className="w-2 h-2 bg-accent pixel-pulse" />
-            <span className="text-accent-dim tracking-wider">{t.header.systemOnline}</span>
+            <span className="text-accent-muted tracking-wider">{t.header.systemOnline}</span>
           </div>
 
           {/* Time display */}
-          <div className="text-accent-dim border-2 border-accent-dim px-3 py-2">
+          <div className="text-accent-muted border-2 border-accent-dim px-3 py-2">
             <span className="tracking-wider">UTC:</span>{' '}
             <span className="text-accent glow-text">{time}</span>
           </div>

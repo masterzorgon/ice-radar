@@ -14,8 +14,8 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 const variantStyles = {
   primary: 'text-accent border-2 border-accent bg-transparent hover:bg-accent hover:text-background',
   danger: 'text-danger border-2 border-danger bg-transparent hover:bg-danger hover:text-background',
-  secondary: 'text-accent-dim border-2 border-accent-dim bg-transparent hover:border-accent hover:text-accent',
-  ghost: 'text-accent-dim border-2 border-transparent hover:text-accent hover:border-accent-dim',
+  secondary: 'text-accent-muted border-2 border-accent-dim bg-transparent hover:border-accent hover:text-accent',
+  ghost: 'text-accent-muted border-2 border-transparent hover:text-accent hover:border-accent-dim',
   donate: 'text-pink-400 border-2 border-pink-400 bg-transparent hover:bg-pink-400 hover:text-background',
 };
 

@@ -59,7 +59,7 @@ export default function ReportDetailModal({ report, onClose, onVerify, onAddComm
       case 'UNVERIFIED':
         return 'text-warning';
       case 'RESOLVED':
-        return 'text-accent-dim';
+        return 'text-accent-muted';
     }
   };
 
@@ -121,11 +121,11 @@ export default function ReportDetailModal({ report, onClose, onVerify, onAddComm
               {getTypeIcon(report.type)}
             </span>
             <span className="text-accent text-[8px] tracking-wider glow-text">{t.detailModal.title}</span>
-            <span className="text-accent-dim text-[8px] tracking-wider">{t.detailModal.report} #{report.id}</span>
+            <span className="text-accent-muted text-[8px] tracking-wider">{t.detailModal.report} #{report.id}</span>
           </div>
           <button
             onClick={onClose}
-            className="text-accent-dim hover:text-accent text-[10px] px-2 py-1 border-2 border-transparent hover:border-accent"
+            className="text-accent-muted hover:text-accent text-[10px] px-2 py-1 border-2 border-transparent hover:border-accent"
           >
             [X]
           </button>
@@ -144,14 +144,14 @@ export default function ReportDetailModal({ report, onClose, onVerify, onAddComm
           </div>
 
           {/* Type Description */}
-          <div className="text-[8px] text-accent-dim tracking-wider italic">
+          <div className="text-[8px] text-accent-muted tracking-wider italic">
             {'>'} {getTypeDescription(report.type)}
           </div>
 
           {/* Location */}
           <div className="bg-background border-2 border-accent-dim p-3">
             <div className="flex items-center justify-between mb-1">
-              <div className="text-[8px] text-accent-dim tracking-wider">{t.detailModal.location}</div>
+              <div className="text-[8px] text-accent-muted tracking-wider">{t.detailModal.location}</div>
               <a
                 href={`https://www.google.com/maps/search/?api=1&query=${report.location.coordinates[1]},${report.location.coordinates[0]}`}
                 target="_blank"
@@ -166,18 +166,18 @@ export default function ReportDetailModal({ report, onClose, onVerify, onAddComm
               {report.location.city}, {report.location.state}
             </div>
             {report.location.address && (
-              <div className="text-[8px] text-accent-dim tracking-wider mt-1">
+              <div className="text-[8px] text-accent-muted tracking-wider mt-1">
                 {report.location.address}
               </div>
             )}
-            <div className="text-[8px] text-accent-dim/50 tracking-wider mt-2">
+            <div className="text-[8px] text-accent-muted/50 tracking-wider mt-2">
               {t.detailModal.coordinates} {report.location.coordinates[1].toFixed(4)}, {report.location.coordinates[0].toFixed(4)}
             </div>
           </div>
 
           {/* Description */}
           <div className="bg-background border-2 border-accent-dim p-3">
-            <div className="text-[8px] text-accent-dim tracking-wider mb-1">{t.detailModal.descriptionLabel}</div>
+            <div className="text-[8px] text-accent-muted tracking-wider mb-1">{t.detailModal.descriptionLabel}</div>
             <div className="text-[10px] text-accent tracking-wider leading-relaxed">
               {report.description}
             </div>
@@ -186,20 +186,20 @@ export default function ReportDetailModal({ report, onClose, onVerify, onAddComm
           {/* Timestamp & Verification */}
           <div className="grid grid-cols-2 gap-3">
             <div className="bg-background border-2 border-accent-dim p-3">
-              <div className="text-[8px] text-accent-dim tracking-wider mb-1">{t.detailModal.reported}</div>
+              <div className="text-[8px] text-accent-muted tracking-wider mb-1">{t.detailModal.reported}</div>
               <div className="text-[10px] text-accent tracking-wider">
                 {formatDistanceToNow(report.timestamp, { addSuffix: true })}
               </div>
-              <div className="text-[8px] text-accent-dim/50 tracking-wider mt-1">
+              <div className="text-[8px] text-accent-muted/50 tracking-wider mt-1">
                 {format(report.timestamp, 'MMM d, yyyy HH:mm')}
               </div>
             </div>
             <div className="bg-background border-2 border-accent-dim p-3">
-              <div className="text-[8px] text-accent-dim tracking-wider mb-1">{t.detailModal.verification}</div>
+              <div className="text-[8px] text-accent-muted tracking-wider mb-1">{t.detailModal.verification}</div>
               <div className="text-[10px] text-accent tracking-wider glow-text">
                 {report.verifiedCount} {t.detailModal.verified}
               </div>
-              <div className="text-[8px] text-accent-dim/50 tracking-wider mt-1">
+              <div className="text-[8px] text-accent-muted/50 tracking-wider mt-1">
                 {report.reporterCount} {report.reporterCount !== 1 ? t.detailModal.reporters : t.detailModal.reporter}
               </div>
             </div>
@@ -207,7 +207,7 @@ export default function ReportDetailModal({ report, onClose, onVerify, onAddComm
 
           {/* Comments Section */}
           <div className="bg-background border-2 border-accent-dim p-3">
-            <div className="text-[8px] text-accent-dim tracking-wider mb-2">{t.detailModal.comments} ({report.comments?.length || 0}):</div>
+            <div className="text-[8px] text-accent-muted tracking-wider mb-2">{t.detailModal.comments} ({report.comments?.length || 0}):</div>
 
             {/* Existing Comments */}
             {report.comments && report.comments.length > 0 && (
@@ -215,7 +215,7 @@ export default function ReportDetailModal({ report, onClose, onVerify, onAddComm
                 {report.comments.map((comment) => (
                   <div key={comment.id} className="bg-background border-2 border-accent-dim/50 p-2">
                     <div className="text-[8px] text-accent tracking-wider">{comment.text}</div>
-                    <div className="text-[8px] text-accent-dim/50 tracking-wider mt-1">
+                    <div className="text-[8px] text-accent-muted/50 tracking-wider mt-1">
                       {formatDistanceToNow(new Date(comment.createdAt), { addSuffix: true })}
                     </div>
                   </div>
@@ -230,10 +230,10 @@ export default function ReportDetailModal({ report, onClose, onVerify, onAddComm
                 onChange={(e) => setCommentText(e.target.value.slice(0, 200))}
                 placeholder={t.detailModal.addComment}
                 rows={2}
-                className="w-full bg-background border-2 border-accent-dim/50 px-2 py-1.5 text-[8px] text-accent tracking-wider placeholder:text-accent-dim/50 focus:border-accent focus:outline-none resize-none"
+                className="w-full bg-background border-2 border-accent-dim/50 px-2 py-1.5 text-[8px] text-accent tracking-wider placeholder:text-accent-muted/50 focus:border-accent focus:outline-none resize-none"
               />
               <div className="flex items-center justify-between">
-                <span className={`text-[8px] tracking-wider ${commentText.length >= 180 ? 'text-warning' : 'text-accent-dim/50'}`}>
+                <span className={`text-[8px] tracking-wider ${commentText.length >= 180 ? 'text-warning' : 'text-accent-muted/50'}`}>
                   {commentText.length}/200
                 </span>
                 <button
@@ -251,7 +251,7 @@ export default function ReportDetailModal({ report, onClose, onVerify, onAddComm
           <div className="flex gap-3 pt-2">
             <button
               onClick={onClose}
-              className="flex-1 px-4 py-2 border-2 border-accent-dim text-accent-dim text-[8px] tracking-wider hover:border-accent hover:text-accent cursor-pointer"
+              className="flex-1 px-4 py-2 border-2 border-accent-dim text-accent-muted text-[8px] tracking-wider hover:border-accent hover:text-accent cursor-pointer"
             >
               [{t.detailModal.close}]
             </button>
@@ -260,7 +260,7 @@ export default function ReportDetailModal({ report, onClose, onVerify, onAddComm
               disabled={hasVerified}
               className={`flex-1 px-4 py-2 text-[8px] tracking-wider cursor-pointer border-2 ${
                 hasVerified
-                  ? 'border-accent-dim text-accent-dim cursor-not-allowed'
+                  ? 'border-accent-dim text-accent-muted cursor-not-allowed'
                   : 'border-accent text-accent hover:bg-accent hover:text-background'
               }`}
             >
@@ -269,7 +269,7 @@ export default function ReportDetailModal({ report, onClose, onVerify, onAddComm
           </div>
 
           {/* Anonymous note */}
-          <div className="text-[8px] text-accent-dim/50 text-center pt-2 tracking-wider">
+          <div className="text-[8px] text-accent-muted/50 text-center pt-2 tracking-wider">
             {t.detailModal.anonymousNote}
           </div>
         </div>

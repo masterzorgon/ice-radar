@@ -425,11 +425,11 @@ export default function ReportModal({ isOpen, onClose, onSubmit, reports, onVeri
           <div className="flex items-center gap-2">
             <span className="text-danger text-[10px] glow-danger">[!]</span>
             <span className="text-accent text-[8px] tracking-wider glow-text">{t.reportModal.title}</span>
-            <span className="text-accent-dim text-[8px] tracking-wider">{t.reportModal.subtitle}</span>
+            <span className="text-accent-muted text-[8px] tracking-wider">{t.reportModal.subtitle}</span>
           </div>
           <button
             onClick={onClose}
-            className="text-accent-dim hover:text-accent text-[10px] px-2 py-1 border-2 border-transparent hover:border-accent"
+            className="text-accent-muted hover:text-accent text-[10px] px-2 py-1 border-2 border-transparent hover:border-accent"
           >
             [X]
           </button>
@@ -439,7 +439,7 @@ export default function ReportModal({ isOpen, onClose, onSubmit, reports, onVeri
         <form onSubmit={handleSubmit} className="p-4 space-y-4">
           {/* Report Type */}
           <div>
-            <label className="block text-[8px] text-accent-dim mb-2 tracking-wider">
+            <label className="block text-[8px] text-accent-muted mb-2 tracking-wider">
               {t.reportModal.incidentType}
             </label>
             <div className="grid grid-cols-3 gap-2">
@@ -452,7 +452,7 @@ export default function ReportModal({ isOpen, onClose, onSubmit, reports, onVeri
                     px-2 py-2 text-[8px] tracking-wider border-2
                     ${formData.type === type
                       ? 'bg-accent text-background border-accent'
-                      : 'bg-transparent text-accent-dim border-accent-dim hover:border-accent hover:text-accent'
+                      : 'bg-transparent text-accent-muted border-accent-dim hover:border-accent hover:text-accent'
                     }
                   `}
                 >
@@ -486,7 +486,7 @@ export default function ReportModal({ isOpen, onClose, onSubmit, reports, onVeri
               <div className="mt-2 text-[8px] text-danger tracking-wider">{locationError}</div>
             )}
             {formData.coordinates && (
-              <div className="mt-2 text-[8px] text-accent-dim tracking-wider">
+              <div className="mt-2 text-[8px] text-accent-muted tracking-wider">
                 {t.reportModal.locationDetected} {formData.coordinates[1].toFixed(4)}, {formData.coordinates[0].toFixed(4)}
               </div>
             )}
@@ -499,7 +499,7 @@ export default function ReportModal({ isOpen, onClose, onSubmit, reports, onVeri
                 <span className="text-warning text-[10px]">[!]</span>
                 <span className="text-warning text-[8px] tracking-wider glow-warning">{t.reportModal.nearbyIncidents}</span>
               </div>
-              <p className="text-[8px] text-accent-dim tracking-wider mb-3">
+              <p className="text-[8px] text-accent-muted tracking-wider mb-3">
                 {t.reportModal.nearbyDescription
                   .replace('{count}', String(nearbyIncidents.length))
                   .replace('{plural}', nearbyIncidents.length > 1 ? 's' : '')}
@@ -519,7 +519,7 @@ export default function ReportModal({ isOpen, onClose, onSubmit, reports, onVeri
                         }`}>
                           [{incident.type}]
                         </span>
-                        <span className="text-[8px] text-accent-dim tracking-wider">
+                        <span className="text-[8px] text-accent-muted tracking-wider">
                           {incident.distance.toFixed(1)} {t.reportModal.milesAway}
                         </span>
                       </div>
@@ -527,10 +527,10 @@ export default function ReportModal({ isOpen, onClose, onSubmit, reports, onVeri
                         {incident.location.city}, {incident.location.state}
                         {incident.location.address && ` - ${incident.location.address}`}
                       </div>
-                      <div className="text-[8px] text-accent-dim tracking-wider truncate mt-0.5">
+                      <div className="text-[8px] text-accent-muted tracking-wider truncate mt-0.5">
                         {incident.description}
                       </div>
-                      <div className="text-[8px] text-accent-dim/50 tracking-wider mt-1">
+                      <div className="text-[8px] text-accent-muted/50 tracking-wider mt-1">
                         {formatDistanceToNow(incident.timestamp, { addSuffix: true })} · {incident.verifiedCount} {t.feed.verified}
                       </div>
                     </div>
@@ -540,7 +540,7 @@ export default function ReportModal({ isOpen, onClose, onSubmit, reports, onVeri
                       disabled={incident.alreadyVerified}
                       className={`shrink-0 px-2 py-1 text-[8px] tracking-wider border-2 cursor-pointer ${
                         incident.alreadyVerified
-                          ? 'border-accent-dim text-accent-dim cursor-not-allowed'
+                          ? 'border-accent-dim text-accent-muted cursor-not-allowed'
                           : 'border-accent text-accent hover:bg-accent hover:text-background'
                       }`}
                     >
@@ -549,7 +549,7 @@ export default function ReportModal({ isOpen, onClose, onSubmit, reports, onVeri
                   </div>
                 ))}
               </div>
-              <div className="mt-2 pt-2 border-t-2 border-warning/30 text-[8px] text-accent-dim tracking-wider text-center">
+              <div className="mt-2 pt-2 border-t-2 border-warning/30 text-[8px] text-accent-muted tracking-wider text-center">
                 {t.reportModal.continueNew}
               </div>
             </div>
@@ -558,7 +558,7 @@ export default function ReportModal({ isOpen, onClose, onSubmit, reports, onVeri
           {/* Location */}
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-[8px] text-accent-dim mb-2 tracking-wider">
+              <label className="block text-[8px] text-accent-muted mb-2 tracking-wider">
                 {t.reportModal.city}
               </label>
               <input
@@ -566,12 +566,12 @@ export default function ReportModal({ isOpen, onClose, onSubmit, reports, onVeri
                 required
                 value={formData.city}
                 onChange={(e) => setFormData({ ...formData, city: e.target.value })}
-                className="w-full bg-background border-2 border-accent-dim px-3 py-2 text-[10px] text-accent placeholder:text-accent-dim/50 focus:border-accent focus:outline-none tracking-wider"
+                className="w-full bg-background border-2 border-accent-dim px-3 py-2 text-[10px] text-accent placeholder:text-accent-muted/50 focus:border-accent focus:outline-none tracking-wider"
                 placeholder={t.reportModal.cityPlaceholder}
               />
             </div>
             <div>
-              <label className="block text-[8px] text-accent-dim mb-2 tracking-wider">
+              <label className="block text-[8px] text-accent-muted mb-2 tracking-wider">
                 {t.reportModal.state}
               </label>
               <select
@@ -592,7 +592,7 @@ export default function ReportModal({ isOpen, onClose, onSubmit, reports, onVeri
 
           {/* Address with Autocomplete */}
           <div className="relative">
-            <label className="block text-[8px] text-accent-dim mb-2 tracking-wider">
+            <label className="block text-[8px] text-accent-muted mb-2 tracking-wider">
               {t.reportModal.address}
             </label>
             <div className="relative">
@@ -602,13 +602,13 @@ export default function ReportModal({ isOpen, onClose, onSubmit, reports, onVeri
                 value={formData.address}
                 onChange={(e) => handleAddressChange(e.target.value)}
                 onFocus={() => addressSuggestions.length > 0 && setShowSuggestions(true)}
-                className="w-full bg-background border-2 border-accent-dim px-3 py-2 text-[10px] text-accent placeholder:text-accent-dim/50 focus:border-accent focus:outline-none tracking-wider"
+                className="w-full bg-background border-2 border-accent-dim px-3 py-2 text-[10px] text-accent placeholder:text-accent-muted/50 focus:border-accent focus:outline-none tracking-wider"
                 placeholder={t.reportModal.addressPlaceholder}
                 autoComplete="off"
               />
               {isSearchingAddress && (
                 <div className="absolute right-3 top-1/2 -translate-y-1/2">
-                  <span className="text-accent-dim text-[8px] loading-dots"></span>
+                  <span className="text-accent-muted text-[8px] loading-dots"></span>
                 </div>
               )}
             </div>
@@ -635,7 +635,7 @@ export default function ReportModal({ isOpen, onClose, onSubmit, reports, onVeri
 
           {/* Description */}
           <div>
-            <label className="block text-[8px] text-accent-dim mb-2 tracking-wider">
+            <label className="block text-[8px] text-accent-muted mb-2 tracking-wider">
               {t.reportModal.description}
             </label>
             <textarea
@@ -644,7 +644,7 @@ export default function ReportModal({ isOpen, onClose, onSubmit, reports, onVeri
               maxLength={500}
               value={formData.description}
               onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-              className="w-full bg-background border-2 border-accent-dim px-3 py-2 text-[10px] text-accent placeholder:text-accent-dim/50 focus:border-accent focus:outline-none resize-none tracking-wider"
+              className="w-full bg-background border-2 border-accent-dim px-3 py-2 text-[10px] text-accent placeholder:text-accent-muted/50 focus:border-accent focus:outline-none resize-none tracking-wider"
               placeholder={t.reportModal.descriptionPlaceholder}
             />
           </div>
@@ -665,7 +665,7 @@ export default function ReportModal({ isOpen, onClose, onSubmit, reports, onVeri
             <button
               type="button"
               onClick={onClose}
-              className="flex-1 px-4 py-2 border-2 border-accent-dim text-accent-dim text-[8px] tracking-wider hover:border-accent hover:text-accent"
+              className="flex-1 px-4 py-2 border-2 border-accent-dim text-accent-muted text-[8px] tracking-wider hover:border-accent hover:text-accent"
             >
               [{t.reportModal.cancel}]
             </button>

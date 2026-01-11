@@ -28,7 +28,7 @@ export default function ReportFeed({
       case 'UNVERIFIED':
         return 'text-warning glow-warning';
       case 'RESOLVED':
-        return 'text-accent-dim';
+        return 'text-accent-muted';
     }
   };
 
@@ -52,8 +52,8 @@ export default function ReportFeed({
       {/* Header */}
       <div className="flex items-center gap-2 px-4 py-2 border-b-2 border-accent-dim bg-accent-dim">
         <span className="text-accent text-[8px] tracking-wider glow-text">{t.feed.title}</span>
-        <span className="text-accent-dim text-[8px] tracking-wider">{t.feed.subtitle}</span>
-        <span className="ml-auto text-[8px] text-accent-dim tracking-wider">
+        <span className="text-accent-muted text-[8px] tracking-wider">{t.feed.subtitle}</span>
+        <span className="ml-auto text-[8px] text-accent-muted tracking-wider">
           [{reports.length}] {t.feed.entries}
         </span>
       </div>
@@ -61,12 +61,12 @@ export default function ReportFeed({
       {/* State filter indicator */}
       {selectedState && (
         <div className="flex items-center justify-between px-4 py-2 bg-accent/10 border-b-2 border-accent-dim">
-          <span className="text-[8px] text-accent-dim tracking-wider">
+          <span className="text-[8px] text-accent-muted tracking-wider">
             {'>'} {t.feed.filtering} <span className="text-accent glow-text">[{selectedState}]</span>
           </span>
           <button
             onClick={onClearState}
-            className="text-[8px] text-accent-dim tracking-wider hover:text-accent px-2 py-1 border-2 border-transparent hover:border-accent-dim"
+            className="text-[8px] text-accent-muted tracking-wider hover:text-accent px-2 py-1 border-2 border-transparent hover:border-accent-dim"
           >
             [{t.feed.clear}]
           </button>
@@ -76,7 +76,7 @@ export default function ReportFeed({
       {/* Feed Content */}
       <div className="flex-1 overflow-y-auto">
         {reports.length === 0 ? (
-          <div className="flex items-center justify-center h-32 text-accent-dim text-[8px] tracking-wider">
+          <div className="flex items-center justify-center h-32 text-accent-muted text-[8px] tracking-wider">
             {'>'} {t.feed.noReports}
           </div>
         ) : (
@@ -109,14 +109,14 @@ export default function ReportFeed({
                     {report.location.city}, {report.location.state}
                     {report.location.address && ` - ${report.location.address}`}
                   </div>
-                  <div className="text-[8px] text-accent-dim tracking-wider truncate">
+                  <div className="text-[8px] text-accent-muted tracking-wider truncate">
                     {'>'} {report.description}
                   </div>
                   <div className="flex items-center gap-4 mt-2 text-[8px] tracking-wider">
-                    <span className="text-accent-dim/50">
+                    <span className="text-accent-muted/50">
                       {formatDistanceToNow(report.timestamp, { addSuffix: true })}
                     </span>
-                    <span className="text-accent-dim">
+                    <span className="text-accent-muted">
                       [OK] {report.verifiedCount} {t.feed.verified}
                     </span>
                   </div>

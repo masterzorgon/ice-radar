@@ -95,11 +95,11 @@ export default function SubscribeModal({ isOpen, onClose }: SubscribeModalProps)
           <div className="flex items-center gap-2">
             <span className="text-accent text-[10px]">[*]</span>
             <span className="text-accent text-[8px] tracking-wider glow-text">{t.subscribe?.title || '[ALERTS]'}</span>
-            <span className="text-accent-dim text-[8px] tracking-wider">{t.subscribe?.subtitle || 'EMAIL NOTIFICATIONS'}</span>
+            <span className="text-accent-muted text-[8px] tracking-wider">{t.subscribe?.subtitle || 'EMAIL NOTIFICATIONS'}</span>
           </div>
           <button
             onClick={handleClose}
-            className="text-accent-dim hover:text-accent text-[10px] px-2 py-1 border-2 border-transparent hover:border-accent"
+            className="text-accent-muted hover:text-accent text-[10px] px-2 py-1 border-2 border-transparent hover:border-accent"
           >
             [X]
           </button>
@@ -113,7 +113,7 @@ export default function SubscribeModal({ isOpen, onClose }: SubscribeModalProps)
               <h3 className="text-accent text-[10px] tracking-wider mb-2 glow-text">
                 {t.subscribe?.successTitle || 'Check Your Email'}
               </h3>
-              <p className="text-[8px] text-accent-dim tracking-wider">
+              <p className="text-[8px] text-accent-muted tracking-wider">
                 {t.subscribe?.successMessage || 'We sent you a verification link. Click it to activate your alerts.'}
               </p>
               <button
@@ -126,13 +126,13 @@ export default function SubscribeModal({ isOpen, onClose }: SubscribeModalProps)
           ) : (
             <form onSubmit={handleSubmit}>
               {/* Description */}
-              <p className="text-[8px] text-accent-dim tracking-wider mb-4">
+              <p className="text-[8px] text-accent-muted tracking-wider mb-4">
                 {t.subscribe?.description || 'Get notified when new ICE sightings are reported in your selected states. Your email is only used for alerts.'}
               </p>
 
               {/* Email Input */}
               <div className="mb-4">
-                <label className="block text-[8px] text-accent-dim mb-2 tracking-wider">
+                <label className="block text-[8px] text-accent-muted mb-2 tracking-wider">
                   {t.subscribe?.emailLabel || 'EMAIL ADDRESS'}
                 </label>
                 <input
@@ -140,7 +140,7 @@ export default function SubscribeModal({ isOpen, onClose }: SubscribeModalProps)
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full bg-background border-2 border-accent-dim px-3 py-2 text-[10px] text-accent placeholder:text-accent-dim/50 focus:border-accent focus:outline-none tracking-wider"
+                  className="w-full bg-background border-2 border-accent-dim px-3 py-2 text-[10px] text-accent placeholder:text-accent-muted/50 focus:border-accent focus:outline-none tracking-wider"
                   placeholder={t.subscribe?.emailPlaceholder || 'your@email.com'}
                 />
               </div>
@@ -148,7 +148,7 @@ export default function SubscribeModal({ isOpen, onClose }: SubscribeModalProps)
               {/* State Selection */}
               <div className="mb-4">
                 <div className="flex items-center justify-between mb-2">
-                  <label className="text-[8px] text-accent-dim tracking-wider flex items-center gap-2">
+                  <label className="text-[8px] text-accent-muted tracking-wider flex items-center gap-2">
                     {t.subscribe?.statesLabel || 'SELECT STATES'}
                     {selectedStates.length > 0 && (
                       <>

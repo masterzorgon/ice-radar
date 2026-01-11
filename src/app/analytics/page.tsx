@@ -47,7 +47,7 @@ export default async function AnalyticsPage() {
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center bg-background border-2 border-danger p-8">
           <p className="text-danger text-[10px] tracking-wider glow-danger mb-2">[!] ANALYTICS DATA UNAVAILABLE</p>
-          <p className="text-accent-dim text-[8px] tracking-wider">{'>'} PLEASE TRY AGAIN LATER OR RUN POST /API/ANALYTICS/REFRESH TO POPULATE THE CACHE.</p>
+          <p className="text-accent-muted text-[8px] tracking-wider">{'>'} PLEASE TRY AGAIN LATER OR RUN POST /API/ANALYTICS/REFRESH TO POPULATE THE CACHE.</p>
         </div>
       </div>
     );

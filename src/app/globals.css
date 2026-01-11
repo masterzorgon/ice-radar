@@ -11,6 +11,7 @@
   --foreground: #33FF00;
   --accent: #33FF00;
   --accent-dim: #0A3300;
+  --accent-muted: #66BB55;
   --danger: #FF0000;
   --danger-dim: #660000;
   --warning: #FFCC00;
@@ -18,10 +19,10 @@
   --border: #0A3300;
 
   /* Retro Terminal Specific */
-  --crt-glow: 0 0 8px #33FF00, 0 0 2px #33FF00;
+  --crt-glow: 0 0 8px #33FF00, 0 0 1px #33FF00;
   --crt-ghost: 1px 1px 0 #0A3300;
-  --crt-glow-danger: 0 0 8px #FF0000, 0 0 2px #FF0000;
-  --crt-glow-warning: 0 0 8px #FFCC00, 0 0 2px #FFCC00;
+  --crt-glow-danger: 0 0 8px #FF0000, 0 0 1px #FF0000;
+  --crt-glow-warning: 0 0 8px #FFCC00, 0 0 1px #FFCC00;
   --scanline-opacity: 0.08;
   --border-weight: 2px;
 
@@ -35,6 +36,7 @@
   --color-foreground: var(--foreground);
   --color-accent: var(--accent);
   --color-accent-dim: var(--accent-dim);
+  --color-accent-muted: var(--accent-muted);
   --color-danger: var(--danger);
   --color-danger-dim: var(--danger-dim);
   --color-warning: var(--warning);
@@ -514,7 +516,7 @@ input:focus, textarea:focus, select:focus {
 }
 
 input::placeholder, textarea::placeholder {
-  color: var(--accent-dim);
+  color: var(--accent-muted);
 }
 
 /* Custom checkbox - pixel style */
@@ -628,7 +630,7 @@ select,
 /* Data label */
 .data-label {
   font-size: 6px;
-  color: var(--accent-dim);
+  color: var(--accent-muted);
   text-transform: uppercase;
   letter-spacing: 1px;
 }

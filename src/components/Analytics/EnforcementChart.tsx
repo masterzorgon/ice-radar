@@ -23,7 +23,7 @@ export default function EnforcementChart({ data, title = 'TRENDS', subtitle = 'M
     <div className="bg-background border-2 border-accent-dim p-4 h-full">
       <div className="flex items-center gap-2 mb-4">
         <span className="text-accent text-[10px] tracking-wider glow-text">[{title}]</span>
-        <span className="text-accent-dim text-[8px] tracking-wider">{subtitle}</span>
+        <span className="text-accent-muted text-[8px] tracking-wider">{subtitle}</span>
       </div>
       <div className="h-[calc(100%-2rem)]">
         <ResponsiveContainer width="100%" height="100%">

@@ -53,20 +53,20 @@ function StateHeatmap({ data, title = 'MAP', subtitle = 'STATE ENFORCEMENT ACTIV
     <div className="bg-background border-2 border-accent-dim p-4 h-full relative">
       <div className="flex items-center gap-2 mb-2">
         <span className="text-accent text-[10px] tracking-wider glow-text">[{title}]</span>
-        <span className="text-accent-dim text-[8px] tracking-wider">{subtitle}</span>
+        <span className="text-accent-muted text-[8px] tracking-wider">{subtitle}</span>
       </div>
 
       {/* Hover tooltip */}
       {hoveredState && (
         <div className="absolute top-12 left-4 z-20 bg-background border-2 border-accent p-3 text-[8px] tracking-wider">
           <div className="text-accent glow-text mb-1">{hoveredState.state}</div>
-          <div className="text-accent-dim">
+          <div className="text-accent-muted">
             ENFORCEMENT ACTIONS: <span className="text-warning glow-warning">{hoveredState.enforcementActions.toLocaleString()}</span>
           </div>
-          <div className="text-accent-dim">
+          <div className="text-accent-muted">
             DEPORTATIONS: <span className="text-danger glow-danger">{hoveredState.deportations.toLocaleString()}</span>
           </div>
-          <div className="text-accent-dim">
+          <div className="text-accent-muted">
             INTENSITY: <span style={{ color: getIntensityColor(hoveredState.intensity) }}>
               {hoveredState.intensity}/10
             </span>
@@ -78,15 +78,15 @@ function StateHeatmap({ data, title = 'MAP', subtitle = 'STATE ENFORCEMENT ACTIV
       <div className="absolute bottom-4 left-4 z-10 flex items-center gap-3 text-[8px] tracking-wider">
         <div className="flex items-center gap-1">
           <span className="w-2 h-2 bg-danger" />
-          <span className="text-accent-dim">HIGH</span>
+          <span className="text-accent-muted">HIGH</span>
         </div>
         <div className="flex items-center gap-1">
           <span className="w-2 h-2 bg-warning" />
-          <span className="text-accent-dim">MED</span>
+          <span className="text-accent-muted">MED</span>
         </div>
         <div className="flex items-center gap-1">
           <span className="w-2 h-2 bg-accent" />
-          <span className="text-accent-dim">LOW</span>
+          <span className="text-accent-muted">LOW</span>
         </div>
       </div>
 

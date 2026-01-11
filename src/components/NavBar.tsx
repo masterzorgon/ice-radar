@@ -23,23 +23,23 @@ export default function NavBar({ onDonateClick, onReportClick, onInfoClick, onDi
   const navLinkClass = (path: string) =>
     isActive(path)
       ? 'px-4 py-2 text-[8px] tracking-wider text-accent border-2 border-accent bg-accent/20 cursor-pointer'
-      : 'px-4 py-2 text-[8px] tracking-wider text-accent-dim border-2 border-transparent hover:border-accent-dim hover:text-accent cursor-pointer';
+      : 'px-4 py-2 text-[8px] tracking-wider text-accent-muted border-2 border-transparent hover:border-accent-dim hover:text-accent cursor-pointer';
 
   // Icon button style for secondary actions
-  const iconButtonClass = 'flex items-center gap-2 px-3 py-2 text-[8px] tracking-wider text-accent-dim border-2 border-transparent hover:border-accent-dim hover:text-accent cursor-pointer';
+  const iconButtonClass = 'flex items-center gap-2 px-3 py-2 text-[8px] tracking-wider text-accent-muted border-2 border-transparent hover:border-accent-dim hover:text-accent cursor-pointer';
 
   return (
     <div className="flex items-center justify-between px-4 py-2 bg-background border-2 border-accent-dim">
       {/* Left side navigation */}
       <div className="flex items-center gap-1">
         <Link href="/" className={navLinkClass('/')}>
-          [{t.nav.home}]
+          {t.nav.home}
         </Link>
         <Link href="/resources" className={navLinkClass('/resources')}>
-          [{t.nav.resources}]
+          {t.nav.resources}
         </Link>
         <Link href="/analytics" className={navLinkClass('/analytics')}>
-          [{t.nav.analytics}]
+          {t.nav.analytics}
         </Link>
 
         {/* Pixel divider */}

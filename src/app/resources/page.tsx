@@ -43,7 +43,7 @@ export default function ResourcesPage() {
         {/* Page header */}
         <div className="flex items-center gap-2 px-2 border-b-2 border-accent-dim pb-2">
           <span className="text-accent text-[10px] tracking-wider glow-text">[RESOURCES]</span>
-          <span className="text-accent-dim text-[8px] tracking-wider">{t.resources?.pageTitle || 'KNOW YOUR RIGHTS & GET HELP'}</span>
+          <span className="text-accent-muted text-[8px] tracking-wider">{t.resources?.pageTitle || 'KNOW YOUR RIGHTS & GET HELP'}</span>
         </div>
 
         {/* Tab navigation */}
@@ -64,15 +64,15 @@ export default function ResourcesPage() {
         <div className="flex items-center justify-between px-4 py-2 bg-background border-2 border-accent-dim text-[8px] tracking-wider">
           <div className="flex items-center gap-6">
             <div className="flex items-center gap-2">
-              <span className="text-accent-dim">{t.statusBar.system}</span>
+              <span className="text-accent-muted">{t.statusBar.system}</span>
               <span className="text-accent glow-text">{t.statusBar.operational}</span>
             </div>
             <div className="flex items-center gap-2">
-              <span className="text-accent-dim">{t.resources?.categories || 'CATEGORIES'}:</span>
+              <span className="text-accent-muted">{t.resources?.categories || 'CATEGORIES'}:</span>
               <span className="text-accent">{resourceCategories.length}</span>
             </div>
           </div>
-          <div className="text-accent-dim/50">
+          <div className="text-accent-muted/50">
             {t.resources?.footer || 'EXTERNAL LINKS OPEN IN NEW TABS'}
           </div>
         </div>

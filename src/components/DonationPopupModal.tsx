@@ -37,21 +37,21 @@ export default function DonationPopupModal({
           <div className="flex items-center gap-2">
             <span className="text-danger text-[10px] tracking-wider">[&lt;3]</span>
             <span className="text-accent text-[10px] tracking-wider glow-text">{t.donationPopup.title}</span>
-            <span className="text-accent-dim text-[8px] tracking-wider">{t.donationPopup.subtitle}</span>
+            <span className="text-accent-muted text-[8px] tracking-wider">{t.donationPopup.subtitle}</span>
           </div>
         </div>
 
         {/* Content */}
         <div className="p-4 space-y-4">
           {/* Compelling message */}
-          <div className="text-[8px] tracking-wider text-accent-dim bg-background border-2 border-accent-dim p-3">
+          <div className="text-[8px] tracking-wider text-accent-muted bg-background border-2 border-accent-dim p-3">
             <p className="mb-3 text-accent">
               {'>'} {t.donationPopup.mainMessage}
             </p>
             <p className="mb-2">
               {t.donationPopup.impactMessage}
             </p>
-            <ul className="text-accent-dim/70 space-y-1">
+            <ul className="text-accent-muted/70 space-y-1">
               <li>[*] {t.donationPopup.impact1}</li>
               <li>[*] {t.donationPopup.impact2}</li>
               <li>[*] {t.donationPopup.impact3}</li>
@@ -59,7 +59,7 @@ export default function DonationPopupModal({
           </div>
 
           {/* Stats/credibility */}
-          <div className="flex items-center justify-center gap-4 text-[8px] text-accent-dim/50 tracking-wider">
+          <div className="flex items-center justify-center gap-4 text-[8px] text-accent-muted/50 tracking-wider">
             <span>{t.donationPopup.credibility}</span>
           </div>
 
@@ -78,13 +78,13 @@ export default function DonationPopupModal({
           <div className="flex gap-3 pt-2">
             <button
               onClick={onDismissForSession}
-              className="flex-1 px-4 py-2 border-2 border-accent-dim text-accent-dim text-[8px] tracking-wider hover:bg-accent-dim hover:text-background cursor-pointer"
+              className="flex-1 px-4 py-2 border-2 border-accent-dim text-accent-muted text-[8px] tracking-wider hover:bg-accent-dim hover:text-background cursor-pointer"
             >
               [{t.donationPopup.maybeLater}]
             </button>
             <button
               onClick={onDismissPermanently}
-              className="flex-1 px-4 py-2 border-2 border-accent-dim/50 text-accent-dim/50 text-[8px] tracking-wider hover:bg-accent-dim/50 hover:text-background cursor-pointer"
+              className="flex-1 px-4 py-2 border-2 border-accent-dim/50 text-accent-muted/50 text-[8px] tracking-wider hover:bg-accent-dim/50 hover:text-background cursor-pointer"
             >
               [{t.donationPopup.dontShowAgain}]
             </button>

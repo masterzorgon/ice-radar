@@ -20,9 +20,9 @@ export default function ResourceSection({ category }: ResourceSectionProps) {
       <div className="mb-4 border-b-2 border-accent-dim pb-2">
         <div className="flex items-center gap-2 mb-1">
           <span className="text-accent text-[10px] tracking-wider glow-text">[{category.id.toUpperCase()}]</span>
-          <span className="text-accent-dim text-[8px] tracking-wider">{name.toUpperCase()}</span>
+          <span className="text-accent-muted text-[8px] tracking-wider">{name.toUpperCase()}</span>
         </div>
-        <p className="text-accent-dim/50 text-[8px] tracking-wider">{'>'} {description}</p>
+        <p className="text-accent-muted/50 text-[8px] tracking-wider">{'>'} {description}</p>
       </div>
 
       {/* Resource cards grid */}

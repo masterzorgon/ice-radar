@@ -52,7 +52,7 @@ export default function DisclaimerModal({ isOpen, onClose }: DisclaimerModalProp
               <span className="text-accent text-[10px] mt-0.5">[#]</span>
               <div>
                 <span className="text-accent text-[8px] tracking-wider">{t.disclaimer.notLegalAdvice}</span>
-                <p className="text-[8px] text-accent-dim tracking-wider mt-1">{t.disclaimer.notLegalAdviceDesc}</p>
+                <p className="text-[8px] text-accent-muted tracking-wider mt-1">{t.disclaimer.notLegalAdviceDesc}</p>
               </div>
             </div>
 
@@ -60,7 +60,7 @@ export default function DisclaimerModal({ isOpen, onClose }: DisclaimerModalProp
               <span className="text-accent text-[10px] mt-0.5">[~]</span>
               <div>
                 <span className="text-accent text-[8px] tracking-wider">{t.disclaimer.externalLinks}</span>
-                <p className="text-[8px] text-accent-dim tracking-wider mt-1">{t.disclaimer.externalLinksDesc}</p>
+                <p className="text-[8px] text-accent-muted tracking-wider mt-1">{t.disclaimer.externalLinksDesc}</p>
               </div>
             </div>
 
@@ -68,7 +68,7 @@ export default function DisclaimerModal({ isOpen, onClose }: DisclaimerModalProp
               <span className="text-accent text-[10px] mt-0.5">[*]</span>
               <div>
                 <span className="text-accent text-[8px] tracking-wider">{t.disclaimer.communityData}</span>
-                <p className="text-[8px] text-accent-dim tracking-wider mt-1">{t.disclaimer.communityDataDesc}</p>
+                <p className="text-[8px] text-accent-muted tracking-wider mt-1">{t.disclaimer.communityDataDesc}</p>
               </div>
             </div>
 
@@ -76,7 +76,7 @@ export default function DisclaimerModal({ isOpen, onClose }: DisclaimerModalProp
               <span className="text-accent text-[10px] mt-0.5">[?]</span>
               <div>
                 <span className="text-accent text-[8px] tracking-wider">{t.disclaimer.verifyIndependently}</span>
-                <p className="text-[8px] text-accent-dim tracking-wider mt-1">{t.disclaimer.verifyIndependentlyDesc}</p>
+                <p className="text-[8px] text-accent-muted tracking-wider mt-1">{t.disclaimer.verifyIndependentlyDesc}</p>
               </div>
             </div>
           </div>

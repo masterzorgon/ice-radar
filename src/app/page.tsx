@@ -23,7 +23,7 @@ const USMap = dynamic(() => import('@/components/USMap'), {
   ssr: false,
   loading: () => (
     <div className="w-full h-full flex items-center justify-center bg-background border-2 border-accent-dim">
-      <div className="text-accent-dim text-[8px] tracking-wider">
+      <div className="text-accent-muted text-[8px] tracking-wider">
         {'>'} LOADING MAP DATA<span className="cursor-blink"></span>
       </div>
     </div>
@@ -239,38 +239,38 @@ export default function Home() {
             <div className="bg-background border-2 border-accent-dim p-4 flex-1">
               <div className="flex items-center gap-2 mb-2">
                 <span className="text-accent text-[8px] tracking-wider glow-text">{t.infoPanel.title}</span>
-                <span className="text-accent-dim text-[8px] tracking-wider">{t.infoPanel.subtitle}</span>
+                <span className="text-accent-muted text-[8px] tracking-wider">{t.infoPanel.subtitle}</span>
               </div>
-              <p className="text-[8px] text-accent-dim tracking-wider mb-3">
+              <p className="text-[8px] text-accent-muted tracking-wider mb-3">
                 {'>'} {t.infoPanel.description}
               </p>
               <div className="space-y-3 text-[8px] tracking-wider">
                 <div className="flex items-start gap-2">
                   <span className="text-accent shrink-0">[i]</span>
                   <div>
-                    <span className="text-accent-dim">{t.infoPanel.whatToReport}</span>
-                    <p className="text-accent-dim/50">{t.infoPanel.whatToReportDesc}</p>
+                    <span className="text-accent-muted">{t.infoPanel.whatToReport}</span>
+                    <p className="text-accent-muted/50">{t.infoPanel.whatToReportDesc}</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-2">
                   <span className="text-accent shrink-0">[*]</span>
                   <div>
-                    <span className="text-accent-dim">{t.infoPanel.where}</span>
-                    <p className="text-accent-dim/50">{t.infoPanel.whereDesc}</p>
+                    <span className="text-accent-muted">{t.infoPanel.where}</span>
+                    <p className="text-accent-muted/50">{t.infoPanel.whereDesc}</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-2">
                   <span className="text-accent shrink-0">[#]</span>
                   <div>
-                    <span className="text-accent-dim">{t.infoPanel.when}</span>
-                    <p className="text-accent-dim/50">{t.infoPanel.whenDesc}</p>
+                    <span className="text-accent-muted">{t.infoPanel.when}</span>
+                    <p className="text-accent-muted/50">{t.infoPanel.whenDesc}</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-2">
                   <span className="text-accent shrink-0">[@]</span>
                   <div>
-                    <span className="text-accent-dim">{t.infoPanel.privacy}</span>
-                    <p className="text-accent-dim/50">{t.infoPanel.privacyDesc}</p>
+                    <span className="text-accent-muted">{t.infoPanel.privacy}</span>
+                    <p className="text-accent-muted/50">{t.infoPanel.privacyDesc}</p>
                   </div>
                 </div>
               </div>
@@ -281,7 +281,7 @@ export default function Home() {
               <div className="flex items-center gap-2 mb-2">
                 <span className="text-accent text-[8px] tracking-wider glow-text">[#] {t.anonymous.title}</span>
               </div>
-              <p className="text-[8px] text-accent-dim tracking-wider">
+              <p className="text-[8px] text-accent-muted tracking-wider">
                 {t.anonymous.description}
               </p>
             </div>
@@ -314,7 +314,7 @@ export default function Home() {
         <div className="flex items-center justify-between px-4 py-2 bg-background border-2 border-accent-dim text-[8px] tracking-wider">
           <div className="flex items-center gap-6">
             <div className="flex items-center gap-2">
-              <span className="text-accent-dim">{t.statusBar.system}</span>
+              <span className="text-accent-muted">{t.statusBar.system}</span>
               <span className="text-accent glow-text">{t.statusBar.operational}</span>
             </div>
             <div className="flex items-center gap-3">
@@ -326,13 +326,13 @@ export default function Home() {
                 [{isLoading ? 'REFRESHING...' : 'REFRESH DATA'}]
               </button>
               {lastUpdated && (
-                <span className="text-accent-dim/50">
+                <span className="text-accent-muted/50">
                   Last updated: {lastUpdated.toLocaleTimeString()}
                 </span>
               )}
             </div>
           </div>
-          <div className="text-accent-dim/50">
+          <div className="text-accent-muted/50">
             {t.statusBar.disclaimer}
           </div>
         </div>

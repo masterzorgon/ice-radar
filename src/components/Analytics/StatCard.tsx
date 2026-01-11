@@ -31,7 +31,7 @@ export default function StatCard({ label, value, previousValue, format = 'number
 
   return (
     <div className="bg-background border-2 border-accent-dim p-3">
-      <div className="text-accent-dim text-[8px] uppercase tracking-wider mb-1">
+      <div className="text-accent-muted text-[8px] uppercase tracking-wider mb-1">
         {'>'} {label}
       </div>
       <div className="text-accent text-[16px] tracking-wider glow-text">
@@ -39,11 +39,11 @@ export default function StatCard({ label, value, previousValue, format = 'number
       </div>
       {changePercent !== null && (
         <div className={`text-[8px] tracking-wider mt-1 flex items-center gap-1 ${
-          isIncrease ? 'text-danger glow-danger' : isDecrease ? 'text-accent glow-text' : 'text-accent-dim'
+          isIncrease ? 'text-danger glow-danger' : isDecrease ? 'text-accent glow-text' : 'text-accent-muted'
         }`}>
           {isIncrease && <span>+</span>}
           {changePercent.toFixed(1)}%
-          <span className="text-accent-dim/50">vs prev period</span>
+          <span className="text-accent-muted/50">vs prev period</span>
         </div>
       )}
     </div>

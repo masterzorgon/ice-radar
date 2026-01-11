@@ -25,7 +25,7 @@ export function CountriesChart({ data, title = 'ORIGIN', subtitle = 'TOP COUNTRI
     <div className="bg-background border-2 border-accent-dim p-4 h-full">
       <div className="flex items-center gap-2 mb-4">
         <span className="text-accent text-[10px] tracking-wider glow-text">[{title}]</span>
-        <span className="text-accent-dim text-[8px] tracking-wider">{subtitle}</span>
+        <span className="text-accent-muted text-[8px] tracking-wider">{subtitle}</span>
       </div>
       <div className="h-[calc(100%-2rem)]">
         <ResponsiveContainer width="100%" height="100%">
@@ -79,14 +79,14 @@ interface AgeChartProps {
   subtitle?: string;
 }
 
-const AGE_COLORS = ['#33FF00', '#29CC00', '#1F9900', '#146600', '#0A3300'];
+const AGE_COLORS = ['#33FF00', '#FFCC00', '#FF8800', '#FF4444', '#880000'];
 
 export function AgeChart({ data, title = 'AGE', subtitle = 'DISTRIBUTION' }: AgeChartProps) {
   return (
     <div className="bg-background border-2 border-accent-dim p-4 h-full">
       <div className="flex items-center gap-2 mb-4">
         <span className="text-accent text-[10px] tracking-wider glow-text">[{title}]</span>
-        <span className="text-accent-dim text-[8px] tracking-wider">{subtitle}</span>
+        <span className="text-accent-muted text-[8px] tracking-wider">{subtitle}</span>
       </div>
       <div className="h-[calc(100%-2rem)] flex">
         <div className="flex-1">
@@ -133,7 +133,7 @@ export function AgeChart({ data, title = 'AGE', subtitle = 'DISTRIBUTION' }: Age
                 className="w-2 h-2"
                 style={{ backgroundColor: AGE_COLORS[index % AGE_COLORS.length] }}
               />
-              <span className="text-accent-dim">{item.group}</span>
+              <span className="text-accent-muted">{item.group}</span>
               <span className="text-accent glow-text">{item.percentage}%</span>
             </div>
           ))}
@@ -155,7 +155,7 @@ export function ApprehensionMethodChart({ data = [], title = 'METHOD', subtitle 
   if (!data || data.length === 0) {
     return (
       <div className="bg-background border-2 border-accent-dim p-4 h-full flex items-center justify-center">
-        <span className="text-accent-dim text-[8px] tracking-wider">{'>'} NO DATA AVAILABLE</span>
+        <span className="text-accent-muted text-[8px] tracking-wider">{'>'} NO DATA AVAILABLE</span>
       </div>
     );
   }
@@ -164,7 +164,7 @@ export function ApprehensionMethodChart({ data = [], title = 'METHOD', subtitle 
     <div className="bg-background border-2 border-accent-dim p-4 h-full">
       <div className="flex items-center gap-2 mb-4">
         <span className="text-accent text-[10px] tracking-wider glow-text">[{title}]</span>
-        <span className="text-accent-dim text-[8px] tracking-wider">{subtitle}</span>
+        <span className="text-accent-muted text-[8px] tracking-wider">{subtitle}</span>
       </div>
       <div className="h-[calc(100%-2rem)] flex">
         <div className="flex-1">
@@ -211,7 +211,7 @@ export function ApprehensionMethodChart({ data = [], title = 'METHOD', subtitle 
                 className="w-2 h-2"
                 style={{ backgroundColor: METHOD_COLORS[index % METHOD_COLORS.length] }}
               />
-              <span className="text-accent-dim whitespace-nowrap">{item.method}</span>
+              <span className="text-accent-muted whitespace-nowrap">{item.method}</span>
               <span className="text-accent glow-text">{item.percentage}%</span>
             </div>
           ))}

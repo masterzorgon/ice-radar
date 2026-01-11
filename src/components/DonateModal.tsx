@@ -53,7 +53,7 @@ export default function DonateModal({ isOpen, onClose }: DonateModalProps) {
             <p className="mb-2">
               {t.donate.message}
             </p>
-            <ul className="text-accent-dim space-y-1">
+            <ul className="text-accent-muted space-y-1">
               <li>{'>'} {t.donate.serverCosts}</li>
               <li>{'>'} {t.donate.development}</li>
               <li>{'>'} {t.donate.keepFree}</li>
@@ -73,15 +73,15 @@ export default function DonateModal({ isOpen, onClose }: DonateModalProps) {
             </Button>
 
             <div className="flex items-center gap-2 justify-center">
-              <span className="text-[8px] text-accent-dim tracking-wider">[#] {t.donate.securePayment}</span>
+              <span className="text-[8px] text-accent-muted tracking-wider">[#] {t.donate.securePayment}</span>
             </div>
           </div>
 
           {/* Security note */}
-          <div className="text-[8px] text-accent-dim text-center border-t-2 border-accent-dim pt-3 mt-2 tracking-wider">
+          <div className="text-[8px] text-accent-muted text-center border-t-2 border-accent-dim pt-3 mt-2 tracking-wider">
             {t.donate.securityNote}
             <br />
-            <span className="text-accent-dim/50">{t.donate.noStorage}</span>
+            <span className="text-accent-muted/50">{t.donate.noStorage}</span>
           </div>
         </div>
       </div>

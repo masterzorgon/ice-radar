@@ -212,7 +212,7 @@ function USMap({ hotspots, reports, onSelectReport, selectedState, onSelectState
       <div className="absolute top-0 left-0 right-0 z-10 flex items-center justify-between px-4 py-2 bg-black/80 border-b border-accent-dim/30 h-10">
         <div className="flex items-center gap-2">
           <span className="text-accent text-xs">[MAP]</span>
-          <span className="text-accent-dim text-xs">CONTINENTAL US // LIVE FEED</span>
+          <span className="text-accent-muted text-xs">CONTINENTAL US // LIVE FEED</span>
           <span className="text-foreground/30 text-xs ml-2">ZOOM: {position.zoom.toFixed(1)}x</span>
         </div>
         <div className="flex items-center gap-4 text-xs">
@@ -234,7 +234,7 @@ function USMap({ hotspots, reports, onSelectReport, selectedState, onSelectState
           </div>
           <div className="flex items-center gap-1">
             <span className="w-2 h-2 rounded-full bg-accent" />
-            <span className="text-accent-dim">NORMAL</span>
+            <span className="text-accent-muted">NORMAL</span>
           </div>
         </div>
       </div>
@@ -266,7 +266,7 @@ function USMap({ hotspots, reports, onSelectReport, selectedState, onSelectState
             Primary Type: <span className="text-warning">{hoveredCluster.primaryType}</span>
           </div>
           {hoveredCluster.count > 1 && position.zoom < 4 && (
-            <div className="text-accent-dim mt-1">
+            <div className="text-accent-muted mt-1">
               Zoom in for details
             </div>
           )}

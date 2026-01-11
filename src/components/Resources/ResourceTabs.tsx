@@ -26,7 +26,7 @@ export default function ResourceTabs({ categories, activeTab, onTabChange }: Res
               px-3 py-2 text-[8px] tracking-wider whitespace-nowrap border-2
               ${isActive
                 ? 'bg-accent text-background border-accent'
-                : 'bg-transparent border-accent-dim text-accent-dim hover:text-accent hover:border-accent'
+                : 'bg-transparent border-accent-dim text-accent-muted hover:text-accent hover:border-accent'
               }
             `}
           >

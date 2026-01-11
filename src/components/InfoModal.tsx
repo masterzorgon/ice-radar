@@ -27,11 +27,11 @@ export default function InfoModal({ isOpen, onClose }: InfoModalProps) {
           <div className="flex items-center gap-2">
             <span className="text-accent text-[10px]">[i]</span>
             <span className="text-accent text-[8px] tracking-wider glow-text">{t.infoModal.title}</span>
-            <span className="text-accent-dim text-[8px] tracking-wider">{t.infoModal.subtitle}</span>
+            <span className="text-accent-muted text-[8px] tracking-wider">{t.infoModal.subtitle}</span>
           </div>
           <button
             onClick={onClose}
-            className="text-accent-dim hover:text-accent text-[10px] px-2 py-1 border-2 border-transparent hover:border-accent"
+            className="text-accent-muted hover:text-accent text-[10px] px-2 py-1 border-2 border-transparent hover:border-accent"
           >
             [X]
           </button>
@@ -50,7 +50,7 @@ export default function InfoModal({ isOpen, onClose }: InfoModalProps) {
                 <div className="flex items-center gap-2 mb-1">
                   <span className="text-danger text-[8px] tracking-wider glow-danger">[{t.status.active}]</span>
                 </div>
-                <p className="text-[8px] text-accent-dim tracking-wider">
+                <p className="text-[8px] text-accent-muted tracking-wider">
                   {t.infoModal.activeDesc}
                 </p>
               </div>
@@ -58,15 +58,15 @@ export default function InfoModal({ isOpen, onClose }: InfoModalProps) {
                 <div className="flex items-center gap-2 mb-1">
                   <span className="text-warning text-[8px] tracking-wider glow-warning">[{t.status.unverified}]</span>
                 </div>
-                <p className="text-[8px] text-accent-dim tracking-wider">
+                <p className="text-[8px] text-accent-muted tracking-wider">
                   {t.infoModal.unverifiedDesc}
                 </p>
               </div>
               <div className="bg-background border-2 border-accent-dim p-3">
                 <div className="flex items-center gap-2 mb-1">
-                  <span className="text-accent-dim text-[8px] tracking-wider">[{t.status.resolved}]</span>
+                  <span className="text-accent-muted text-[8px] tracking-wider">[{t.status.resolved}]</span>
                 </div>
-                <p className="text-[8px] text-accent-dim tracking-wider">
+                <p className="text-[8px] text-accent-muted tracking-wider">
                   {t.infoModal.resolvedDesc}
                 </p>
               </div>
@@ -84,7 +84,7 @@ export default function InfoModal({ isOpen, onClose }: InfoModalProps) {
                 <div className="flex items-center gap-2 mb-1">
                   <span className="text-danger text-[8px] tracking-wider">[{t.reportTypes.raid}]</span>
                 </div>
-                <p className="text-[8px] text-accent-dim tracking-wider">
+                <p className="text-[8px] text-accent-muted tracking-wider">
                   {t.infoModal.raidDesc}
                 </p>
               </div>
@@ -92,7 +92,7 @@ export default function InfoModal({ isOpen, onClose }: InfoModalProps) {
                 <div className="flex items-center gap-2 mb-1">
                   <span className="text-warning text-[8px] tracking-wider">[{t.reportTypes.checkpoint}]</span>
                 </div>
-                <p className="text-[8px] text-accent-dim tracking-wider">
+                <p className="text-[8px] text-accent-muted tracking-wider">
                   {t.infoModal.checkpointDesc}
                 </p>
               </div>
@@ -100,7 +100,7 @@ export default function InfoModal({ isOpen, onClose }: InfoModalProps) {
                 <div className="flex items-center gap-2 mb-1">
                   <span className="text-accent text-[8px] tracking-wider">[{t.reportTypes.patrol}]</span>
                 </div>
-                <p className="text-[8px] text-accent-dim tracking-wider">
+                <p className="text-[8px] text-accent-muted tracking-wider">
                   {t.infoModal.patrolDesc}
                 </p>
               </div>
@@ -108,7 +108,7 @@ export default function InfoModal({ isOpen, onClose }: InfoModalProps) {
                 <div className="flex items-center gap-2 mb-1">
                   <span className="text-accent text-[8px] tracking-wider">[{t.reportTypes.detention}]</span>
                 </div>
-                <p className="text-[8px] text-accent-dim tracking-wider">
+                <p className="text-[8px] text-accent-muted tracking-wider">
                   {t.infoModal.detentionDesc}
                 </p>
               </div>
@@ -116,7 +116,7 @@ export default function InfoModal({ isOpen, onClose }: InfoModalProps) {
                 <div className="flex items-center gap-2 mb-1">
                   <span className="text-accent text-[8px] tracking-wider">[{t.reportTypes.surveillance}]</span>
                 </div>
-                <p className="text-[8px] text-accent-dim tracking-wider">
+                <p className="text-[8px] text-accent-muted tracking-wider">
                   {t.infoModal.surveillanceDesc}
                 </p>
               </div>
@@ -135,7 +135,7 @@ export default function InfoModal({ isOpen, onClose }: InfoModalProps) {
                   <span className="w-2 h-2 bg-danger" />
                   <span className="text-danger text-[8px] tracking-wider glow-danger">{t.infoModal.critical}</span>
                 </div>
-                <p className="text-[8px] text-accent-dim tracking-wider">
+                <p className="text-[8px] text-accent-muted tracking-wider">
                   {t.infoModal.criticalDesc}
                 </p>
               </div>
@@ -144,7 +144,7 @@ export default function InfoModal({ isOpen, onClose }: InfoModalProps) {
                   <span className="w-2 h-2 bg-warning" />
                   <span className="text-warning text-[8px] tracking-wider glow-warning">{t.infoModal.elevated}</span>
                 </div>
-                <p className="text-[8px] text-accent-dim tracking-wider">
+                <p className="text-[8px] text-accent-muted tracking-wider">
                   {t.infoModal.elevatedDesc}
                 </p>
               </div>
@@ -153,7 +153,7 @@ export default function InfoModal({ isOpen, onClose }: InfoModalProps) {
                   <span className="w-2 h-2 bg-accent" />
                   <span className="text-accent text-[8px] tracking-wider glow-text">{t.infoModal.normal}</span>
                 </div>
-                <p className="text-[8px] text-accent-dim tracking-wider">
+                <p className="text-[8px] text-accent-muted tracking-wider">
                   {t.infoModal.normalDesc}
                 </p>
               </div>
@@ -167,10 +167,10 @@ export default function InfoModal({ isOpen, onClose }: InfoModalProps) {
               {t.infoModal.verificationSystem}
             </h3>
             <div className="bg-background border-2 border-accent-dim p-3">
-              <p className="text-[8px] text-accent-dim tracking-wider mb-2">
+              <p className="text-[8px] text-accent-muted tracking-wider mb-2">
                 <span className="text-accent">{t.infoModal.verifiedCount}</span> {t.infoModal.verifiedCountDesc}
               </p>
-              <p className="text-[8px] text-accent-dim tracking-wider">
+              <p className="text-[8px] text-accent-muted tracking-wider">
                 {t.infoModal.verificationNote}
               </p>
             </div>
