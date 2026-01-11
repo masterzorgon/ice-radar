@@ -33,7 +33,14 @@ export default function Header() {
     <header className="border-b border-accent-dim/30 bg-black/80 px-4 py-3">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-3">
+            <Image
+              src="/logo-icon.svg"
+              alt="ICE RADAR"
+              width={32}
+              height={32}
+              className="drop-shadow-[0_0_8px_#00ff00]"
+            />
             <div>
               <h1 className="text-accent text-lg font-bold tracking-wider">
                 {t.header.title}

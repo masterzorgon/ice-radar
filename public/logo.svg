@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100" width="300" height="100" style="background-color: transparent;">
+  <defs>
+    <style>
+      @font-face {
+        font-family: 'Monospace';
+        src: url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@600&display=swap');
+      }
+      .terminal-style {
+        fill: none;
+        stroke: #00ff00;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+      .text-style {
+        fill: #00ff00;
+        font-family: 'Monospace', monospace;
+        font-size: 24px;
+        letter-spacing: 2px;
+      }
+    </style>
+  </defs>
+
+  <g transform="translate(30, 20)">
+    <path d="M10,70 L5,70 L15,10 L25,10 L35,70 L30,70 M10,60 L30,60 M12,45 L28,45 M14,30 L26,30" stroke-width="2" class="terminal-style"/>
+
+    <circle cx="20" cy="10" r="4" stroke-width="2" class="terminal-style"/>
+
+    <g transform="translate(20, 10)">
+      <path d="M5,-8 A10,10 0 0 1 18,5 M-5,-8 A10,10 0 0 0 -18,5" stroke-width="2" stroke-opacity="0.8" class="terminal-style"/>
+      <path d="M10,-15 A20,20 0 0 1 28,8 M-10,-15 A20,20 0 0 0 -28,8" stroke-width="2" stroke-opacity="0.6" class="terminal-style"/>
+      <path d="M15,-22 A30,30 0 0 1 38,12 M-15,-22 A30,30 0 0 0 -38,12" stroke-width="2" stroke-opacity="0.4" class="terminal-style"/>
+    </g>
+  </g>
+
+  <text x="80" y="55" class="text-style">ICE RADAR</text>
+
+  <line x1="0" y1="10" x2="300" y2="10" stroke="#00ff00" stroke-opacity="0.1" stroke-width="1" />
+  <line x1="0" y1="30" x2="300" y2="30" stroke="#00ff00" stroke-opacity="0.1" stroke-width="1" />
+  <line x1="0" y1="50" x2="300" y2="50" stroke="#00ff00" stroke-opacity="0.1" stroke-width="1" />
+  <line x1="0" y1="70" x2="300" y2="70" stroke="#00ff00" stroke-opacity="0.1" stroke-width="1" />
+  <line x1="0" y1="90" x2="300" y2="90" stroke="#00ff00" stroke-opacity="0.1" stroke-width="1" />
+</svg>

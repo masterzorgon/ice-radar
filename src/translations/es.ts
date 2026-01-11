@@ -1,7 +1,7 @@
 export const es = {
   // Header
   header: {
-    title: 'RASTREADOR DE AVISTAMIENTOS DE ICE',
+    title: 'ICE RADAR',
     subtitle: 'SISTEMA DE ALERTA COMUNITARIA (BETA)',
     systemOnline: 'SISTEMA EN LINEA',
   },

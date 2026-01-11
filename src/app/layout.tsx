@@ -9,8 +9,11 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "ICE TRACKER // COMMUNITY ALERT SYSTEM",
+  title: "ICE RADAR // COMMUNITY ALERT SYSTEM",
   description: "Real-time community reporting and tracking system for ICE activity",
+  icons: {
+    icon: "/logo-icon.svg",
+  },
 };
 
 export default function RootLayout({
