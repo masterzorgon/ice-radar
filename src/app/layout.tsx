@@ -16,8 +16,8 @@ const vt323 = VT323({
 });
 
 export const metadata: Metadata = {
-  title: "ICE RADAR // COMMUNITY ALERT SYSTEM",
-  description: "Real-time community reporting and tracking system for ICE activity",
+  title: "ICE RADAR",
+  description: "Anonymous community reporting and tracking system for ICE activity",
   icons: {
     icon: "/logo-icon.svg",
   },

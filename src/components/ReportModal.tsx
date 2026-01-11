@@ -4,6 +4,7 @@ import { useState, useMemo, useRef, useEffect, useCallback } from 'react';
 import { ReportType, Report } from '@/types';
 import { formatDistanceToNow } from 'date-fns';
 import { useLanguage } from '@/contexts/LanguageContext';
+import Button from '@/components/ui/Button';
 
 interface AddressSuggestion {
   display_name: string;
@@ -427,12 +428,14 @@ export default function ReportModal({ isOpen, onClose, onSubmit, reports, onVeri
             <span className="text-accent text-[8px] tracking-wider glow-text">{t.reportModal.title}</span>
             <span className="text-accent-muted text-[8px] tracking-wider">{t.reportModal.subtitle}</span>
           </div>
-          <button
+          <Button
             onClick={onClose}
-            className="text-accent-muted hover:text-accent text-[10px] px-2 py-1 border-2 border-transparent hover:border-accent"
+            variant="icon"
+            size="sm"
+            className="text-[10px]"
           >
             [X]
-          </button>
+          </Button>
         </div>
 
         {/* Form */}
@@ -444,35 +447,34 @@ export default function ReportModal({ isOpen, onClose, onSubmit, reports, onVeri
             </label>
             <div className="grid grid-cols-3 gap-2">
               {REPORT_TYPES.map((type) => (
-                <button
+                <Button
                   key={type}
                   type="button"
                   onClick={() => setFormData({ ...formData, type })}
-                  className={`
-                    px-2 py-2 text-[8px] tracking-wider border-2
-                    ${formData.type === type
-                      ? 'bg-accent text-background border-accent'
-                      : 'bg-transparent text-accent-muted border-accent-dim hover:border-accent hover:text-accent'
-                    }
-                  `}
+                  variant={formData.type === type ? 'primary' : 'secondary'}
+                  active={formData.type === type}
+                  size="sm"
+                  className="py-2"
                 >
                   [{type}]
-                </button>
+                </Button>
               ))}
             </div>
           </div>
 
           {/* Use My Location Button */}
           <div>
-            <button
+            <Button
               type="button"
               onClick={handleUseMyLocation}
               disabled={isLocating}
-              className="w-full px-4 py-2 bg-transparent border-2 border-accent text-accent text-[8px] tracking-wider hover:bg-accent hover:text-background disabled:opacity-50 flex items-center justify-center gap-2"
+              variant="primary"
+              fullWidth
+              pulse={isLocating}
             >
               {isLocating ? (
                 <>
-                  <span className="pixel-pulse">[*]</span>
+                  <span>[*]</span>
                   <span>{t.reportModal.detectingLocation}</span>
                 </>
               ) : (
@@ -481,7 +483,7 @@ export default function ReportModal({ isOpen, onClose, onSubmit, reports, onVeri
                   <span>{t.reportModal.useLocation}</span>
                 </>
               )}
-            </button>
+            </Button>
             {locationError && (
               <div className="mt-2 text-[8px] text-danger tracking-wider">{locationError}</div>
             )}
@@ -534,18 +536,16 @@ export default function ReportModal({ isOpen, onClose, onSubmit, reports, onVeri
                         {formatDistanceToNow(incident.timestamp, { addSuffix: true })} · {incident.verifiedCount} {t.feed.verified}
                       </div>
                     </div>
-                    <button
+                    <Button
                       type="button"
                       onClick={() => handleVerifyInModal(incident.id)}
                       disabled={incident.alreadyVerified}
-                      className={`shrink-0 px-2 py-1 text-[8px] tracking-wider border-2 cursor-pointer ${
-                        incident.alreadyVerified
-                          ? 'border-accent-dim text-accent-muted cursor-not-allowed'
-                          : 'border-accent text-accent hover:bg-accent hover:text-background'
-                      }`}
+                      variant={incident.alreadyVerified ? 'secondary' : 'primary'}
+                      size="sm"
+                      className="shrink-0"
                     >
                       {incident.alreadyVerified ? `[${t.reportModal.verifiedButton}]` : `[${t.reportModal.verifyButton}]`}
-                    </button>
+                    </Button>
                   </div>
                 ))}
               </div>
@@ -620,14 +620,15 @@ export default function ReportModal({ isOpen, onClose, onSubmit, reports, onVeri
                 className="absolute z-50 w-full mt-1 bg-background border-2 border-accent max-h-48 overflow-y-auto"
               >
                 {addressSuggestions.map((suggestion, index) => (
-                  <button
+                  <Button
                     key={index}
                     type="button"
                     onClick={() => handleSuggestionSelect(suggestion)}
-                    className="w-full px-3 py-2 text-left text-[8px] text-accent tracking-wider hover:bg-accent hover:text-background border-b-2 border-accent-dim last:border-b-0"
+                    variant="ghost"
+                    className="w-full justify-start text-left border-b-2 border-accent-dim last:border-b-0 rounded-none"
                   >
                     {suggestion.display_name}
-                  </button>
+                  </Button>
                 ))}
               </div>
             )}
@@ -662,20 +663,22 @@ export default function ReportModal({ isOpen, onClose, onSubmit, reports, onVeri
 
           {/* Submit */}
           <div className="flex gap-3 pt-2">
-            <button
+            <Button
               type="button"
               onClick={onClose}
-              className="flex-1 px-4 py-2 border-2 border-accent-dim text-accent-muted text-[8px] tracking-wider hover:border-accent hover:text-accent"
+              variant="secondary"
+              className="flex-1"
             >
               [{t.reportModal.cancel}]
-            </button>
-            <button
+            </Button>
+            <Button
               type="submit"
               disabled={isSubmitting}
-              className="flex-1 px-4 py-2 bg-transparent border-2 border-danger text-danger text-[8px] tracking-wider hover:bg-danger hover:text-background disabled:opacity-50"
+              variant="danger"
+              className="flex-1"
             >
               {isSubmitting ? `[${t.reportModal.submitting}]` : `[${t.reportModal.submit}]`}
-            </button>
+            </Button>
           </div>
         </form>
       </div>

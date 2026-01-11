@@ -76,18 +76,20 @@ export default function DonationPopupModal({
 
           {/* Dismiss options */}
           <div className="flex gap-3 pt-2">
-            <button
+            <Button
               onClick={onDismissForSession}
-              className="flex-1 px-4 py-2 border-2 border-accent-dim text-accent-muted text-[8px] tracking-wider hover:bg-accent-dim hover:text-background cursor-pointer"
+              variant="secondary"
+              className="flex-1"
             >
               [{t.donationPopup.maybeLater}]
-            </button>
-            <button
+            </Button>
+            <Button
               onClick={onDismissPermanently}
-              className="flex-1 px-4 py-2 border-2 border-accent-dim/50 text-accent-muted/50 text-[8px] tracking-wider hover:bg-accent-dim/50 hover:text-background cursor-pointer"
+              variant="ghost"
+              className="flex-1 text-accent-muted/50"
             >
               [{t.donationPopup.dontShowAgain}]
-            </button>
+            </Button>
           </div>
         </div>
       </div>

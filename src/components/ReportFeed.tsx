@@ -3,6 +3,7 @@
 import { Report } from '@/types';
 import { formatDistanceToNow } from 'date-fns';
 import { useLanguage } from '@/contexts/LanguageContext';
+import Button from '@/components/ui/Button';
 
 interface ReportFeedProps {
   reports: Report[];
@@ -48,11 +49,11 @@ export default function ReportFeed({
   };
 
   return (
-    <div className="bg-background border-2 border-accent-dim flex flex-col h-full max-h-[calc(100vh-12rem)]">
+    <div className="bg-background border-2 border-accent-dim flex flex-col h-full max-h-[50vh] sm:max-h-[60vh] lg:max-h-[calc(100vh-12rem)]">
       {/* Header */}
-      <div className="flex items-center gap-2 px-4 py-2 border-b-2 border-accent-dim bg-accent-dim">
+      <div className="flex items-center gap-2 px-3 sm:px-4 py-2 border-b-2 border-accent-dim bg-accent-dim">
         <span className="text-accent text-[8px] tracking-wider glow-text">{t.feed.title}</span>
-        <span className="text-accent-muted text-[8px] tracking-wider">{t.feed.subtitle}</span>
+        <span className="text-accent-muted text-[8px] tracking-wider hidden sm:inline">{t.feed.subtitle}</span>
         <span className="ml-auto text-[8px] text-accent-muted tracking-wider">
           [{reports.length}] {t.feed.entries}
         </span>
@@ -60,16 +61,18 @@ export default function ReportFeed({
 
       {/* State filter indicator */}
       {selectedState && (
-        <div className="flex items-center justify-between px-4 py-2 bg-accent/10 border-b-2 border-accent-dim">
+        <div className="flex items-center justify-between px-3 sm:px-4 py-2 bg-accent/10 border-b-2 border-accent-dim">
           <span className="text-[8px] text-accent-muted tracking-wider">
             {'>'} {t.feed.filtering} <span className="text-accent glow-text">[{selectedState}]</span>
           </span>
-          <button
+          <Button
             onClick={onClearState}
-            className="text-[8px] text-accent-muted tracking-wider hover:text-accent px-2 py-1 border-2 border-transparent hover:border-accent-dim"
+            variant="ghost"
+            size="sm"
+            className="min-h-[36px] min-w-[36px]"
           >
             {t.feed.clear}
-          </button>
+          </Button>
         </div>
       )}
 
@@ -85,19 +88,20 @@ export default function ReportFeed({
               key={report.id}
               onClick={() => onSelectReport?.(report)}
               className={`
-                px-4 py-3 border-b-2 border-accent-dim/30 cursor-pointer
-                hover:bg-accent/10
+                px-3 sm:px-4 py-3 border-b-2 border-accent-dim/30 cursor-pointer
+                hover:bg-accent/10 active:bg-accent/20
+                min-h-[44px]
                 ${selectedReportId === report.id ? 'bg-accent/10 border-l-4 border-l-accent' : ''}
               `}
             >
-              <div className="flex items-start gap-3">
+              <div className="flex items-start gap-2 sm:gap-3">
                 <span
-                  className={`text-[10px] tracking-wider ${report.status === 'ACTIVE' ? 'text-danger glow-danger' : 'text-warning glow-warning'}`}
+                  className={`text-[10px] tracking-wider shrink-0 ${report.status === 'ACTIVE' ? 'text-danger glow-danger' : 'text-warning glow-warning'}`}
                 >
                   {getTypeIcon(report.type)}
                 </span>
                 <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2 mb-1">
+                  <div className="flex flex-wrap items-center gap-1 sm:gap-2 mb-1">
                     <span className="text-[8px] tracking-wider text-accent">
                       [{report.type}]
                     </span>
@@ -107,12 +111,14 @@ export default function ReportFeed({
                   </div>
                   <div className="text-[8px] text-accent tracking-wider mb-1">
                     {report.location.city}, {report.location.state}
-                    {report.location.address && ` - ${report.location.address}`}
+                    <span className="hidden sm:inline">
+                      {report.location.address && ` - ${report.location.address}`}
+                    </span>
                   </div>
                   <div className="text-[8px] text-accent-muted tracking-wider truncate">
                     {'>'} {report.description}
                   </div>
-                  <div className="flex items-center gap-4 mt-2 text-[8px] tracking-wider">
+                  <div className="flex flex-wrap items-center gap-2 sm:gap-4 mt-2 text-[8px] tracking-wider">
                     <span className="text-accent-muted/50">
                       {formatDistanceToNow(report.timestamp, { addSuffix: true })}
                     </span>

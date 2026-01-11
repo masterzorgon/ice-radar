@@ -1,6 +1,7 @@
 'use client';
 
 import { useLanguage } from '@/contexts/LanguageContext';
+import Button from '@/components/ui/Button';
 
 interface InfoModalProps {
   isOpen: boolean;
@@ -29,12 +30,14 @@ export default function InfoModal({ isOpen, onClose }: InfoModalProps) {
             <span className="text-accent text-[8px] tracking-wider glow-text">{t.infoModal.title}</span>
             <span className="text-accent-muted text-[8px] tracking-wider">{t.infoModal.subtitle}</span>
           </div>
-          <button
+          <Button
             onClick={onClose}
-            className="text-accent-muted hover:text-accent text-[10px] px-2 py-1 border-2 border-transparent hover:border-accent"
+            variant="icon"
+            size="sm"
+            className="text-[10px]"
           >
             [X]
-          </button>
+          </Button>
         </div>
 
         {/* Content */}
@@ -179,12 +182,13 @@ export default function InfoModal({ isOpen, onClose }: InfoModalProps) {
 
         {/* Footer */}
         <div className="px-4 py-3 border-t-2 border-accent-dim bg-accent-dim">
-          <button
+          <Button
             onClick={onClose}
-            className="w-full px-4 py-2 bg-transparent border-2 border-accent text-accent text-[8px] tracking-wider hover:bg-accent hover:text-background cursor-pointer"
+            variant="primary"
+            fullWidth
           >
             [{t.infoModal.close}]
-          </button>
+          </Button>
         </div>
       </div>
     </div>

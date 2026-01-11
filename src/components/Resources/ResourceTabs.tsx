@@ -2,6 +2,7 @@
 
 import { ResourceCategory } from '@/data/resourcesData';
 import { useLanguage } from '@/contexts/LanguageContext';
+import Button from '@/components/ui/Button';
 
 interface ResourceTabsProps {
   categories: ResourceCategory[];
@@ -19,19 +20,16 @@ export default function ResourceTabs({ categories, activeTab, onTabChange }: Res
         const name = language === 'es' ? category.shortNameEs : category.shortName;
 
         return (
-          <button
+          <Button
             key={category.id}
             onClick={() => onTabChange(category.id)}
-            className={`
-              px-3 py-2 text-[8px] tracking-wider whitespace-nowrap border-2
-              ${isActive
-                ? 'bg-accent text-background border-accent'
-                : 'bg-transparent border-accent-dim text-accent-muted hover:text-accent hover:border-accent'
-              }
-            `}
+            variant={isActive ? 'primary' : 'secondary'}
+            active={isActive}
+            size="sm"
+            className="whitespace-nowrap py-2"
           >
             [{name.toUpperCase()}]
-          </button>
+          </Button>
         );
       })}
     </div>

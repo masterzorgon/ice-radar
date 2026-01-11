@@ -18,6 +18,7 @@ import {
   STATE_NAME_TO_ABBR,
   getIntensityColor,
 } from './mapConstants';
+import Button from '@/components/ui/Button';
 
 /**
  * Calculate distance between two coordinates
@@ -303,12 +304,14 @@ function USMapCanvas({
         </div>
         <div className="flex items-center gap-4 text-xs">
           {selectedState && (
-            <button
+            <Button
               onClick={() => onSelectState(null)}
-              className="px-2 py-0.5 bg-accent/20 text-accent border border-accent/30 text-xs hover:bg-accent/30 transition-colors"
+              variant="ghost"
+              size="sm"
+              className="text-xs bg-accent/20 border-accent/30"
             >
               {selectedState} ×
-            </button>
+            </Button>
           )}
           <div className="flex items-center gap-1">
             <span className="w-2 h-2 rounded-full bg-danger animate-pulse" />
@@ -366,25 +369,31 @@ function USMapCanvas({
 
       {/* Zoom Controls */}
       <div className="absolute bottom-14 right-4 z-20 flex flex-col gap-1">
-        <button
+        <Button
           onClick={handleZoomIn}
-          className="w-8 h-8 bg-black/80 border border-accent-dim/50 text-accent text-sm hover:bg-accent/20 transition-colors flex items-center justify-center"
+          variant="secondary"
+          size="icon"
+          className="bg-black/80 text-sm"
         >
           +
-        </button>
-        <button
+        </Button>
+        <Button
           onClick={handleZoomOut}
-          className="w-8 h-8 bg-black/80 border border-accent-dim/50 text-accent text-sm hover:bg-accent/20 transition-colors flex items-center justify-center"
+          variant="secondary"
+          size="icon"
+          className="bg-black/80 text-sm"
         >
           −
-        </button>
-        <button
+        </Button>
+        <Button
           onClick={handleReset}
-          className="w-8 h-8 bg-black/80 border border-accent-dim/50 text-accent text-xs hover:bg-accent/20 transition-colors flex items-center justify-center"
+          variant="secondary"
+          size="icon"
+          className="bg-black/80 text-xs"
           title="Reset view"
         >
           ⌂
-        </button>
+        </Button>
       </div>
 
       {/* Grid Overlay Effect */}

@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { US_STATES } from '@/data/states';
+import Button from '@/components/ui/Button';
 
 interface SubscribeModalProps {
   isOpen: boolean;
@@ -97,12 +98,14 @@ export default function SubscribeModal({ isOpen, onClose }: SubscribeModalProps)
             <span className="text-accent text-[8px] tracking-wider glow-text">{t.subscribe?.title || '[ALERTS]'}</span>
             <span className="text-accent-muted text-[8px] tracking-wider">{t.subscribe?.subtitle || 'EMAIL NOTIFICATIONS'}</span>
           </div>
-          <button
+          <Button
             onClick={handleClose}
-            className="text-accent-muted hover:text-accent text-[10px] px-2 py-1 border-2 border-transparent hover:border-accent"
+            variant="icon"
+            size="sm"
+            className="text-[10px]"
           >
             [X]
-          </button>
+          </Button>
         </div>
 
         {/* Content */}
@@ -116,12 +119,13 @@ export default function SubscribeModal({ isOpen, onClose }: SubscribeModalProps)
               <p className="text-[8px] text-accent-muted tracking-wider">
                 {t.subscribe?.successMessage || 'We sent you a verification link. Click it to activate your alerts.'}
               </p>
-              <button
+              <Button
                 onClick={handleClose}
-                className="mt-6 px-6 py-2 bg-transparent border-2 border-accent text-accent text-[8px] tracking-wider hover:bg-accent hover:text-background cursor-pointer"
+                variant="primary"
+                className="mt-6"
               >
                 [{t.subscribe?.close || 'CLOSE'}]
-              </button>
+              </Button>
             </div>
           ) : (
             <form onSubmit={handleSubmit}>
@@ -159,15 +163,16 @@ export default function SubscribeModal({ isOpen, onClose }: SubscribeModalProps)
                       </>
                     )}
                   </label>
-                  <button
+                  <Button
                     type="button"
                     onClick={handleSelectAll}
-                    className="text-[8px] text-accent tracking-wider hover:text-accent/80 border-2 border-transparent hover:border-accent-dim px-2 py-1"
+                    variant="ghost"
+                    size="sm"
                   >
                     [{selectedStates.length === US_STATES.length
                       ? (t.subscribe?.deselectAll || 'Deselect All')
                       : (t.subscribe?.selectAll || 'Select All')}]
-                  </button>
+                  </Button>
                 </div>
                 <div className="bg-background border-2 border-accent-dim p-3 max-h-48 overflow-y-auto">
                   <div className="grid grid-cols-2 gap-1">
@@ -205,15 +210,16 @@ export default function SubscribeModal({ isOpen, onClose }: SubscribeModalProps)
               </div>
 
               {/* Submit */}
-              <button
+              <Button
                 type="submit"
                 disabled={isSubmitting || (!validateEmail(email) || !validateStates(selectedStates))}
-                className="w-full px-4 py-2 bg-transparent border-2 border-accent text-accent text-[8px] tracking-wider hover:bg-accent hover:text-background cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                variant="primary"
+                fullWidth
               >
                 {isSubmitting
                   ? `[${t.subscribe?.submitting || 'SUBSCRIBING...'}]`
                   : `[${t.subscribe?.submit || 'SUBSCRIBE TO ALERTS'}]`}
-              </button>
+              </Button>
             </form>
           )}
         </div>

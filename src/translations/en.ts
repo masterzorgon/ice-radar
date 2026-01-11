@@ -16,6 +16,8 @@ export const en = {
     alerts: '[ALERTS]',
     donate: 'DONATE',
     submitReport: '[+ SUBMIT REPORT]',
+    reportShort: 'REPORT',
+    menu: 'Menu',
   },
 
   // Stats Panel

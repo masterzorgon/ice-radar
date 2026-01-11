@@ -1,6 +1,7 @@
 'use client';
 
 import { useLanguage } from '@/contexts/LanguageContext';
+import Button from '@/components/ui/Button';
 
 interface DisclaimerModalProps {
   isOpen: boolean;
@@ -29,12 +30,14 @@ export default function DisclaimerModal({ isOpen, onClose }: DisclaimerModalProp
             <span className="text-warning text-[8px] tracking-wider glow-warning">{t.disclaimer.title}</span>
             <span className="text-warning/50 text-[8px] tracking-wider">{t.disclaimer.subtitle}</span>
           </div>
-          <button
+          <Button
             onClick={onClose}
-            className="text-warning/50 hover:text-warning text-[10px] px-2 py-1 border-2 border-transparent hover:border-warning"
+            variant="icon"
+            size="sm"
+            className="text-[10px] text-warning/50 hover:text-warning hover:border-warning"
           >
             [X]
-          </button>
+          </Button>
         </div>
 
         {/* Content */}
@@ -84,12 +87,13 @@ export default function DisclaimerModal({ isOpen, onClose }: DisclaimerModalProp
 
         {/* Footer */}
         <div className="px-4 py-3 border-t-2 border-warning/50 bg-warning/10">
-          <button
+          <Button
             onClick={onClose}
-            className="w-full px-4 py-2 bg-transparent border-2 border-warning text-warning text-[8px] tracking-wider hover:bg-warning hover:text-background cursor-pointer"
+            variant="warning"
+            fullWidth
           >
             [{t.disclaimer.close}]
-          </button>
+          </Button>
         </div>
       </div>
     </div>

@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { useLanguage } from '@/contexts/LanguageContext';
 import RadarLogo from './RadarLogo';
+import Button from '@/components/ui/Button';
 
 export default function Header() {
   const [time, setTime] = useState<string>('');
@@ -31,17 +32,24 @@ export default function Header() {
   };
 
   return (
-    <header className="border-b-2 border-accent-dim bg-background px-4 py-3">
-      <div className="flex items-center justify-between">
+    <header className="border-b-2 border-accent-dim bg-background px-3 sm:px-4 py-2 sm:py-3">
+      <div className="flex items-center justify-between gap-2 sm:gap-4">
         {/* Logo and Title */}
-        <div className="flex items-center gap-4">
-          <div className="flex items-center gap-3">
-            <RadarLogo size={38} />
-            <div>
-              <h1 className="text-accent text-[10px] tracking-[3px] glow-text">
+        <div className="flex items-center gap-2 sm:gap-4 min-w-0">
+          <div className="flex items-center gap-2 sm:gap-3">
+            <div className="shrink-0">
+              <div className="block sm:hidden">
+                <RadarLogo size={28} />
+              </div>
+              <div className="hidden sm:block">
+                <RadarLogo size={38} />
+              </div>
+            </div>
+            <div className="min-w-0">
+              <h1 className="text-accent text-[8px] sm:text-[10px] tracking-[2px] sm:tracking-[3px] glow-text truncate">
                 {t.header.title}
               </h1>
-              <p className="text-accent-muted text-[8px] tracking-wider mt-1">
+              <p className="text-accent-muted text-[6px] sm:text-[8px] tracking-wider mt-0.5 sm:mt-1 hidden xs:block">
                 {t.header.subtitle}
               </p>
             </div>
@@ -49,11 +57,12 @@ export default function Header() {
         </div>
 
         {/* Right side controls */}
-        <div className="flex items-center gap-6 text-[8px]">
+        <div className="flex items-center gap-2 sm:gap-4 md:gap-6 text-[8px] shrink-0">
           {/* Language Toggle - pixel button style */}
-          <button
+          <Button
             onClick={toggleLanguage}
-            className="flex items-center gap-2 px-3 py-2 border-2 border-accent-dim hover:border-accent hover:bg-accent hover:text-background cursor-pointer"
+            variant="secondary"
+            className="min-h-[44px] gap-1 sm:gap-2"
             title={language === 'en' ? 'Switch to Spanish' : 'Cambiar a Ingles'}
           >
             <Image
@@ -64,16 +73,17 @@ export default function Header() {
               className="pixelated"
             />
             <span className="tracking-wider">{language === 'en' ? 'EN' : 'ES'}</span>
-          </button>
+          </Button>
 
-          {/* System status indicator */}
-          <div className="flex items-center gap-2 border-2 border-accent-dim px-3 py-2">
+          {/* System status indicator - hidden on smallest screens */}
+          <div className="hidden sm:flex items-center gap-2 border-2 border-accent-dim px-2 sm:px-3 py-2 min-h-[44px]">
             <span className="w-2 h-2 bg-accent pixel-pulse" />
-            <span className="text-accent-muted tracking-wider">{t.header.systemOnline}</span>
+            <span className="text-accent-muted tracking-wider hidden md:inline">{t.header.systemOnline}</span>
+            <span className="text-accent-muted tracking-wider md:hidden">ON</span>
           </div>
 
-          {/* Time display */}
-          <div className="text-accent-muted border-2 border-accent-dim px-3 py-2">
+          {/* Time display - hidden on mobile */}
+          <div className="hidden md:block text-accent-muted border-2 border-accent-dim px-3 py-2 min-h-[44px]">
             <span className="tracking-wider">UTC:</span>{' '}
             <span className="text-accent glow-text">{time}</span>
           </div>

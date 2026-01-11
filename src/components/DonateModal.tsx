@@ -38,12 +38,14 @@ export default function DonateModal({ isOpen, onClose }: DonateModalProps) {
             <span className="text-pink-400 text-[8px] tracking-wider">{t.donate.title}</span>
             <span className="text-pink-400/50 text-[8px] tracking-wider">{t.donate.subtitle}</span>
           </div>
-          <button
+          <Button
             onClick={onClose}
-            className="text-pink-400/50 hover:text-pink-400 text-[10px] px-2 py-1 border-2 border-transparent hover:border-pink-400"
+            variant="icon"
+            size="sm"
+            className="text-[10px] text-pink-400/50 hover:text-pink-400 hover:border-pink-400"
           >
             [X]
-          </button>
+          </Button>
         </div>
 
         {/* Content */}

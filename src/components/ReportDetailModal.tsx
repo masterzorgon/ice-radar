@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { Report } from '@/types';
 import { formatDistanceToNow, format } from 'date-fns';
 import { useLanguage } from '@/contexts/LanguageContext';
-import ShareButtons from '@/components/ui/ShareButtons';
+import Button from '@/components/ui/Button';
 
 interface ReportDetailModalProps {
   report: Report | null;
@@ -124,12 +124,14 @@ export default function ReportDetailModal({ report, onClose, onVerify, onAddComm
             <span className="text-accent text-[8px] tracking-wider glow-text">{t.detailModal.title}</span>
             <span className="text-accent-muted text-[8px] tracking-wider">{t.detailModal.report} #{report.id}</span>
           </div>
-          <button
+          <Button
             onClick={onClose}
-            className="text-accent-muted hover:text-accent text-[10px] px-2 py-1 border-2 border-transparent hover:border-accent"
+            variant="icon"
+            size="sm"
+            className="text-[10px]"
           >
             [X]
-          </button>
+          </Button>
         </div>
 
         {/* Content */}
@@ -237,42 +239,35 @@ export default function ReportDetailModal({ report, onClose, onVerify, onAddComm
                 <span className={`text-[8px] tracking-wider ${commentText.length >= 180 ? 'text-warning' : 'text-accent-muted/50'}`}>
                   {commentText.length}/200
                 </span>
-                <button
+                <Button
                   onClick={handleSubmitComment}
                   disabled={!commentText.trim() || isSubmittingComment}
-                  className="px-3 py-1 bg-transparent border-2 border-accent text-accent text-[8px] tracking-wider hover:bg-accent hover:text-background disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+                  variant="primary"
+                  size="sm"
                 >
-                  [{isSubmittingComment ? t.detailModal.posting : t.detailModal.post}]
-                </button>
+                  {isSubmittingComment ? t.detailModal.posting : t.detailModal.post}
+                </Button>
               </div>
             </div>
           </div>
 
-          {/* Share buttons */}
-          <div className="pt-2">
-            <div className="text-[8px] text-accent-muted tracking-wider mb-2">{t.share.title}:</div>
-            <ShareButtons report={report} variant="full" />
-          </div>
-
-
           {/* Actions */}
           <div className="flex gap-3 pt-2">
-            <button
+            <Button
               onClick={onClose}
-              className="flex-1 px-4 py-2 border-2 border-accent-dim text-accent-muted text-[8px] tracking-wider hover:border-accent hover:text-accent cursor-pointer"
+              variant="secondary"
+              className="flex-1"
             >
               {t.detailModal.close}
-            </button>
-            <button
+            </Button>
+            <Button
               onClick={handleVerify}
               disabled={hasVerified}
-              className={`flex-1 px-4 py-2 text-[8px] tracking-wider cursor-pointer border-2 ${hasVerified
-                  ? 'border-accent-dim text-accent-muted cursor-not-allowed'
-                  : 'border-accent text-accent hover:bg-accent hover:text-background'
-                }`}
+              variant={hasVerified ? 'secondary' : 'primary'}
+              className="flex-1"
             >
               {hasVerified ? `${t.detailModal.verifiedCheck}` : `${t.detailModal.verifyReport}`}
-            </button>
+            </Button>
           </div>
 
           {/* Anonymous note */}

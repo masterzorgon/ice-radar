@@ -17,6 +17,7 @@ import { useDonationPopup } from '@/hooks/useDonationPopup';
 import { useReportsData } from '@/hooks/useReportsData';
 import { Report } from '@/types';
 import { useLanguage } from '@/contexts/LanguageContext';
+import Button from '@/components/ui/Button';
 
 // Dynamic import for map to avoid SSR issues
 const USMap = dynamic(() => import('@/components/USMap'), {
@@ -220,7 +221,7 @@ export default function Home() {
     <div className="min-h-screen bg-background flex flex-col">
       <Header />
 
-      <main className="flex-1 p-4 flex flex-col gap-4">
+      <main className="flex-1 p-2 sm:p-4 flex flex-col gap-3 sm:gap-4">
         <NavBar
           onInfoClick={() => setIsInfoModalOpen(true)}
           onDisclaimerClick={() => setIsDisclaimerModalOpen(true)}
@@ -229,14 +230,25 @@ export default function Home() {
           onReportClick={() => setIsReportModalOpen(true)}
         />
 
-        {/* Main content grid */}
-        <div className="flex-1 grid grid-cols-12 gap-4 min-h-0">
-          {/* Left sidebar - Stats */}
-          <div className="col-span-3 flex flex-col gap-4">
+        {/* Main content grid - stacks on mobile, 12-col on desktop */}
+        <div className="flex-1 grid grid-cols-1 lg:grid-cols-12 gap-3 sm:gap-4 min-h-0">
+          {/* Center - Map (shows first on mobile) */}
+          <div className="lg:col-span-6 lg:order-2 order-1 relative min-h-[300px] sm:min-h-[400px] lg:min-h-0">
+            <USMap
+              hotspots={hotspots}
+              reports={reports}
+              onSelectReport={handleSelectReport}
+              selectedState={selectedState}
+              onSelectState={setSelectedState}
+            />
+          </div>
+
+          {/* Left sidebar - Stats (shows second on mobile) */}
+          <div className="lg:col-span-3 lg:order-1 order-2 flex flex-col gap-3 sm:gap-4">
             <StatsPanel stats={stats} />
 
-            {/* Quick info panel */}
-            <div className="bg-background border-2 border-accent-dim p-4 flex-1">
+            {/* Quick info panel - hidden on mobile, visible on larger screens */}
+            <div className="hidden lg:block bg-background border-2 border-accent-dim p-4 flex-1">
               <div className="flex items-center gap-2 mb-2">
                 <span className="text-accent text-[8px] tracking-wider glow-text">{t.infoPanel.title}</span>
                 <span className="text-accent-muted text-[8px] tracking-wider">{t.infoPanel.subtitle}</span>
@@ -287,19 +299,8 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Center - Map */}
-          <div className="col-span-6 relative">
-            <USMap
-              hotspots={hotspots}
-              reports={reports}
-              onSelectReport={handleSelectReport}
-              selectedState={selectedState}
-              onSelectState={setSelectedState}
-            />
-          </div>
-
-          {/* Right sidebar - Feed */}
-          <div className="col-span-3 min-h-0">
+          {/* Right sidebar - Feed (shows third on mobile) */}
+          <div className="lg:col-span-3 lg:order-3 order-3 min-h-0">
             <ReportFeed
               reports={filteredReports}
               onSelectReport={handleSelectReport}
@@ -311,28 +312,30 @@ export default function Home() {
         </div>
 
         {/* Bottom status bar */}
-        <div className="flex items-center justify-between px-4 py-2 bg-background border-2 border-accent-dim text-[8px] tracking-wider">
-          <div className="flex items-center gap-6">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-0 px-3 sm:px-4 py-2 bg-background border-2 border-accent-dim text-[8px] tracking-wider">
+          <div className="flex flex-wrap items-center gap-3 sm:gap-6">
             <div className="flex items-center gap-2">
               <span className="text-accent-muted">{t.statusBar.system}</span>
               <span className="text-accent glow-text">{t.statusBar.operational}</span>
             </div>
-            <div className="flex items-center gap-3">
-              <button
+            <div className="flex items-center gap-2 sm:gap-3">
+              <Button
                 onClick={refresh}
                 disabled={isLoading}
-                className="px-3 py-1 bg-transparent border-2 border-accent text-accent hover:bg-accent hover:text-background disabled:opacity-50 disabled:cursor-not-allowed"
+                variant="primary"
+                size="sm"
+                className="min-h-[36px] sm:min-h-0"
               >
                 [{isLoading ? 'REFRESHING...' : 'REFRESH DATA'}]
-              </button>
+              </Button>
               {lastUpdated && (
-                <span className="text-accent-muted/50">
+                <span className="text-accent-muted/50 hidden sm:inline">
                   Last updated: {lastUpdated.toLocaleTimeString()}
                 </span>
               )}
             </div>
           </div>
-          <div className="text-accent-muted/50">
+          <div className="text-accent-muted/50 hidden md:block">
             {t.statusBar.disclaimer}
           </div>
         </div>
