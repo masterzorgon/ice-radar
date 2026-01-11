@@ -24,7 +24,7 @@ jobs:
           node-version: '20'
 
       - name: Install dependencies for aggregation
-        run: npm install xlsx unzip-stream sax
+        run: npm install --legacy-peer-deps xlsx unzip-stream sax
 
       - name: Run aggregation script
         run: node scripts/aggregate-detention.js
