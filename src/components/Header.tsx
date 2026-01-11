@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { useLanguage } from '@/contexts/LanguageContext';
+import RadarLogo from './RadarLogo';
 
 export default function Header() {
   const [time, setTime] = useState<string>('');
@@ -34,13 +35,7 @@ export default function Header() {
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-3">
-            <Image
-              src="/logo-icon.svg"
-              alt="ICE RADAR"
-              width={32}
-              height={32}
-              className="drop-shadow-[0_0_8px_#00ff00]"
-            />
+            <RadarLogo size={38} />
             <div>
               <h1 className="text-accent text-lg font-bold tracking-wider">
                 {t.header.title}

@@ -1,42 +1,79 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100" width="300" height="100" style="background-color: transparent;">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 80" width="300" height="80" style="background-color: transparent;">
   <defs>
     <style>
-      @font-face {
-        font-family: 'Monospace';
-        src: url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@600&display=swap');
-      }
-      .terminal-style {
+      .terminal-stroke {
         fill: none;
         stroke: #00ff00;
         stroke-linecap: round;
         stroke-linejoin: round;
       }
+      .terminal-fill {
+        fill: #00ff00;
+      }
       .text-style {
         fill: #00ff00;
-        font-family: 'Monospace', monospace;
-        font-size: 24px;
-        letter-spacing: 2px;
+        font-family: 'JetBrains Mono', 'Source Code Pro', 'Courier New', monospace;
+        font-weight: 600;
+        letter-spacing: 3px;
       }
     </style>
   </defs>
 
-  <g transform="translate(30, 20)">
-    <path d="M10,70 L5,70 L15,10 L25,10 L35,70 L30,70 M10,60 L30,60 M12,45 L28,45 M14,30 L26,30" stroke-width="2" class="terminal-style"/>
+  <!-- Scanline effect overlay -->
+  <defs>
+    <pattern id="scanlines" patternUnits="userSpaceOnUse" width="4" height="4">
+      <line x1="0" y1="0" x2="4" y2="0" stroke="#00ff00" stroke-opacity="0.03" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect x="0" y="0" width="300" height="80" fill="url(#scanlines)"/>
 
-    <circle cx="20" cy="10" r="4" stroke-width="2" class="terminal-style"/>
+  <!-- Radar icon -->
+  <g transform="translate(40, 40)">
+    <!-- Outer frame/bezel -->
+    <rect x="-32" y="-32" width="64" height="64" rx="3" ry="3" stroke-width="2" class="terminal-stroke"/>
 
-    <g transform="translate(20, 10)">
-      <path d="M5,-8 A10,10 0 0 1 18,5 M-5,-8 A10,10 0 0 0 -18,5" stroke-width="2" stroke-opacity="0.8" class="terminal-style"/>
-      <path d="M10,-15 A20,20 0 0 1 28,8 M-10,-15 A20,20 0 0 0 -28,8" stroke-width="2" stroke-opacity="0.6" class="terminal-style"/>
-      <path d="M15,-22 A30,30 0 0 1 38,12 M-15,-22 A30,30 0 0 0 -38,12" stroke-width="2" stroke-opacity="0.4" class="terminal-style"/>
-    </g>
+    <!-- Concentric radar circles -->
+    <circle cx="0" cy="0" r="24" stroke-width="1.5" stroke-opacity="0.3" class="terminal-stroke"/>
+    <circle cx="0" cy="0" r="17" stroke-width="1.5" stroke-opacity="0.4" class="terminal-stroke"/>
+    <circle cx="0" cy="0" r="10" stroke-width="1.5" stroke-opacity="0.5" class="terminal-stroke"/>
+    <circle cx="0" cy="0" r="3" stroke-width="1.5" stroke-opacity="0.6" class="terminal-stroke"/>
+
+    <!-- Cross-hairs -->
+    <line x1="0" y1="-26" x2="0" y2="26" stroke-width="1" stroke-opacity="0.2" class="terminal-stroke"/>
+    <line x1="-26" y1="0" x2="26" y2="0" stroke-width="1" stroke-opacity="0.2" class="terminal-stroke"/>
+    <line x1="-18" y1="-18" x2="18" y2="18" stroke-width="1" stroke-opacity="0.15" class="terminal-stroke"/>
+    <line x1="18" y1="-18" x2="-18" y2="18" stroke-width="1" stroke-opacity="0.15" class="terminal-stroke"/>
+
+    <!-- Radar sweep line -->
+    <line x1="0" y1="0" x2="20" y2="-12" stroke-width="2" stroke-opacity="0.9" class="terminal-stroke"/>
+
+    <!-- Sweep glow/trail -->
+    <path d="M0,0 L15,-19 A24,24 0 0 1 24,0 L0,0" fill="#00ff00" fill-opacity="0.15"/>
+
+    <!-- Center dot -->
+    <circle cx="0" cy="0" r="2" class="terminal-fill"/>
+
+    <!-- Blip markers -->
+    <circle cx="8" cy="-7" r="2" class="terminal-fill" fill-opacity="0.9"/>
+    <circle cx="-12" cy="10" r="1.5" class="terminal-fill" fill-opacity="0.6"/>
+    <circle cx="15" cy="4" r="1.5" class="terminal-fill" fill-opacity="0.4"/>
   </g>
 
-  <text x="80" y="55" class="text-style">ICE RADAR</text>
+  <!-- Text: ICE RADAR -->
+  <text x="88" y="48" class="text-style" font-size="26">ICE RADAR</text>
 
-  <line x1="0" y1="10" x2="300" y2="10" stroke="#00ff00" stroke-opacity="0.1" stroke-width="1" />
-  <line x1="0" y1="30" x2="300" y2="30" stroke="#00ff00" stroke-opacity="0.1" stroke-width="1" />
-  <line x1="0" y1="50" x2="300" y2="50" stroke="#00ff00" stroke-opacity="0.1" stroke-width="1" />
-  <line x1="0" y1="70" x2="300" y2="70" stroke="#00ff00" stroke-opacity="0.1" stroke-width="1" />
-  <line x1="0" y1="90" x2="300" y2="90" stroke="#00ff00" stroke-opacity="0.1" stroke-width="1" />
+  <!-- Decorative terminal brackets -->
+  <g stroke="#00ff00" stroke-width="1.5" fill="none" stroke-opacity="0.4">
+    <!-- Left bracket -->
+    <path d="M82,22 L78,22 L78,58 L82,58"/>
+    <!-- Right bracket -->
+    <path d="M270,22 L274,22 L274,58 L270,58"/>
+  </g>
+
+  <!-- Subtle grid lines -->
+  <g stroke="#00ff00" stroke-opacity="0.05" stroke-width="1">
+    <line x1="0" y1="20" x2="300" y2="20"/>
+    <line x1="0" y1="40" x2="300" y2="40"/>
+    <line x1="0" y1="60" x2="300" y2="60"/>
+  </g>
 </svg>
