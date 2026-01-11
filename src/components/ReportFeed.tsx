@@ -68,7 +68,7 @@ export default function ReportFeed({
             onClick={onClearState}
             className="text-[8px] text-accent-muted tracking-wider hover:text-accent px-2 py-1 border-2 border-transparent hover:border-accent-dim"
           >
-            [{t.feed.clear}]
+            {t.feed.clear}
           </button>
         </div>
       )}
