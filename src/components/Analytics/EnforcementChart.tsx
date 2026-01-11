@@ -50,6 +50,7 @@ export default function EnforcementChart({ data, title = 'TRENDS', subtitle = 'M
               }}
               labelStyle={{ color: '#00ff00' }}
               itemStyle={{ color: '#00ff00' }}
+              formatter={(value) => typeof value === 'number' ? value.toLocaleString() : value}
             />
             <Legend
               wrapperStyle={{ fontSize: 10 }}

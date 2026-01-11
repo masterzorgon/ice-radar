@@ -102,6 +102,21 @@ export const en = {
     noStorage: 'No payment information is stored on our servers.',
   },
 
+  // Donation Popup Modal
+  donationPopup: {
+    title: '[SUPPORT]',
+    subtitle: 'COMMUNITY PROJECT',
+    mainMessage: 'You\'ve been using ICE Radar to help keep your community safe. This platform is 100% free, anonymous, and run by volunteers.',
+    impactMessage: 'Your donation directly supports:',
+    impact1: 'Server costs to keep alerts running 24/7',
+    impact2: 'Security updates to protect user anonymity',
+    impact3: 'New features requested by the community',
+    credibility: 'Every dollar goes directly to keeping this platform alive',
+    donateButton: '[SUPPORT THIS PROJECT]',
+    maybeLater: '[MAYBE LATER]',
+    dontShowAgain: '[DON\'T SHOW AGAIN]',
+  },
+
   // Info Modal
   infoModal: {
     title: '[INFO]',

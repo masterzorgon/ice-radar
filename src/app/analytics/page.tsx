@@ -11,9 +11,11 @@ import { mockAnalyticsData } from '@/data/analyticsData';
 import { useLanguage } from '@/contexts/LanguageContext';
 import ReportModal from '@/components/ReportModal';
 import DonateModal from '@/components/DonateModal';
+import DonationPopupModal from '@/components/DonationPopupModal';
 import InfoModal from '@/components/InfoModal';
 import DisclaimerModal from '@/components/DisclaimerModal';
 import SubscribeModal from '@/components/SubscribeModal';
+import { useDonationPopup } from '@/hooks/useDonationPopup';
 
 // Dynamic import for map to avoid SSR issues
 const StateHeatmap = dynamic(() => import('@/components/Analytics/StateHeatmap'), {
@@ -29,6 +31,7 @@ const StateHeatmap = dynamic(() => import('@/components/Analytics/StateHeatmap')
 
 export default function AnalyticsPage() {
   const { t } = useLanguage();
+  const { isPopupOpen, dismissForSession, dismissPermanently } = useDonationPopup();
   const { summary, monthlyTrends, countriesOfOrigin, ageGroups, familyStatus, stateEnforcement, lastUpdated, dataSources } = mockAnalyticsData;
   const [isReportModalOpen, setIsReportModalOpen] = useState(false);
   const [isDonateModalOpen, setIsDonateModalOpen] = useState(false);
@@ -225,6 +228,13 @@ export default function AnalyticsPage() {
       <SubscribeModal
         isOpen={isSubscribeModalOpen}
         onClose={() => setIsSubscribeModalOpen(false)}
+      />
+
+      {/* Donation Popup Modal */}
+      <DonationPopupModal
+        isOpen={isPopupOpen}
+        onDismissForSession={dismissForSession}
+        onDismissPermanently={dismissPermanently}
       />
     </div>
   );

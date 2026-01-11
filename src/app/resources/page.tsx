@@ -9,12 +9,15 @@ import { resourceCategories } from '@/data/resourcesData';
 import { useLanguage } from '@/contexts/LanguageContext';
 import ReportModal from '@/components/ReportModal';
 import DonateModal from '@/components/DonateModal';
+import DonationPopupModal from '@/components/DonationPopupModal';
 import InfoModal from '@/components/InfoModal';
 import DisclaimerModal from '@/components/DisclaimerModal';
 import SubscribeModal from '@/components/SubscribeModal';
+import { useDonationPopup } from '@/hooks/useDonationPopup';
 
 export default function ResourcesPage() {
   const { t } = useLanguage();
+  const { isPopupOpen, dismissForSession, dismissPermanently } = useDonationPopup();
   const [activeTab, setActiveTab] = useState('rights');
   const [isReportModalOpen, setIsReportModalOpen] = useState(false);
   const [isDonateModalOpen, setIsDonateModalOpen] = useState(false);
@@ -113,6 +116,13 @@ export default function ResourcesPage() {
       <SubscribeModal
         isOpen={isSubscribeModalOpen}
         onClose={() => setIsSubscribeModalOpen(false)}
+      />
+
+      {/* Donation Popup Modal */}
+      <DonationPopupModal
+        isOpen={isPopupOpen}
+        onDismissForSession={dismissForSession}
+        onDismissPermanently={dismissPermanently}
       />
     </div>
   );

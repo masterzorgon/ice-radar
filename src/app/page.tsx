@@ -9,9 +9,11 @@ import ReportFeed from '@/components/ReportFeed';
 import ReportModal, { ReportFormData } from '@/components/ReportModal';
 import ReportDetailModal from '@/components/ReportDetailModal';
 import DonateModal from '@/components/DonateModal';
+import DonationPopupModal from '@/components/DonationPopupModal';
 import InfoModal from '@/components/InfoModal';
 import DisclaimerModal from '@/components/DisclaimerModal';
 import SubscribeModal from '@/components/SubscribeModal';
+import { useDonationPopup } from '@/hooks/useDonationPopup';
 import { mockReports, mockHotspots, mockStats } from '@/data/mockData';
 import { Report } from '@/types';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -30,6 +32,7 @@ const USMap = dynamic(() => import('@/components/USMap'), {
 
 export default function Home() {
   const { t } = useLanguage();
+  const { isPopupOpen, dismissForSession, dismissPermanently } = useDonationPopup();
   const [selectedReport, setSelectedReport] = useState<Report | null>(null);
   const [selectedState, setSelectedState] = useState<string | null>(null);
   const [isReportModalOpen, setIsReportModalOpen] = useState(false);
@@ -286,6 +289,13 @@ export default function Home() {
       <SubscribeModal
         isOpen={isSubscribeModalOpen}
         onClose={() => setIsSubscribeModalOpen(false)}
+      />
+
+      {/* Donation Popup Modal */}
+      <DonationPopupModal
+        isOpen={isPopupOpen}
+        onDismissForSession={dismissForSession}
+        onDismissPermanently={dismissPermanently}
       />
     </div>
   );
