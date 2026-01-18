@@ -1,16 +1,16 @@
 {
-  "generated": "2026-01-11T16:41:15.271Z",
+  "generated": "2026-01-18T05:25:24.937Z",
   "summary": {
-    "avgDailyDetentions": 33721,
-    "avgDailyDetentionsPrevPeriod": 35667,
+    "avgDailyDetentions": 33042,
+    "avgDailyDetentionsPrevPeriod": 35920,
     "activeCases": 61901,
-    "activeCasesPrevPeriod": 4982
+    "activeCasesPrevPeriod": 5519
   },
   "metadata": {
     "totalRecords": 671750,
     "currentlyDetained": 61901,
     "releasedCount": 609849,
     "avgLengthOfStay": 48,
-    "processedAt": "2026-01-11T16:41:15.271Z"
+    "processedAt": "2026-01-18T05:25:24.937Z"
   }
 }
